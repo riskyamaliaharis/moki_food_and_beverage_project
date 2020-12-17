@@ -19,7 +19,7 @@
               v-for="(item, index) in products"
               :key="index"
             >
-              <b-card
+              <!-- <b-card
                 v-bind:title="item.product_name"
                 img-src="https://picsum.photos/600/300/?image=25"
                 img-alt="Image"
@@ -42,14 +42,33 @@
                 <b-button type="button" class="btn a rounded-circle act">
                   <i class="fa fa-edit "></i>
                 </b-button>
-                <!-- <b-button variant="primary">Add To Cart</b-button>
-                <b-button variant="success">Update</b-button>
+              </b-card> -->
+              <div class="menu">
+                <img
+                  class="rounded-circle"
+                  src="../assets/img/twitter_logo.png"
+                  alt="thumbnail"
+                  style="width:100px"
+                />
+                <div class="p-title">
+                  <p class="poppins menu-title">
+                    <strong>{{ item.product_name }}</strong>
+                  </p>
+                </div>
+
+                <p class="price">Rp. {{ item.product_price }}</p>
                 <b-button
+                  type="button"
+                  class="btn a rounded-circle act"
                   variant="danger"
                   @click="deleteProduct(item.product_id)"
-                  >Delete</b-button
-                > -->
-              </b-card>
+                >
+                  <i class="fa fa-trash "></i>
+                </b-button>
+                <b-button type="button" class="btn a rounded-circle act">
+                  <i class="fa fa-edit "></i>
+                </b-button>
+              </div>
             </b-col>
           </b-row>
           <b-pagination
@@ -178,6 +197,10 @@ b-button {
   width: 60%;
 }
 
+.p-title {
+  height: 170px;
+}
+
 button.act {
   background-color: rgba(255, 186, 51, 1);
   border-color: none;
@@ -186,5 +209,36 @@ button.act {
 
 .card-mid {
   align-items: center;
+}
+
+.menu {
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  border-radius: 20px;
+  position: relative;
+  width: 150px;
+  height: 270px;
+  box-shadow: 0 0 5px 5px #f8f8f8;
+  padding-bottom: 0;
+  vertical-align: bottom;
+}
+.menu p {
+  line-height: 101.34%;
+}
+
+.menu-title {
+  padding-top: 80px;
+  font-weight: 900;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.menu img {
+  position: absolute;
+  margin: 0 auto;
+  top: -30px;
+  left: 6px;
 }
 </style>
