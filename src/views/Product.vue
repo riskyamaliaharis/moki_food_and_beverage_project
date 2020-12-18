@@ -5,7 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <Header />
-
+    <Navbar />
     <div class="product-page">
       <div class="centered">
         <b-container class="bv-example-row">
@@ -19,30 +19,6 @@
               v-for="(item, index) in products"
               :key="index"
             >
-              <!-- <b-card
-                v-bind:title="item.product_name"
-                img-src="https://picsum.photos/600/300/?image=25"
-                img-alt="Image"
-                img-top
-                tag="article"
-                style="max-width: 10rem;"
-                class="mb-2"
-                rounded="circle"
-              >
-                <b-card-text> Rp. {{ item.product_price }} </b-card-text>
-
-                <b-button
-                  type="button"
-                  class="btn a rounded-circle act"
-                  variant="danger"
-                  @click="deleteProduct(item.product_id)"
-                >
-                  <i class="fa fa-trash "></i>
-                </b-button>
-                <b-button type="button" class="btn a rounded-circle act">
-                  <i class="fa fa-edit "></i>
-                </b-button>
-              </b-card> -->
               <div class="menu">
                 <img
                   class="rounded-circle"
@@ -79,7 +55,9 @@
             @change="handlePageChange"
           ></b-pagination>
           <div>
-            <b-button block variant="primary">Add New Product</b-button>
+            <b-button block variant="primary" class="toggle-add"
+              >Add New Product</b-button
+            >
           </div>
         </b-container>
       </div>
@@ -95,12 +73,14 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import axios from 'axios'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: 'Home',
   components: {
     Header,
-    Footer
+    Footer,
+    Navbar
   },
   computed: {
     rows() {
@@ -175,6 +155,14 @@ export default {
     },
     deleteProduct(product_id) {
       console.log(product_id)
+      axios
+        .delete(`http://localhost:3000/product/${this.product_id}`)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     handlePageChange(numberPage) {
       console.log(numberPage)
@@ -220,7 +208,7 @@ button.act {
   position: relative;
   width: 150px;
   height: 270px;
-  box-shadow: 0 0 5px 5px #f8f8f8;
+  box-shadow: 0 0 5px 5px #928b8b;
   padding-bottom: 0;
   vertical-align: bottom;
 }
@@ -239,6 +227,16 @@ button.act {
   position: absolute;
   margin: 0 auto;
   top: -30px;
-  left: 6px;
+  left: 24px;
+}
+.toggle-add {
+  background-color: rgba(106, 64, 41, 1);
+  width: 60%;
+  margin: auto;
+}
+.toggle-add:hover {
+  background-color: white;
+  color: rgba(106, 64, 41, 1);
+  border-color: white;
 }
 </style>
