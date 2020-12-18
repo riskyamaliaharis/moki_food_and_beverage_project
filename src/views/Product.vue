@@ -6,10 +6,12 @@
     />
     <Header />
     <Navbar />
+    <Coupon />
     <div class="product-page">
       <div class="centered">
         <b-container class="bv-example-row">
           <b-row>
+            <!-- START CARD -->
             <b-col
               class="card-mid"
               xl="3"
@@ -44,6 +46,7 @@
                 <b-button type="button" class="btn a rounded-circle act">
                   <i class="fa fa-edit "></i>
                 </b-button>
+                <!-- END CARD-->
               </div>
             </b-col>
           </b-row>
@@ -74,13 +77,15 @@ import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 import Navbar from '@/components/Navbar.vue'
+import Coupon from '@/components/Coupon.vue'
 
 export default {
   name: 'Home',
   components: {
     Header,
     Footer,
-    Navbar
+    Navbar,
+    Coupon
   },
   computed: {
     rows() {
@@ -201,8 +206,8 @@ button.act {
 
 .menu {
   padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-bottom: 40px;
   text-align: center;
   border-radius: 20px;
   position: relative;
