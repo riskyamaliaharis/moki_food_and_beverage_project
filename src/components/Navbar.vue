@@ -5,7 +5,9 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav ">
         <li class="nav-item">
-          <a class="nav-link on" href="#">Favorite Product</a>
+          <a class="nav-link" @click="chooseCategory('fav')"
+            >Favorite Product</a
+          >
         </li>
 
         <li class="nav-item">
@@ -39,7 +41,10 @@ export default {
 </script>
 
 <style>
-.navbar-nav a.on {
+.navbar-nav a:hover {
+  cursor: pointer;
+}
+.navbar-nav a:active {
   font-weight: 700;
   border-bottom-style: ridge;
   border-bottom-color: #895537;

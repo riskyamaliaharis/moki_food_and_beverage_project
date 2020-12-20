@@ -5,7 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <Header />
-    <Navbar @category="getProductByCategory(category_name)" />
+    <Navbar @category="getProductByCategory" />
     <Coupon />
     <div class="product-page">
       <div class="centered">
@@ -29,7 +29,10 @@
                   style="width:100px"
                 />
                 <div class="p-title">
-                  <p class="poppins menu-title">
+                  <p
+                    class="poppins menu-title"
+                    @click="detailProduct(item.product_id)"
+                  >
                     <strong>{{ item.product_name }}</strong>
                   </p>
                 </div>
@@ -145,21 +148,7 @@ export default {
           console.log(error)
         })
     },
-    postProduct() {
-      console.log(this.form)
-      axios
-        .post('http://localhost:3000/product', this.form)
-        .then(response => {
-          console.log(response)
-          this.totalRows = response.data.pagination.totalData
-          this.alert = true
-          this.isMsg = response.data.msg
-          this.getProduct()
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-    },
+
     setProduct(data) {
       console.log(data)
       this.form = data
@@ -185,6 +174,10 @@ export default {
       this.page = numberPage
       this.getProduct()
     },
+    detailProduct(product_id) {
+      console.log(product_id)
+      this.$router.push({ name: 'detailProduct', params: { id: product_id } })
+    },
     getProductByCategory(category_name) {
       console.log(category_name)
       axios
@@ -195,7 +188,8 @@ export default {
           if (
             category_name !== 'coffee' &&
             category_name !== 'noncoffee' &&
-            category_name !== 'food'
+            category_name !== 'food' &&
+            category_name !== 'addon'
           ) {
             this.category_name = ''
             this.products = this.getProduct()
