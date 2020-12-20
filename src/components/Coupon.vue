@@ -9,17 +9,17 @@
         <div class="box1">
           <img
             class="rounded-circle"
-            src="customer/img/image 29.png"
+            src="../assets/img/product/image 29.png"
             alt="spaghetti"
           />
-          <h2 class="poppins">Beef Spaghetti</h2>
-          <h2>20% OFF</h2>
+          <h3 class="poppins">Beef Spaghetti</h3>
+          <h3>20% OFF</h3>
           <p class="poppins">
             Buy 1 Choco Oreo and get 20% off for Beef Spaghetti
           </p>
           <div class="line"></div>
           <p>COUPON CODE</p>
-          <h1>FNPR15RG</h1>
+          <h2>FNPR15RG</h2>
           <p>Valid untill October 10th 2020</p>
         </div>
 
@@ -67,8 +67,8 @@
 }
 
 div.box1 img {
-  margin-top: 40px;
-  width: 140px;
+  margin-top: 20px;
+  width: 100px;
 }
 
 .col-lg-3 .box1 p {
@@ -99,7 +99,7 @@ p.promo_info {
 .box2 {
   height: 380px;
   top: 170px;
-  left: 20px;
+  left: 30px;
   z-index: 2;
   background-color: black;
 }
@@ -107,8 +107,8 @@ p.promo_info {
   z-index: 1;
 
   height: 300px;
-  top: 200px;
-  left: 30px;
+  top: 210px;
+  left: 45px;
   background-color: rgba(106, 64, 41, 1);
 }
 
