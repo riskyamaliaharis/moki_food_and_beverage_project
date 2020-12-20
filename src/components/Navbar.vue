@@ -9,21 +9,34 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Coffee</a>
+          <a class="nav-link" @click="chooseCategory('coffee')">Coffee</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Non-Coffee</a>
+          <a class="nav-link" @click="chooseCategory('noncoffee')"
+            >Non-Coffee</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Foods</a>
+          <a class="nav-link" @click="chooseCategory('food')">Foods</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Add-on</a>
+          <a class="nav-link" @click="chooseCategory('addon')">Add-on</a>
         </li>
       </ul>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    chooseCategory(category_name) {
+      console.log(category_name)
+      this.$emit('category', category_name)
+    }
+  }
+}
+</script>
 
 <style>
 .navbar-nav a.on {

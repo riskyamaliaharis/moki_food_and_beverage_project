@@ -5,7 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <Header />
-    <Navbar />
+    <Navbar @category="getProductByCategory(category_name)" />
     <Coupon />
     <div class="product-page">
       <div class="centered">
@@ -40,10 +40,15 @@
                   class="btn a rounded-circle act"
                   variant="danger"
                   @click="deleteProduct(item.product_id)"
+                  v-if="role === 1"
                 >
                   <i class="fa fa-trash "></i>
                 </b-button>
-                <b-button type="button" class="btn a rounded-circle act">
+                <b-button
+                  type="button"
+                  class="btn a rounded-circle act"
+                  v-if="role === 1"
+                >
                   <i class="fa fa-edit "></i>
                 </b-button>
                 <!-- END CARD-->
@@ -58,7 +63,11 @@
             @change="handlePageChange"
           ></b-pagination>
           <div>
-            <b-button block variant="primary" class="toggle-add"
+            <b-button
+              block
+              variant="primary"
+              class="toggle-add"
+              v-if="role === 1"
               >Add New Product</b-button
             >
           </div>
@@ -113,7 +122,9 @@ export default {
       currentPage: 1,
       totalRows: null,
       limit: 10,
-      page: 1
+      page: 1,
+      category_name: '',
+      role: 2
     }
   },
   created() {
@@ -173,6 +184,33 @@ export default {
       console.log(numberPage)
       this.page = numberPage
       this.getProduct()
+    },
+    getProductByCategory(category_name) {
+      console.log(category_name)
+      axios
+        .get(
+          `http://localhost:3000/product/category?page=${this.page}&limit=${this.limit}&category_name=${category_name}`
+        )
+        .then(response => {
+          if (
+            category_name !== 'coffee' &&
+            category_name !== 'noncoffee' &&
+            category_name !== 'food'
+          ) {
+            this.category_name = ''
+            this.products = this.getProduct()
+          } else {
+            this.category_name = category_name
+            this.products = response.data.data
+          }
+
+          this.totalRows = response.data.pagination.totalData
+
+          console.log(this.products)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
@@ -201,7 +239,7 @@ button.act {
 }
 
 .card-mid {
-  align-items: center;
+  text-align: center;
 }
 
 .menu {
