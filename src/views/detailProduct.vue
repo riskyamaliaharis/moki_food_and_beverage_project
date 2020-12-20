@@ -1,9 +1,7 @@
 <template>
   <b-container fluid class="main-set bv-example-row">
     <b-breadcrumb>
-      <b-breadcrumb-item href="http://localhost:8080/product"
-        >Product</b-breadcrumb-item
-      >
+      <b-breadcrumb-item to="/product">Product</b-breadcrumb-item>
       <b-breadcrumb-item active>{{ product.product_name }}</b-breadcrumb-item>
     </b-breadcrumb>
     <b-container class="detail-page">
@@ -165,7 +163,7 @@ export default {
     },
     getProduct() {
       axios
-        .get(`http://localhost:3000/selectproduct/${this.product_id}`)
+        .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
         .then(response => {
           console.log(response)
           this.product = response.data.data[0]
@@ -182,6 +180,7 @@ export default {
 <style scoped>
 .main-set {
   background-color: white;
+  min-height: 700px;
   /* background-color: #bcbaba; */
 }
 .detail-page {

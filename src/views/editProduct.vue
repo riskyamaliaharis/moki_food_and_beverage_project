@@ -3,9 +3,7 @@
     <b-container class="bv-example-row">
       <Header />
       <b-breadcrumb>
-        <b-breadcrumb-item href="http://localhost:8080/product"
-          >Product</b-breadcrumb-item
-        >
+        <b-breadcrumb-item to="/product">Product</b-breadcrumb-item>
         <b-breadcrumb-item active>Add New Product</b-breadcrumb-item>
       </b-breadcrumb>
       <b-row>

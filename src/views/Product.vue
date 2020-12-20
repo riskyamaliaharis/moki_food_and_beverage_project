@@ -67,6 +67,7 @@
           ></b-pagination>
           <div>
             <b-button
+              to="/editproduct"
               block
               variant="primary"
               class="toggle-add"
@@ -127,7 +128,7 @@ export default {
       limit: 10,
       page: 1,
       category_name: '',
-      role: 2
+      role: 1
     }
   },
   created() {
@@ -161,7 +162,7 @@ export default {
     deleteProduct(product_id) {
       console.log(product_id)
       axios
-        .delete(`http://localhost:3000/product/${this.product_id}`)
+        .delete(`http://localhost:3000/product/${product_id}`)
         .then(response => {
           console.log(response)
         })
