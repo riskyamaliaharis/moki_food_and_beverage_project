@@ -5,6 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <Header />
+    <Sorting @sort="getProduct" :sort="sort" />
     <Navbar @category="getProductByCategory" />
     <Coupon />
     <div class="product-page">
@@ -24,7 +25,7 @@
               <div class="menu">
                 <img
                   class="rounded-circle"
-                  src="../assets/img/twitter_logo.png"
+                  src="../assets/img/product/image 22.png"
                   alt="thumbnail"
                   style="width:100px"
                 />
@@ -91,6 +92,7 @@ import Footer from '@/components/Footer.vue'
 import axios from 'axios'
 import Navbar from '@/components/Navbar.vue'
 import Coupon from '@/components/Coupon.vue'
+import Sorting from '@/components/Sorting.vue'
 
 export default {
   name: 'Home',
@@ -98,7 +100,8 @@ export default {
     Header,
     Footer,
     Navbar,
-    Coupon
+    Coupon,
+    Sorting
   },
   computed: {
     rows() {
@@ -128,20 +131,22 @@ export default {
       limit: 10,
       page: 1,
       category_name: '',
+      sort: '',
       role: 1
     }
   },
   created() {
-    this.getProduct()
+    this.getProduct(this.sort)
   },
   methods: {
-    getProduct() {
+    getProduct(sort) {
       axios
         .get(
-          `http://localhost:3000/product?page=${this.page}&limit=${this.limit}`
+          `http://localhost:3000/product?page=${this.page}&limit=${this.limit}&sort=${sort}`
         )
         .then(response => {
           console.log(response)
+          this.sort = sort
           this.totalRows = response.data.pagination.totalData
           this.products = response.data.data
         })
@@ -165,6 +170,7 @@ export default {
         .delete(`http://localhost:3000/product/${product_id}`)
         .then(response => {
           console.log(response)
+          this.getProduct(this.sort)
         })
         .catch(error => {
           console.log(error)
@@ -173,14 +179,14 @@ export default {
     handlePageChange(numberPage) {
       console.log(numberPage)
       this.page = numberPage
-      this.getProduct()
+      this.getProduct(this.sort)
     },
     detailProduct(product_id) {
       console.log(product_id)
       this.$router.push({ name: 'detailProduct', params: { id: product_id } })
     },
     getProductByCategory(category_name) {
-      console.log(category_name)
+      console.log(category_name + this.sort)
       axios
         .get(
           `http://localhost:3000/product/category?page=${this.page}&limit=${this.limit}&category_name=${category_name}`
@@ -193,7 +199,7 @@ export default {
             category_name !== 'addon'
           ) {
             this.category_name = ''
-            this.products = this.getProduct()
+            this.products = this.getProduct(this.sort)
           } else {
             this.category_name = category_name
             this.products = response.data.data
@@ -207,6 +213,37 @@ export default {
           console.log(error)
         })
     }
+    //   sortingProduct(sort) {
+    //     console.log(sort)
+    //     axios
+    //       .get(
+    //         `http://localhost:3000/product/sorting?page=${this.page}&limit=${this.limit}&sort=${sort}`
+    //       )
+    //       .then(response => {
+    //         if (
+    //           sort !== 'product_name ASC' &&
+    //           sort !== 'product_name DESC' &&
+    //           sort !== 'product_price ASC' &&
+    //           sort !== 'product_price DESC' &&
+    //           sort !== 'product_cretaed_at ASC' &&
+    //           sort !== 'product_created_at DESC'
+    //         ) {
+    //           console.log('yayayay')
+    //           this.sort = ''
+    //           this.products = this.getProduct()
+    //         } else {
+    //           console.log('husdjs')
+    //           this.sort = sort
+    //           console.log(response)
+    //           this.products = response.data.data
+    //           this.totalRows = response.data.pagination.totalData
+    //         }
+    //         console.log(this.products)
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //       })
+    //   }
   }
 }
 </script>
