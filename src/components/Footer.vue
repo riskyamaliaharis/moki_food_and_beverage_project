@@ -1,17 +1,27 @@
 <template>
-  <b-container>
-    <footer>
+  <b-container id="footer-set">
+    <footer class="container">
       <b-row>
-        <b-col cols="7">
+        <b-col
+          lg="6"
+          md="4"
+          sm="12"
+          order-lg="0"
+          order-md="0"
+          order-sm="3"
+          order-xs="3"
+        >
           <div class="about">
-            <!-- <img class="moki" src="../assets/logo.png" alt="coffee-logo" /> -->
+            <!-- <img src="../img/coffee 1.png" alt="coffee-logo" /> -->
+            <p class="rubik">Coffee Shop</p>
             <div class="description">
               <p class="font-weight-light">
                 Coffee Shop is a store that sells some good meals, and
                 especially coffee. We provide high quality beans
               </p>
             </div>
-            <div class="social-media" vertical-align="end">
+
+            <div class="social-media">
               <img src="../assets/img/facebook_logo.png" alt="fb" />
               <img src="../assets/img/twitter_logo.png" alt="twitter" />
               <img src="../assets/img/instagram_logo.png" alt="ig" />
@@ -19,7 +29,15 @@
             <p class="font-weight-light">&copy;2020CoffeeStore</p>
           </div>
         </b-col>
-        <b-col cols="2">
+        <b-col
+          lg="3"
+          md="4"
+          sm="12"
+          order-lg="1"
+          order-md="1"
+          order-sm="0"
+          order-xs="0"
+        >
           <div class="product">
             <p class="rubik">Product</p>
             <ul class="rubik ">
@@ -31,7 +49,16 @@
             </ul>
           </div>
         </b-col>
-        <b-col cols="2">
+
+        <b-col
+          lg="3"
+          md="4"
+          sm="12"
+          order-lg="2"
+          order-md="2"
+          order-sm="2"
+          order-xs="2"
+        >
           <div class="engage">
             <p class="rubik">Engage</p>
             <ul class="rubik  ">
@@ -57,29 +84,27 @@
   width: 100px;
 }
 
-/* .about {
-  padding-left: 100px;
-} */
 .about .description p {
   width: 40%;
   word-wrap: break-word;
 }
 footer {
   height: 200px;
-  align-items: flex-end;
   margin: 0 auto;
 }
 footer .product,
 footer .engage {
-  flex: 1;
+  /* flex: 1; */
   font-weight: 700;
 }
+
 .product li,
 .engage li {
   list-style-type: none;
   font-weight: 5;
   font-size: 15px;
   line-height: 2;
+  margin-left: 55px;
 }
 
 .product li a,
@@ -89,5 +114,50 @@ footer .engage {
 
 b-container {
   margin-top: 100px;
+}
+
+@media (max-width: 576px) {
+}
+
+@media (max-width: 768px) {
+  .product li,
+  .engage li {
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .about .description p {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  #footer-set .about p {
+    font-size: 13px;
+  }
+
+  #footer-set .about {
+    text-align: center;
+  }
+
+  #footer-set .product ul,
+  #footer-set .engage ul {
+    text-align: center;
+    margin-left: -70px;
+  }
+
+  footer {
+    padding-top: 20px;
+  }
+
+  .social-media img {
+    width: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .product li,
+  .engage li {
+    margin-left: 35px;
+  }
 }
 </style>

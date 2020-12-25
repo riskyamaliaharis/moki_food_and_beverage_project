@@ -14,15 +14,16 @@
           <b-row>
             <!-- START CARD -->
             <b-col
-              class="card-mid"
+              class="card-mid "
               xl="3"
               lg="4"
               md="6"
-              sm="12"
+              sm="6"
+              xs="12"
               v-for="(item, index) in products"
               :key="index"
             >
-              <div class="menu">
+              <div class="menu mx-auto">
                 <img
                   class="rounded-circle"
                   src="../assets/img/product/image 22.png"
@@ -262,6 +263,7 @@ b-button {
 
 .p-title {
   height: 170px;
+  cursor: pointer;
 }
 
 button.act {
