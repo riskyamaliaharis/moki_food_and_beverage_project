@@ -1,6 +1,7 @@
 <template>
   <b-container fluid class="main-set bv-example-row">
-    <b-breadcrumb>
+    <Header />
+    <b-breadcrumb class="breadcrumb">
       <b-breadcrumb-item to="/product">Product</b-breadcrumb-item>
       <b-breadcrumb-item active>{{ product.product_name }}</b-breadcrumb-item>
     </b-breadcrumb>
@@ -10,7 +11,6 @@
         <!-- START FIRST COLUMN -->
         <b-col>
           <section>
-            <!-- <h6 class="rubik">Favorite & Promo > <strong>Cold Brew</strong></h6> -->
             <img
               class="img-set rounded-circle"
               src="../assets/img/product/image 25.png"
@@ -21,17 +21,17 @@
             </h2>
             <h3>IDR {{ product.product_price }}</h3>
             <br />
-            <p>
-              Delivery only on Monday to Friday at
-            </p>
-            <p>
-              {{ product.delivery_start_hour }} until
-              {{ product.delivery_end_hour }}
-            </p>
-            <br />
+
             <div class="button-set">
               <button type="button" class="btn btn-1 rounded btn-md btn-block">
                 Add to Cart
+              </button>
+              <button
+                type="button"
+                class="btn btn-2 rounded btn-md btn-block"
+                v-if="role === 0"
+              >
+                Ask a Staff
               </button>
               <button
                 type="button"
@@ -48,6 +48,11 @@
         <!-- START SECOND COLUMN -->
         <b-col>
           <div class="card-coldbrew2">
+            <p>
+              Delivery only on <b>Monday to Friday</b> at
+              <b>{{ product.delivery_start_hour }}</b> until
+              <b>{{ product.delivery_end_hour }}</b>
+            </p>
             <p>
               {{ product.product_description }}
             </p>
@@ -96,24 +101,25 @@
             </div>
             <div class="p-1 text-coldbrew ">
               <h6><strong>COLD BREW</strong></h6>
-              <p>xl (Large)</p>
-              <p>xl (Regular)</p>
+              <p>x {{ value }} (Large)</p>
+              <p>x {{ value }} (Regular)</p>
             </div>
             <div class="p-2 counter-coldbrew d-flex justify-content-around">
               <button
                 id="sub"
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="add"
+                @click="sub"
               >
                 -
               </button>
-              <input type="text" id="qtyBox" readonly="" value="0" />
+              <!-- <input type="text" id="qtyBox" readonly="" value="0" /> -->
+              <span>{{ value }}</span>
               <button
                 id="add"
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="sub"
+                @click="add"
               >
                 +
               </button>
@@ -132,17 +138,26 @@
       </b-row>
       <!-- END SECOND ROW -->
     </b-container>
+    <Footer />
   </b-container>
 </template>
 
 <script>
 import axios from 'axios'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+
 export default {
+  components: {
+    Header,
+    Footer
+  },
   data() {
     return {
       product: '',
       product_id: '',
-      role: 2
+      role: 1,
+      value: 0
     }
   },
   created() {
@@ -152,13 +167,13 @@ export default {
   },
   methods: {
     add() {
-      this.qty.value = parseInt(this.qty.value) + 1
+      this.value = parseInt(this.value) + 1
     },
     sub() {
-      if (this.qty.value <= 0) {
-        this.qty.value = 0
+      if (this.value <= 0) {
+        this.value = 0
       } else {
-        this.qty.value = parseInt(this.qty.value) - 1
+        this.value = parseInt(this.value) - 1
       }
     },
     getProduct() {
@@ -183,10 +198,15 @@ export default {
   min-height: 700px;
   /* background-color: #bcbaba; */
 }
+.breadcrumb {
+  background-color: white;
+  margin-left: 100px;
+}
+
 .detail-page {
   min-height: 800px;
   text-align: center;
-  padding-top: 80px;
+  padding-top: 0px;
   position: relative;
 }
 
@@ -302,6 +322,9 @@ section {
   height: 25px;
   background-color: rgba(255, 186, 51, 1);
   padding: 0;
+}
+.counter-coldbrew span {
+  margin: 0 3px;
 }
 .button-set {
   width: 40%;

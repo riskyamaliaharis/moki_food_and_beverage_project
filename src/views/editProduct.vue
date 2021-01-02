@@ -241,7 +241,6 @@ export default {
     createImage(item, file) {
       // var image = new Image();
       var reader = new FileReader()
-
       reader.onload = e => {
         item.image = e.target.result
       }
@@ -279,9 +278,7 @@ export default {
       else if (this.size[1] == true) this.form.size_id = 2
       else if (this.size[0] == true) this.form.size_id = 1
       else console.log('choice is not available')
-
       console.log('size ' + this.form.size_id)
-
       if (
         this.checked[0] == true &&
         this.checked[1] == true &&
@@ -298,7 +295,6 @@ export default {
       else if (this.checked[1] == true) this.form.delivery_method_id = 2
       else if (this.checked[0] == true) this.form.delivery_method_id = 1
       else console.log('choice is not available')
-
       console.log(this.form.delivery_method_id)
     },
     postProduct() {
@@ -340,11 +336,9 @@ div.picture {
 .vue-counter {
   border-color: grey;
 }
-
 .vue-counter button {
   border-color: white;
 }
-
 .center {
   text-align: center;
 }
@@ -364,11 +358,9 @@ textarea {
 .deliv-method {
   margin-bottom: 20px;
 }
-
 .product-size {
   margin-bottom: 20px;
 }
-
 .label-title,
 h4 {
   color: rgba(106, 64, 41, 1);
@@ -378,7 +370,6 @@ h4 {
   margin-top: 65px;
   margin-bottom: 45px;
 }
-
 .save {
   margin-top: 100px;
   width: 70%;
@@ -387,7 +378,6 @@ h4 {
   color: white;
   margin-right: 100px;
 }
-
 .cat {
   width: 300px;
 }

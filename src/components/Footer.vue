@@ -1,83 +1,98 @@
 <template>
-  <b-container id="footer-set">
-    <footer class="container">
-      <b-row>
-        <b-col
-          lg="6"
-          md="4"
-          sm="12"
-          order-lg="0"
-          order-md="0"
-          order-sm="3"
-          order-xs="3"
-        >
-          <div class="about">
-            <!-- <img src="../img/coffee 1.png" alt="coffee-logo" /> -->
-            <p class="rubik">Coffee Shop</p>
-            <div class="description">
-              <p class="font-weight-light">
-                Coffee Shop is a store that sells some good meals, and
-                especially coffee. We provide high quality beans
-              </p>
-            </div>
+  <b-container fluid class="footer">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+    <b-container id="footer-set">
+      <footer class="container">
+        <b-row>
+          <b-col
+            lg="6"
+            md="4"
+            sm="12"
+            order-lg="0"
+            order-md="0"
+            order-sm="3"
+            order-xs="3"
+          >
+            <div class="about">
+              <!-- <img src="../img/coffee 1.png" alt="coffee-logo" /> -->
+              <p class="satisfy">Moki</p>
+              <div class="description">
+                <p class="font-weight-light">
+                  Coffee Shop is a store that sells some good meals, and
+                  especially coffee. We provide high quality beans
+                </p>
+              </div>
 
-            <div class="social-media">
-              <img src="../assets/img/facebook_logo.png" alt="fb" />
-              <img src="../assets/img/twitter_logo.png" alt="twitter" />
-              <img src="../assets/img/instagram_logo.png" alt="ig" />
+              <div class="social-media">
+                <img src="../assets/img/facebook_logo.png" alt="fb" />
+                <img src="../assets/img/twitter_logo.png" alt="twitter" />
+                <img src="../assets/img/instagram_logo.png" alt="ig" />
+              </div>
+              <p class="font-weight-light">&copy;2020CoffeeStore</p>
             </div>
-            <p class="font-weight-light">&copy;2020CoffeeStore</p>
-          </div>
-        </b-col>
-        <b-col
-          lg="3"
-          md="4"
-          sm="12"
-          order-lg="1"
-          order-md="1"
-          order-sm="0"
-          order-xs="0"
-        >
-          <div class="product">
-            <p class="rubik">Product</p>
-            <ul class="rubik ">
-              <li><a href="#">Download</a></li>
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">Locations</a></li>
-              <li><a href="#">Countries</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-          </div>
-        </b-col>
+          </b-col>
+          <b-col
+            lg="3"
+            md="4"
+            sm="12"
+            order-lg="1"
+            order-md="1"
+            order-sm="0"
+            order-xs="0"
+          >
+            <div class="product">
+              <p class="rubik">Product</p>
+              <ul class="rubik ">
+                <li><a href="#">Download</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Locations</a></li>
+                <li><a href="#">Countries</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </div>
+          </b-col>
 
-        <b-col
-          lg="3"
-          md="4"
-          sm="12"
-          order-lg="2"
-          order-md="2"
-          order-sm="2"
-          order-xs="2"
-        >
-          <div class="engage">
-            <p class="rubik">Engage</p>
-            <ul class="rubik  ">
-              <li><a href="#">Coffee Shop?</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-            </ul>
-          </div>
-        </b-col>
-      </b-row>
-    </footer>
+          <b-col
+            lg="3"
+            md="4"
+            sm="12"
+            order-lg="2"
+            order-md="2"
+            order-sm="2"
+            order-xs="2"
+          >
+            <div class="engage">
+              <p class="rubik">Engage</p>
+              <ul class="rubik  ">
+                <li><a href="#">Coffee Shop?</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+          </b-col>
+        </b-row>
+      </footer>
+    </b-container>
   </b-container>
 </template>
 
 <style>
+.footer {
+  background-color: white;
+  padding-top: 50px;
+}
 .rubik {
   font-family: 'Rubik', sans-serif;
+}
+.about .satisfy {
+  font-family: 'Satisfy', cursive;
+  font-size: 30px;
 }
 .about img.moki {
   margin: 5px 5px;

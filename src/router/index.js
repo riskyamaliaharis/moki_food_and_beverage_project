@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+require('dotenv').config()
 import Product from '../views/Product.vue'
-
 import detailProduct from '../views/detailProduct.vue'
 import editProduct from '../views/editProduct.vue'
-
+import Cart from '../views/Cart.vue'
+import Login from '../views/auth/Login.vue'
+import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true }
   },
   {
     path: '/about',
@@ -30,12 +33,24 @@ const routes = [
   {
     path: '/detailproduct/:id',
     name: 'detailProduct',
-    component: detailProduct
+    component: detailProduct,
+    meta: { requiresAuth: true }
   },
   {
     path: '/editproduct',
     name: 'editProduct',
     component: editProduct
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { requiresVisitor: true }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
 ]
 
@@ -43,6 +58,26 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/login'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (store.getters.isLogin) {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
+  } else next()
 })
 
 export default router
