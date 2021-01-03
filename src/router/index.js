@@ -45,8 +45,8 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
-    meta: { requiresVisitor: true }
+    component: Login
+    // meta: { requiresVisitor: true }
   },
   {
     path: '/cart',

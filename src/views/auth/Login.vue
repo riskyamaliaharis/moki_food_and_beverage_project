@@ -1,66 +1,38 @@
 <template>
-  <div>
-    <h1>Halaman Login</h1>
-    <h3>{{ dataName }}</h3>
-    <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
-      <input
-        type="email"
-        v-model="form.email"
-        placeholder="Input Your Email ..."
-      /><br />
-      <input
-        type="password"
-        v-model="form.password"
-        placeholder="Input Your Password ..."
-      />
-      <br />
-      <button type="submit">Submit</button>
-      <button type="reset">Reset</button>
-    </b-form>
+  <div class="login">
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col cols="6">
+          <div class="left">
+            <Jumbotron />
+          </div>
+        </b-col>
+        <b-col cols="6">
+          <div class="right"><FormLogin /></div>
+        </b-col>
+      </b-row>
+    </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import Jumbotron from '@/components/login/Jumbotron.vue'
+import FormLogin from '@/components/login/FormLogin.vue'
+import Footer from '@/components/Footer.vue'
 export default {
   name: 'Login',
-  data() {
-    return {
-      form: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  computed: {
-    // 1st
-    // dataName() {
-    //   return this.$store.state.name
-    // }
-    // 2nd
-    ...mapState(['name']),
-    ...mapState({ dataName: 'name' })
-  },
-  methods: {
-    //mapActions & mapMutations
-    onSubmit() {
-      console.log(this.form)
-      this.login(this.form)
-        .then(result => {
-          console.log(result)
-          this.$router.push('/product')
-        })
-        .catch(error => {
-          alert(error.data.msg)
-        })
-    },
-    onReset() {
-      this.form = {
-        email: '',
-        password: ''
-      }
-    },
-    ...mapActions(['login'])
+  components: {
+    Jumbotron,
+    FormLogin,
+    Footer
   }
 }
 </script>
+
+<style>
+div.right {
+  margin-right: -100px;
+  /* background-color: yellowgreen; */
+}
+</style>
