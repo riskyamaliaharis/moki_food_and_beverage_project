@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="signup">
     <b-container class="bv-example-row">
       <b-row>
         <b-col cols="6">
@@ -8,7 +8,7 @@
           </div>
         </b-col>
         <b-col cols="6">
-          <div class="right"><FormLogin /></div>
+          <div class="right"><FormSignUp /></div>
         </b-col>
       </b-row>
     </b-container>
@@ -18,20 +18,19 @@
 
 <script>
 import Jumbotron from '@/components/login/Jumbotron.vue'
-import FormLogin from '@/components/login/FormLogin.vue'
+import FormSignUp from '@/components/signup/FormSignUp.vue'
 import Footer from '@/components/Footer.vue'
 export default {
-  name: 'Login',
+  name: 'SignUp',
   components: {
     Jumbotron,
-    FormLogin,
+    FormSignUp,
     Footer
   }
 }
 </script>
 
 <style>
-div.right {
-  margin-right: -100px;
+@media (max-width: 576px) {
 }
 </style>

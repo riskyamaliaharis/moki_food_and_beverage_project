@@ -8,6 +8,7 @@ import editProduct from '../views/editProduct.vue'
 import Cart from '../views/Cart.vue'
 import History from '../views/History.vue'
 import Login from '../views/auth/Login.vue'
+import SignUp from '../views/auth/SignUp.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/history',
     name: 'History',
     component: History
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp
   }
 ]
 
