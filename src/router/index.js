@@ -9,6 +9,7 @@ import Cart from '../views/Cart.vue'
 import History from '../views/History.vue'
 import Login from '../views/auth/Login.vue'
 import SignUp from '../views/auth/SignUp.vue'
+import AddPromo from '../views/Promo/AddPromo.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/promo/addpromo',
+    name: 'AddPromo',
+    component: AddPromo
   }
 ]
 
