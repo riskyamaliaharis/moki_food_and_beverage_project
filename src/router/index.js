@@ -6,6 +6,7 @@ import Product from '../views/Product.vue'
 import detailProduct from '../views/detailProduct.vue'
 import editProduct from '../views/editProduct.vue'
 import Cart from '../views/Cart.vue'
+import Profile from '../views/user/Profile.vue'
 import History from '../views/History.vue'
 import Login from '../views/auth/Login.vue'
 import SignUp from '../views/auth/SignUp.vue'
@@ -69,6 +70,11 @@ const routes = [
     path: '/promo/addpromo',
     name: 'AddPromo',
     component: AddPromo
+  },
+  {
+    path: '/user/profile',
+    name: 'Profile',
+    component: Profile
   }
 ]
 
