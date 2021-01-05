@@ -11,6 +11,8 @@ import History from '../views/History.vue'
 import Login from '../views/auth/Login.vue'
 import SignUp from '../views/auth/SignUp.vue'
 import AddPromo from '../views/Promo/AddPromo.vue'
+import EditPromo from '../views/Promo/EditPromo.vue'
+// import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -18,8 +20,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: { requiresAuth: true }
+    component: Home
+    // meta: { requiresAuth: true }
   },
   {
     path: '/about',
@@ -72,10 +74,20 @@ const routes = [
     component: AddPromo
   },
   {
+    path: '/promo/editpromo',
+    name: 'EditPromo',
+    component: EditPromo
+  },
+  {
     path: '/user/profile',
     name: 'Profile',
     component: Profile
   }
+  // {
+  //   path: '/admin/dashboard',
+  //   name: 'Dashboard',
+  //   component: Dashboard
+  // }
 ]
 
 const router = new VueRouter({

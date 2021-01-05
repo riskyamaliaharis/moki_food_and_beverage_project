@@ -1,8 +1,19 @@
 <template>
   <div class="home">
     <Header />
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Jumbotron />
+    <b-container class="bv-example-row bv-example-row-flex-cols">
+      <b-row class="info" align-v="center">
+        <b-col>
+          <LeftHome />
+        </b-col>
+        <b-col>
+          <RightHome />
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
 
     <Footer />
   </div>
@@ -10,16 +21,26 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Jumbotron from '@/components/home/Jumbotron.vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import LeftHome from '@/components/home/LeftHome.vue'
+import RightHome from '@/components/home/RightHome.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    Jumbotron,
     Header,
-    Footer
+    Footer,
+    LeftHome,
+    RightHome
   }
 }
 </script>
+
+<style scoped>
+.info {
+  margin-top: 80px;
+}
+</style>

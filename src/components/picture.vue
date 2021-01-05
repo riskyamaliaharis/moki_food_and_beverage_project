@@ -1,6 +1,6 @@
 <template>
   <div class="centered">
-    <img src="../../assets/img/unnamed.png" alt="" />
+    <img src="../assets/img/unnamed.png" alt="" />
     <br />
     <b-button class="upload-btn">Take a Picture</b-button>
     <br />

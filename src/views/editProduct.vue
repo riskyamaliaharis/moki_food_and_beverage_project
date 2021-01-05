@@ -1,7 +1,7 @@
 <template>
   <div>
+    <Header />
     <b-container class="bv-example-row">
-      <Header />
       <b-breadcrumb>
         <b-breadcrumb-item to="/product">Product</b-breadcrumb-item>
         <b-breadcrumb-item active>Add New Product</b-breadcrumb-item>
@@ -20,24 +20,27 @@
                 <button @click="removeImage(item)">Remove image</button>
               </div>
             </div>
+            <Picture />
           </div>
           <div class="delivery-time">
             <label class="label-title" for="">Start Delivery</label>
             <br />
-            <input
+            <b-form-timepicker
               type="time"
               placeholder="HH:mm:ss"
               v-model="form.delivery_start_hour"
-            />
+              class="form"
+            ></b-form-timepicker>
             <br />
             <br />
             <label class="label-title" for="">End Delivery</label>
             <br />
-            <input
+            <b-form-timepicker
               type="time"
               placeholder="HH:mm:ss"
               v-model="form.delivery_end_hour"
-            />
+              class="form"
+            ></b-form-timepicker>
           </div>
           <div>
             <label class="label-title" for="">Product Stock</label>
@@ -58,7 +61,7 @@
         </b-col>
 
         <b-col class="right">
-          <table class="table">
+          <table class="table form">
             <tbody>
               <tr>
                 <td>
@@ -139,26 +142,6 @@
             </b-form-checkbox>
           </div>
           <b-row class="">
-            <b-col md="4">
-              <div id="vue-counter">
-                <button type="button" v-on:click="decrease">-</button>
-                <span>{{ counter }}</span
-                ><button type="button" v-on:click="increase">+</button>
-                <button type="button" v-on:click="reset">Reset</button>
-              </div>
-            </b-col>
-
-            <b-col md="8">
-              <div>
-                <b-button
-                  block
-                  variant="warning"
-                  @click="chooseSizeAndDelivMethod"
-                  >Generate</b-button
-                >
-              </div>
-            </b-col>
-            <br />
             <button
               class="save"
               type="button"
@@ -179,6 +162,7 @@
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Picture from '@/components/Picture.vue'
 import axios from 'axios'
 export default {
   data() {
@@ -186,7 +170,8 @@ export default {
       name: 'editProduct',
       components: {
         Header,
-        Footer
+        Footer,
+        Picture
       },
       form: {
         category_id: '',
@@ -195,7 +180,6 @@ export default {
         product_stock: '',
         image_src: '',
         product_description: '',
-        payment_method_id: 1,
         delivery_method_id: '',
         size_id: '',
         delivery_start_hour: '',
@@ -298,6 +282,7 @@ export default {
       console.log(this.form.delivery_method_id)
     },
     postProduct() {
+      this.chooseSizeAndDelivMethod()
       console.log(this.form)
       axios
         .post('http://localhost:3000/product', this.form)
@@ -345,6 +330,10 @@ div.picture {
 button {
   margin-right: 5px;
 }
+div.form,
+table.form {
+  width: 300px;
+}
 b-form-checkbox {
   background-color: rgba(106, 64, 41, 1);
 }
@@ -372,11 +361,12 @@ h4 {
 }
 .save {
   margin-top: 100px;
-  width: 70%;
-  border-radius: 20px;
+  width: 50%;
+  border-radius: 5px;
   background-color: rgba(106, 64, 41, 1);
   color: white;
   margin-right: 100px;
+  text-align: center;
 }
 .cat {
   width: 300px;
