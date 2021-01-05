@@ -5,6 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <Header />
+    <br /><br /><br /><br /><br />
     <Sorting @sort="getProduct" :sort="sort" />
     <Navbar @category="getProductByCategory" />
     <Coupon />
@@ -94,9 +95,11 @@ import axios from 'axios'
 import Navbar from '@/components/Navbar.vue'
 import Coupon from '@/components/Coupon.vue'
 import Sorting from '@/components/Sorting.vue'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+// import mapStates from 'vuex'
 
 export default {
-  name: 'Home',
+  name: 'Product',
   components: {
     Header,
     Footer,
@@ -105,13 +108,20 @@ export default {
     Sorting
   },
   computed: {
-    rows() {
-      return this.totalRows
-    }
+    ...mapGetters({
+      products: 'getDataProduct',
+      page: 'getPageProduct',
+      limit: 'getLimitProduct',
+      rows: 'getTotalRowsProduct',
+      sort: 'getSortProduct'
+    })
+    // rows() {
+    //   return this.totalRows
+    // }
   },
   data() {
     return {
-      products: [],
+      // products: [],
       form: {
         category_id: '',
         product_name: '',
@@ -128,33 +138,35 @@ export default {
       isMsg: '',
       product_id: '',
       currentPage: 1,
-      totalRows: null,
-      limit: 10,
-      page: 1,
+      // totalRows: null,
+      // limit: 10,
+      // page: 1,
       category_name: '',
-      sort: '',
+      // sort: '',
       role: 1
     }
   },
   created() {
-    this.getProduct(this.sort)
+    this.getProducts()
   },
   methods: {
-    getProduct(sort) {
-      axios
-        .get(
-          `http://localhost:3000/product?page=${this.page}&limit=${this.limit}&sort=${sort}`
-        )
-        .then(response => {
-          console.log(response)
-          this.sort = sort
-          this.totalRows = response.data.pagination.totalData
-          this.products = response.data.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
+    ...mapActions(['getProducts']),
+    ...mapMutations(['changePage']),
+    // getProduct(sort) {
+    // axios
+    //   .get(
+    //     `http://localhost:3000/product?page=${this.page}&limit=${this.limit}&sort=${sort}`
+    //   )
+    //   .then(response => {
+    //     console.log(response)
+    //     this.sort = sort
+    //     this.totalRows = response.data.pagination.totalData
+    //     this.products = response.data.data
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+    // },
 
     setProduct(data) {
       console.log(data)
@@ -178,9 +190,10 @@ export default {
         })
     },
     handlePageChange(numberPage) {
-      console.log(numberPage)
-      this.page = numberPage
-      this.getProduct(this.sort)
+      // console.log(numberPage)
+      // this.page = numberPage
+      this.changePage(numberPage)
+      this.getProducts()
     },
     detailProduct(product_id) {
       console.log(product_id)

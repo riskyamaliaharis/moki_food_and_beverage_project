@@ -10,7 +10,7 @@
         <b-col>
           <!-- Plain mode -->
           <div class="picture">
-            <div class="upload" v-for="item in items" :key="item">
+            <!-- <div class="upload" v-for="item in items" :key="item">
               <div v-if="!item.image">
                 <h4>Select product image</h4>
                 <input type="file" @change="onFileChange(item, $event)" />
@@ -18,8 +18,22 @@
               <div v-else>
                 <img :src="item.image" />
                 <button @click="removeImage(item)">Remove image</button>
+              </div> -->
+
+            <!-- </div> -->
+            <div class="upload">
+              <div v-if="!image_src">
+                <h4>Select product image</h4>
+                <input type="file" @change="handleFile" />
+              </div>
+              <div v-else>
+                <img :src="'http://localhost:3000/' + image_src" />
+                <button @click="removeImage(image_src)">Remove image</button>
               </div>
             </div>
+            <!-- <h4>Select product image</h4>
+            <input type="file" @change="handleFile" />
+            <img :src="'http://localhost/:3000/' + image_src" /> -->
             <Picture />
           </div>
           <div class="delivery-time">
@@ -163,7 +177,7 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Picture from '@/components/Picture.vue'
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data() {
     return {
@@ -214,24 +228,27 @@ export default {
     reset: function() {
       this.counter = 0
     },
-    onFileChange(item, e) {
-      this.form.image_src = e.target.files[0].name
-      console.log(this.form.image_src)
-      var files = e.target.files || e.dataTransfer.files
-      console.log(files)
-      if (!files.length) return
-      this.createImage(item, files[0])
-    },
-    createImage(item, file) {
-      // var image = new Image();
-      var reader = new FileReader()
-      reader.onload = e => {
-        item.image = e.target.result
-      }
-      reader.readAsDataURL(file)
-    },
-    removeImage: function(item) {
-      item.image = false
+    // onFileChange(item, e) {
+    //   this.form.image_src = e.target.files[0].name
+    //   console.log(this.form.image_src)
+    //   var files = e.target.files || e.dataTransfer.files
+    //   console.log(files)
+    //   if (!files.length) return
+    //   this.createImage(item, files[0])
+    // },
+    // createImage(item, file) {
+    //   // var image = new Image();
+    //   var reader = new FileReader()
+    //   reader.onload = e => {
+    //     item.image = e.target.result
+    //   }
+    //   reader.readAsDataURL(file)
+    // },
+    // removeImage: function(item) {
+    //   item.image = false
+    // },
+    handleFile(event) {
+      this.form.image_src = event.target.files[0]
     },
     chooseSizeAndDelivMethod() {
       console.log(this.size)
@@ -284,18 +301,47 @@ export default {
     postProduct() {
       this.chooseSizeAndDelivMethod()
       console.log(this.form)
-      axios
-        .post('http://localhost:3000/product', this.form)
-        .then(response => {
-          console.log(response)
-          // this.totalRows = response.data.pagination.totalData
-          this.alert = true
-          this.isMsg = response.data.msg
-          // this.getProduct()
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
+      const {
+        product_name,
+        category_id,
+        product_price,
+        product_stock,
+        image_src,
+        product_description,
+        delivery_method_id,
+        size_id,
+        delivery_start_hour,
+        delivery_end_hour,
+        discount_id
+      } = this.form
+      const data = new FormData()
+      data.append('product_name', product_name)
+      data.append('category_id', category_id)
+      data.append('product_price', product_price)
+      data.append('product_stock', product_stock)
+      data.append('image_src', image_src)
+      data.append('product_description', product_description)
+      data.append('delivery_method_id', delivery_method_id)
+      data.append('size_id', size_id)
+      data.append('delivery_start_hour', delivery_start_hour)
+      data.append('delivery_end_hour', delivery_end_hour)
+      data.append('discount_id', discount_id)
+      for (var pair of data.entries()) {
+        console.log(pair[0] + ', ' + pair[1])
+      }
+
+      // axios
+      //   .post('http://localhost:3000/product', this.form)
+      //   .then(response => {
+      //     console.log(response)
+      //     // this.totalRows = response.data.pagination.totalData
+      //     this.alert = true
+      //     this.isMsg = response.data.msg
+      //     // this.getProduct()
+      //   })
+      //   .catch(error => {
+      //     console.log(error.response)
+      //   })
     }
   }
 }
