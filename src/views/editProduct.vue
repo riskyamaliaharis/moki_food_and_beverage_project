@@ -180,6 +180,7 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Picture from '@/components/Picture.vue'
+import axios from 'axios'
 // import axios from 'axios'
 export default {
   data() {
@@ -333,18 +334,19 @@ export default {
         console.log(pair[0] + ', ' + pair[1])
       }
 
-      // axios
-      //   .post('http://localhost:3000/product', this.form)
-      //   .then(response => {
-      //     console.log(response)
-      //     // this.totalRows = response.data.pagination.totalData
-      //     this.alert = true
-      //     this.isMsg = response.data.msg
-      //     // this.getProduct()
-      //   })
-      //   .catch(error => {
-      //     console.log(error.response)
-      //   })
+      axios
+        .post('http://localhost:3000/product', data)
+        .then(response => {
+          console.log(response)
+          // this.totalRows = response.data.pagination.totalData
+          this.alert = true
+          this.isMsg = response.data.msg
+          alert('Success Post data product')
+          // this.getProduct()
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
     }
   }
 }

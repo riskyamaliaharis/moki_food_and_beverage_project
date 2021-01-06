@@ -7,7 +7,7 @@
     <Header />
     <br /><br /><br /><br /><br />
     <Sorting @sort="getProductSorting" :sort="sort" />
-    <Navbar @category="getProductByCategory" />
+    <Navbar @category="handleCategory" />
 
     <Coupon />
     <div>
@@ -114,7 +114,8 @@ export default {
       page: 'getPageProduct',
       limit: 'getLimitProduct',
       rows: 'getTotalRowsProduct',
-      sort: 'getSortProduct'
+      sort: 'getSortProduct',
+      category_name: 'getCategoryNameProduct'
     })
     // rows() {
     //   return this.totalRows
@@ -142,7 +143,7 @@ export default {
       // totalRows: null,
       // limit: 10,
       // page: 1,
-      category_name: '',
+      // category_name: '',
       // sort: '',
       role: 1
     }
@@ -151,9 +152,9 @@ export default {
     this.getProducts()
   },
   methods: {
-    ...mapActions(['getProducts']),
-    ...mapMutations(['changePage']),
-    ...mapMutations(['changeSort']),
+    ...mapActions(['getProducts', 'getProductsByCategory']),
+    ...mapMutations(['changePage', 'changeSort', 'changeCategory']),
+
     getProductSorting(sort) {
       console.log('before ' + sort)
       this.changeSort(sort)
@@ -208,34 +209,39 @@ export default {
       console.log(product_id)
       this.$router.push({ name: 'detailProduct', params: { id: product_id } })
     },
-    getProductByCategory(category_name) {
-      console.log(category_name + this.sort)
-      axios
-        .get(
-          `http://localhost:3000/product/category?page=${this.page}&limit=${this.limit}&category_name=${category_name}`
-        )
-        .then(response => {
-          if (
-            category_name !== 'coffee' &&
-            category_name !== 'noncoffee' &&
-            category_name !== 'food' &&
-            category_name !== 'addon'
-          ) {
-            this.category_name = ''
-            this.products = this.getProduct(this.sort)
-          } else {
-            this.category_name = category_name
-            this.products = response.data.data
-          }
-
-          this.totalRows = response.data.pagination.totalData
-
-          console.log(this.products)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    handleCategory(category_name) {
+      this.changeCategory(category_name)
+      console.log('after click category ' + this.category_name)
+      this.getProductsByCategory()
     }
+    // getProductByCategory(category_name) {
+    //   console.log(category_name + this.sort)
+    //   axios
+    //     .get(
+    //       `http://localhost:3000/product/category?page=${this.page}&limit=${this.limit}&category_name=${category_name}`
+    //     )
+    //     .then(response => {
+    //       if (
+    //         category_name !== 'coffee' &&
+    //         category_name !== 'noncoffee' &&
+    //         category_name !== 'food' &&
+    //         category_name !== 'addon'
+    //       ) {
+    //         this.category_name = ''
+    //         this.products = this.getProduct(this.sort)
+    //       } else {
+    //         this.category_name = category_name
+    //         this.products = response.data.data
+    //       }
+
+    //       this.totalRows = response.data.pagination.totalData
+
+    //       console.log(this.products)
+    //     })
+    //     .catch(error => {
+    //       console.log(error)
+    //     })
+    // }
     //   sortingProduct(sort) {
     //     console.log(sort)
     //     axios
