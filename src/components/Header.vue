@@ -81,8 +81,8 @@ export default {
   methods: {
     ...mapActions(['logout']),
     handleLogout() {
-      console.log('Anda berhasil logout')
       this.logout()
+      alert('Success Logout')
     }
   }
 }

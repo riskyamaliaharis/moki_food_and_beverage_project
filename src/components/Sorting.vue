@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-dropdown class="b" variant="primary" text="Sort By">
+  <div class="sort">
+    <b-dropdown class="btn-sort" variant="warning" text="Sort By">
       <b-dropdown-item @click="sortBy('product_name ASC')">A-Z</b-dropdown-item>
       <b-dropdown-item @click="sortBy('product_name DESC')"
         >Z-A</b-dropdown-item
@@ -38,7 +38,8 @@ export default {
 </script>
 
 <style scoped>
-.b {
-  position: sticky;
+div.sort .btn-sort {
+  background-color: #ffcb65;
+  width: 150px;
 }
 </style>

@@ -9,13 +9,14 @@
     <!-- <Sorting @sort="getProductSorting" :sort="sort" />
     <Navbar @category="handleCategory" /> -->
     <Navbar />
-    <Sorting />
-    <Coupon />
     <div>
-      <b-button to="/editproduct" block class="toggle-add" v-if="role === 1"
+      <b-button to="/editproduct" block class="toggle-add"
         >Add New Product</b-button
       >
     </div>
+
+    <Coupon />
+    <Sorting />
 
     <Card />
     <Footer />
@@ -45,7 +46,6 @@ export default {
 
 <style scoped>
 .toggle-add {
-  margin-top: 300px;
   background-color: rgba(106, 64, 41, 1);
   width: 60%;
   margin: auto;

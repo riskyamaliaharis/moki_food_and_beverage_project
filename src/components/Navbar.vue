@@ -43,10 +43,9 @@ export default {
 <style>
 .navbar-nav a:hover {
   cursor: pointer;
-}
-.navbar-nav a:active {
-  font-weight: 700;
   border-bottom-style: ridge;
   border-bottom-color: #895537;
+}
+.navbar-nav {
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="product-page">
+      <!-- <div>
+        <b-button to="/editproduct" block class="toggle-add"
+          >Add New Product</b-button
+        >
+      </div> -->
       <div class="centered">
         <b-container class="bv-example-row">
           <b-row>
@@ -207,6 +212,8 @@ button.act {
   background-color: rgba(106, 64, 41, 1);
   width: 60%;
   margin: auto;
+  position: absolute;
+  left: 270px;
 }
 .toggle-add:hover {
   background-color: white;

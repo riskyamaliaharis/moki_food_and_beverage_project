@@ -1,6 +1,6 @@
 <template>
   <div class="left-side">
-    <b-button v-b-toggle.sidebar-1>Get Promo</b-button>
+    <b-button v-b-toggle.sidebar-1 class="btn-coupon">Get Promo</b-button>
     <b-sidebar id="sidebar-1" title="Promo for you" shadow>
       <div class="px-3 py-2">
         <p class="promo_info">
@@ -40,8 +40,14 @@
 </template>
 
 <style>
-.left-side {
+/* .left-side {
   position: relative;
+} */
+div.left-side .btn-coupon {
+  background-color: #895537;
+  width: 150px;
+  position: absolute;
+  top: 130px;
 }
 .promo_info {
   position: absolute;
