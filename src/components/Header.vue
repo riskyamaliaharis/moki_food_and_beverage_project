@@ -42,6 +42,8 @@
                 <b-form-input
                   size="sm"
                   class="mr-sm-2"
+                  v-model="inputSearch"
+                  @keyup.enter.prevent="searchData"
                   placeholder="Search"
                 ></b-form-input>
               </b-nav-form>
@@ -75,14 +77,30 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'Header',
+  data() {
+    return {
+      inputSearch: ''
+    }
+  },
+  computed: {
+    ...mapGetters({ search: 'getSearchProduct' })
+  },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'getProductsSearching']),
     handleLogout() {
       this.logout()
       alert('Success Logout')
+    },
+    ...mapMutations(['newSearch']),
+    searchData() {
+      console.log(this.inputSearch)
+      // localStorage.setItem('searching', JSON.stringify(this.inputSearch))
+      // console.log(this.inputSearch)
+      this.newSearch(this.inputSearch)
+      this.getProductsSearching()
     }
   }
 }

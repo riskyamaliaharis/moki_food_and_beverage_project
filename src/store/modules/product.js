@@ -2,12 +2,13 @@ import axios from 'axios'
 
 export default {
   state: {
-    limit: 2,
+    limit: 8,
     page: 1,
     products: [],
     sort: '',
     totalRows: null,
-    category_name: ''
+    category_name: '',
+    search: ''
   },
   mutations: {
     setProduct(state, payload) {
@@ -23,17 +24,22 @@ export default {
       state.page = payload
     },
     changeSort(state, payload) {
-      console.log('payload ' + payload)
       state.sort = payload
     },
     changeCategory(state, payload) {
       state.category_name = payload
+    },
+    newSearch(state, payload) {
+      state.search = payload
+    },
+    setProductAfterInputSearch(state, payload) {
+      state.products = payload.data
+      state.totalRows = payload.pagination.totalData
     }
   },
   actions: {
     getProducts(context) {
       return new Promise((resolve, reject) => {
-        // context.state.sort = payload
         axios
           .get(
             `http://localhost:3000/product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`
@@ -41,9 +47,6 @@ export default {
           .then(response => {
             context.commit('setProduct', response.data)
             resolve(response)
-            // context.state.sort = sort
-            // context.state.totalRows = response.data.pagination.totalData
-            // context.state.products = response.data.data
           })
           .catch(error => {
             reject(error)
@@ -64,7 +67,7 @@ export default {
               context.state.category_name !== 'addon'
             ) {
               context.state.category_name = ''
-              context.state.products = context.state.getProducts()
+              // context.state.products = context.state.getProducts()
             } else {
               // this.category_name = category_name
               context.commit('setDataAfterClickCategory', response.data)
@@ -72,11 +75,25 @@ export default {
               // this.totalRows = response.data.pagination.totalData
             }
 
-            console.log(this.products)
             resolve(response)
           })
           .catch(error => {
             console.log(error.response)
+            reject(error)
+          })
+      })
+    },
+    getProductsSearching(context) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            `http://localhost:3000/product/searching?page=${context.state.page}&limit=${context.state.limit}&search=${context.state.search}`
+          )
+          .then(response => {
+            context.commit('setProductAfterInputSearch', response.data)
+            resolve(response)
+          })
+          .catch(error => {
             reject(error)
           })
       })
@@ -100,6 +117,9 @@ export default {
     },
     getCategoryNameProduct(state) {
       return state.category_name
+    },
+    getSearchProduct(state) {
+      return state.search
     }
   }
 }

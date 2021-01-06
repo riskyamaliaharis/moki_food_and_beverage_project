@@ -41,5 +41,6 @@ export default {
 div.sort .btn-sort {
   background-color: #ffcb65;
   width: 150px;
+  border-radius: 5px;
 }
 </style>

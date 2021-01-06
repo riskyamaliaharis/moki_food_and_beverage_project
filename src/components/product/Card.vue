@@ -82,7 +82,8 @@ export default {
       limit: 'getLimitProduct',
       rows: 'getTotalRowsProduct',
       sort: 'getSortProduct',
-      category_name: 'getCategoryNameProduct'
+      category_name: 'getCategoryNameProduct',
+      search: 'getSearchProduct'
     })
   },
   created() {
@@ -105,12 +106,12 @@ export default {
       alert: false,
       isMsg: '',
       product_id: '',
-      role: ''
+      role: 1
     }
   },
   methods: {
     ...mapActions(['getProducts', 'getProductsByCategory']),
-    ...mapMutations(['changePage', 'changeCategory']),
+    ...mapMutations(['changePage']),
 
     setProduct(data) {
       console.log(data)
@@ -141,11 +142,6 @@ export default {
     detailProduct(product_id) {
       console.log(product_id)
       this.$router.push({ name: 'detailProduct', params: { id: product_id } })
-    },
-    handleCategory(category_name) {
-      this.changeCategory(category_name)
-      console.log('after click category ' + this.category_name)
-      this.getProductsByCategory()
     }
   }
 }
@@ -157,7 +153,7 @@ export default {
 }
 .product-page {
   margin: 100px auto;
-  min-height: 400px;
+  min-height: 200px;
 }
 b-button {
   width: 60%;
@@ -207,6 +203,7 @@ button.act {
   margin: 0 auto;
   top: -30px;
   left: 24px;
+  object-fit: cover;
 }
 .toggle-add {
   background-color: rgba(106, 64, 41, 1);

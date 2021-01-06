@@ -44,10 +44,10 @@
   position: relative;
 } */
 div.left-side .btn-coupon {
-  background-color: #895537;
+  background-color: black;
   width: 150px;
   position: absolute;
-  top: 130px;
+  top: 160px;
 }
 .promo_info {
   position: absolute;

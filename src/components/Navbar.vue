@@ -30,11 +30,14 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex'
 export default {
   methods: {
+    ...mapMutations(['changeCategory']),
+    ...mapActions(['getProductsByCategory']),
     chooseCategory(category_name) {
-      console.log(category_name)
-      this.$emit('category', category_name)
+      this.changeCategory(category_name)
+      this.getProductsByCategory()
     }
   }
 }
