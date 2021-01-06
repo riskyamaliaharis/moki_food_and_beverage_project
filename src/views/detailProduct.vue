@@ -95,7 +95,7 @@
             <div class="p-2">
               <img
                 class="img-coldbrew rounded-circle "
-                src="../assets/img/product/image 25.png"
+                :src="'http://localhost:3000/' + product.image_src"
                 alt="coldbrew"
               />
             </div>

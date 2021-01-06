@@ -6,8 +6,11 @@
     />
     <Header />
     <br /><br /><br /><br /><br />
-    <Sorting @sort="getProductSorting" :sort="sort" />
-    <Navbar @category="handleCategory" />
+    <!-- <Sorting @sort="getProductSorting" :sort="sort" />
+    <Navbar @category="handleCategory" /> -->
+
+    <Sorting />
+    <Navbar />
 
     <Coupon />
     <div>
@@ -153,7 +156,7 @@ export default {
   },
   methods: {
     ...mapActions(['getProducts', 'getProductsByCategory']),
-    ...mapMutations(['changePage', 'changeSort', 'changeCategory']),
+    ...mapMutations(['changePage', 'changeCategory']),
 
     getProductSorting(sort) {
       console.log('before ' + sort)

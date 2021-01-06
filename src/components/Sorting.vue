@@ -22,11 +22,16 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex'
 export default {
   methods: {
+    ...mapMutations(['changeSort']),
+    ...mapActions(['getProducts']),
     sortBy(sort) {
-      console.log(sort)
-      this.$emit('sort', sort)
+      console.log('before sort ' + sort)
+      this.changeSort(sort)
+      console.log('after sort ' + sort)
+      this.getProducts()
     }
   }
 }
