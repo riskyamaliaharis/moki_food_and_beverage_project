@@ -16,11 +16,16 @@ export default {
     },
     changePage(state, payload) {
       state.page = payload
+    },
+    changeSort(state, payload) {
+      console.log('payload ' + payload)
+      state.sort = payload
     }
   },
   actions: {
     getProducts(context) {
       return new Promise((resolve, reject) => {
+        // context.state.sort = payload
         axios
           .get(
             `http://localhost:3000/product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`

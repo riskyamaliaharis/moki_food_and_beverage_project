@@ -6,9 +6,20 @@
     />
     <Header />
     <br /><br /><br /><br /><br />
-    <Sorting @sort="getProduct" :sort="sort" />
+    <Sorting @sort="getProductSorting" :sort="sort" />
     <Navbar @category="getProductByCategory" />
+
     <Coupon />
+    <div>
+      <b-button
+        to="/editproduct"
+        block
+        variant="primary"
+        class="toggle-add"
+        v-if="role === 1"
+        >Add New Product</b-button
+      >
+    </div>
     <div class="product-page">
       <div class="centered">
         <b-container class="bv-example-row">
@@ -27,7 +38,7 @@
               <div class="menu mx-auto">
                 <img
                   class="rounded-circle"
-                  src="../assets/img/product/image 22.png"
+                  :src="'http://localhost:3000/' + item.image_src"
                   alt="thumbnail"
                   style="width:100px"
                 />
@@ -68,16 +79,6 @@
             aria-controls="my-table"
             @change="handlePageChange"
           ></b-pagination>
-          <div>
-            <b-button
-              to="/editproduct"
-              block
-              variant="primary"
-              class="toggle-add"
-              v-if="role === 1"
-              >Add New Product</b-button
-            >
-          </div>
         </b-container>
       </div>
     </div>
@@ -152,6 +153,13 @@ export default {
   methods: {
     ...mapActions(['getProducts']),
     ...mapMutations(['changePage']),
+    ...mapMutations(['changeSort']),
+    getProductSorting(sort) {
+      console.log('before ' + sort)
+      this.changeSort(sort)
+      console.log('after ' + sort)
+      this.getProducts()
+    },
     // getProduct(sort) {
     // axios
     //   .get(
@@ -190,6 +198,7 @@ export default {
         })
     },
     handlePageChange(numberPage) {
+      console.log(numberPage)
       // console.log(numberPage)
       // this.page = numberPage
       this.changePage(numberPage)

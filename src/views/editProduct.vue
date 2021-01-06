@@ -60,7 +60,7 @@
             <label class="label-title" for="">Product Stock</label>
             <br />
             <input type="number" v-model="form.product_stock" />
-            <br />
+            <br /><br />
           </div>
           <div>
             <label class="label-title" for="">Product Category</label>
@@ -113,6 +113,7 @@
             >
               <b>R</b>
             </b-form-checkbox>
+
             <b-form-checkbox
               button-variant="warning"
               v-model="size[1]"
@@ -141,7 +142,9 @@
               <b>500gr</b>
             </b-form-checkbox>
           </div>
+          <br />
           <label class="label-title"> Input Delivery Method</label>
+
           <div class="deliv-method">
             <!-- (Checked: {{ checked3 }}) -->
 
@@ -399,7 +402,7 @@ textarea {
 .label-title,
 h4 {
   color: rgba(106, 64, 41, 1);
-  font-weight: 650;
+  font-weight: 500;
 }
 .delivery-time {
   margin-top: 65px;

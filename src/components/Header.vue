@@ -63,7 +63,7 @@
                     alt="Kitten"
                   />
                 </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
+                <b-dropdown-item to="/user/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="handleLogout">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
             </b-navbar-nav>

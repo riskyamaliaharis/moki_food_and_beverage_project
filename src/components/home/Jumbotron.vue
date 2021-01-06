@@ -21,13 +21,16 @@
           We provide high quality beans, good taste, and healthy meals made by
           love just for you. Start your day with us for a bigger smile!
         </p>
-        <b-button class="sign up" href="#">Sign Up</b-button>
-        <b-button class="sign in" variant="warning" href="#">Login</b-button>
+        <b-button class="sign up" to="/signup" href="#">Sign Up</b-button>
+        <b-button class="sign in" to="/login" variant="warning" href="#"
+          >Login</b-button
+        >
         <div class="data">
           <b-row align-h="center">
             <b-col>
               <div class="">
-                <i class="fa fa-user staff fa-2x"></i><span>90+ staff</span>
+                <i class="fa fa-user staff fa-2x"></i
+                ><span><b>90+ staff</b></span>
               </div>
             </b-col>
             <b-col>
@@ -83,6 +86,10 @@ h1.title,
 .sign {
   margin-right: 20px;
   border: none;
+  width: 120px;
+  height: 40px;
+  padding: auto;
+  font-weight: 500;
 }
 .sign.up {
   background-color: #6a4029;

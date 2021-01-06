@@ -13,7 +13,7 @@
           <section>
             <img
               class="img-set rounded-circle"
-              src="../assets/img/product/image 25.png"
+              :src="'http://localhost:3000/' + product.image_src"
               alt="coldbrew"
             />
             <h2 class="poppins">
