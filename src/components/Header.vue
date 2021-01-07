@@ -43,7 +43,7 @@
                   size="sm"
                   class="mr-sm-2"
                   v-model="inputSearch"
-                  @keyup.enter.prevent="searchData"
+                  @keydown.enter.prevent="searchData"
                   placeholder="Search"
                 ></b-form-input>
               </b-nav-form>

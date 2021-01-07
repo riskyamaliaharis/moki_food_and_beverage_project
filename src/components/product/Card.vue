@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="product-page">
-      <!-- <div>
-        <b-button to="/editproduct" block class="toggle-add"
-          >Add New Product</b-button
-        >
-      </div> -->
       <div class="centered">
         <b-container class="bv-example-row">
           <b-row>
@@ -71,7 +66,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -110,7 +104,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getProducts', 'getProductsByCategory']),
+    ...mapActions(['getProducts', 'getProductsByCategory', 'deleteProducts']),
     ...mapMutations(['changePage']),
 
     setProduct(data) {
@@ -123,16 +117,8 @@ export default {
       console.log(this.form)
     },
     deleteProduct(product_id) {
-      console.log(product_id)
-      axios
-        .delete(`http://localhost:3000/product/${product_id}`)
-        .then(response => {
-          console.log(response)
-          this.getProduct(this.sort)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.deleteProducts(product_id)
+      this.getProducts()
     },
     handlePageChange(numberPage) {
       console.log(numberPage)

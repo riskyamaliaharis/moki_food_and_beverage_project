@@ -67,12 +67,9 @@ export default {
               context.state.category_name !== 'addon'
             ) {
               context.state.category_name = ''
-              context.state.products = context.dispatch.getProducts()
+              context.dispatch.getProducts()
             } else {
-              // this.category_name = category_name
               context.commit('setDataAfterClickCategory', response.data)
-              // this.products = response.data.data
-              // this.totalRows = response.data.pagination.totalData
             }
 
             resolve(response)
@@ -91,6 +88,21 @@ export default {
           )
           .then(response => {
             context.commit('setProductAfterInputSearch', response.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    deleteProducts(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`http://localhost:3000/product/${payload}`)
+          .then(response => {
+            // context.dispatch.getProducts()
+            console.log(context.limit)
+            alert('success delete')
             resolve(response)
           })
           .catch(error => {
