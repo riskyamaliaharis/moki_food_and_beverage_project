@@ -4,7 +4,8 @@ import Home from '../views/Home.vue'
 require('dotenv').config()
 import Product from '../views/Product.vue'
 import detailProduct from '../views/detailProduct.vue'
-import editProduct from '../views/editProduct.vue'
+import addProduct from '../views/addProduct.vue'
+import CreateProduct from '../views/product/AddProduct.vue'
 import Cart from '../views/Cart.vue'
 import Profile from '../views/user/Profile.vue'
 import History from '../views/History.vue'
@@ -43,9 +44,14 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/editproduct',
-    name: 'editProduct',
-    component: editProduct
+    path: '/addproduct',
+    name: 'addProduct',
+    component: addProduct
+  },
+  {
+    path: '/createproduct',
+    name: 'CreateProduct',
+    component: CreateProduct
   },
   {
     path: '/login',

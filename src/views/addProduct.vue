@@ -132,13 +132,28 @@
             >
               <b>XL</b>
             </b-form-checkbox>
-            <b-form-checkbox v-model="size[3]" name="check-button" button>
+            <b-form-checkbox
+              v-model="size[3]"
+              class="food-size"
+              name="check-button"
+              button
+            >
               <b>250gr</b>
             </b-form-checkbox>
-            <b-form-checkbox v-model="size[4]" name="check-button" button>
+            <b-form-checkbox
+              v-model="size[4]"
+              class="food-size"
+              name="check-button"
+              button
+            >
               <b>300gr</b>
             </b-form-checkbox>
-            <b-form-checkbox v-model="size[5]" name="check-button" button>
+            <b-form-checkbox
+              v-model="size[5]"
+              class="food-size"
+              name="check-button"
+              button
+            >
               <b>500gr</b>
             </b-form-checkbox>
           </div>
@@ -148,13 +163,28 @@
           <div class="deliv-method">
             <!-- (Checked: {{ checked3 }}) -->
 
-            <b-form-checkbox v-model="checked[0]" name="check-button" button>
-              <b>(Dine In: {{ checked[0] }})</b>
+            <b-form-checkbox
+              v-model="checked[0]"
+              class="delivery"
+              name="check-button"
+              button
+            >
+              <b>(Dine In)</b>
             </b-form-checkbox>
-            <b-form-checkbox v-model="checked[1]" name="check-button" button>
+            <b-form-checkbox
+              v-model="checked[1]"
+              class="delivery"
+              name="check-button"
+              button
+            >
               <b>Door Delivery</b>
             </b-form-checkbox>
-            <b-form-checkbox v-model="checked[2]" name="check-button" button>
+            <b-form-checkbox
+              v-model="checked[2]"
+              class="delivery"
+              name="check-button"
+              button
+            >
               <b>Pick Up</b>
             </b-form-checkbox>
           </div>
@@ -369,11 +399,11 @@ div.picture {
   margin-bottom: 10px;
   border-radius: 50%;
 }
-.vue-counter {
-  border-color: grey;
-}
-.vue-counter button {
-  border-color: white;
+div.product-size .food-size,
+div.deliv-method .delivery {
+  background-color: rgba(106, 64, 41, 1);
+  margin-right: 5px;
+  border-radius: 50%;
 }
 .center {
   text-align: center;
@@ -384,9 +414,6 @@ button {
 div.form,
 table.form {
   width: 300px;
-}
-b-form-checkbox {
-  background-color: rgba(106, 64, 41, 1);
 }
 textarea {
   width: 80%;
@@ -418,6 +445,7 @@ h4 {
   color: white;
   margin-right: 100px;
   text-align: center;
+  height: 50px;
 }
 .cat {
   width: 300px;

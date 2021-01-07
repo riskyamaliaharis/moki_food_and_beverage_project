@@ -67,7 +67,7 @@ export default {
               context.state.category_name !== 'addon'
             ) {
               context.state.category_name = ''
-              // context.state.products = context.state.getProducts()
+              context.state.products = context.dispatch.getProducts()
             } else {
               // this.category_name = category_name
               context.commit('setDataAfterClickCategory', response.data)

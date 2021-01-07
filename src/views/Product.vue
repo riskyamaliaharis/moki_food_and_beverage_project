@@ -6,11 +6,9 @@
     />
     <Header />
     <br /><br /><br /><br /><br />
-    <!-- <Sorting @sort="getProductSorting" :sort="sort" />
-    <Navbar @category="handleCategory" /> -->
     <Navbar />
     <div>
-      <b-button to="/editproduct" block class="toggle-add"
+      <b-button to="/createproduct" block class="toggle-add"
         >Add New Product</b-button
       >
     </div>
