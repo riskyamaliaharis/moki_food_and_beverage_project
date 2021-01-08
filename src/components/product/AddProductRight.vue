@@ -4,28 +4,28 @@
     <b-form-input
       class="input-text"
       id="input-name"
-      v-model="name"
+      v-model="form.name"
     ></b-form-input>
 
     <label for="input-price">Price :</label>
     <b-form-input
       class="input-text"
       id="input-price"
-      v-model="price"
+      v-model="form.price"
     ></b-form-input>
 
     <label for="input-desc">Description :</label>
     <b-form-input
       class="input-text"
       id="input-desc"
-      v-model="description"
+      v-model="form.description"
     ></b-form-input>
 
     <label for="input-cat">Input Category :</label>
     <b-form-input
       class="input-text"
       id="input-cat"
-      v-model="category"
+      v-model="form.category"
     ></b-form-input>
     <!-- <label for="input-cat">Input Category:</label>
     <b-form-input list="input-list" id="input-cat"></b-form-input>
@@ -77,17 +77,21 @@ export default {
   },
   data() {
     return {
-      name: '',
-      price: '',
-      description: '',
-      category: ''
+      form: {
+        name: '',
+        price: '',
+        description: '',
+        category: ''
+      }
+
       // options: ['Coffee', 'Non-Coffee', 'Food', 'Add On']
     }
   },
   methods: {
     ...mapMutations(['changeRightData']),
     rightData() {
-      this.changeRightData(this)
+      console.log(this.form)
+      this.changeRightData(this.form)
 
       console.log(this.category_id)
       console.log(this.product_name)

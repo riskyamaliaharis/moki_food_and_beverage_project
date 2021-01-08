@@ -35,7 +35,6 @@
                 <b-button
                   type="button"
                   class="btn a rounded-circle act"
-                  variant="danger"
                   @click="deleteProduct(item.product_id)"
                   v-if="role === 1"
                 >
@@ -44,6 +43,7 @@
                 <b-button
                   type="button"
                   class="btn a rounded-circle act"
+                  @click="patchProduct(item.product_id)"
                   v-if="role === 1"
                 >
                   <i class="fa fa-edit "></i>
@@ -112,9 +112,10 @@ export default {
       this.form = data
       this.product_id = data.product_id
     },
-    patchProduct() {
+    patchProduct(product_id) {
       console.log(this.product_id)
       console.log(this.form)
+      this.$router.push({ name: 'editProduct', params: { id: product_id } })
     },
     deleteProduct(product_id) {
       this.deleteProducts(product_id)

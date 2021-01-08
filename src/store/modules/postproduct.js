@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   state: {
@@ -22,6 +22,7 @@ export default {
     //   state.totalRows = payload.pagination.totalData
     // },
     changeRightData(state, payload) {
+      console.log(payload)
       state.form.product_name = payload.name
       state.form.product_price = payload.price
       state.form.product_description = payload.description
