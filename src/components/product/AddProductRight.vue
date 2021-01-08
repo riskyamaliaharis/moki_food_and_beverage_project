@@ -1,22 +1,40 @@
 <template>
   <div>
     <label for="input-name" class="name">Name :</label>
-    <b-form-input class="input-text" id="input-name"></b-form-input>
+    <b-form-input
+      class="input-text"
+      id="input-name"
+      v-model="name"
+    ></b-form-input>
 
     <label for="input-price">Price :</label>
-    <b-form-input class="input-text" id="input-price"></b-form-input>
+    <b-form-input
+      class="input-text"
+      id="input-price"
+      v-model="price"
+    ></b-form-input>
 
     <label for="input-desc">Description :</label>
-    <b-form-input class="input-text" id="input-desc"></b-form-input>
+    <b-form-input
+      class="input-text"
+      id="input-desc"
+      v-model="description"
+    ></b-form-input>
 
-    <label for="input-cat">Input Category:</label>
+    <label for="input-cat">Input Category :</label>
+    <b-form-input
+      class="input-text"
+      id="input-cat"
+      v-model="category"
+    ></b-form-input>
+    <!-- <label for="input-cat">Input Category:</label>
     <b-form-input list="input-list" id="input-cat"></b-form-input>
-    <b-form-datalist id="input-list" :options="options"></b-form-datalist>
+    <b-form-datalist id="input-list" :options="options"></b-form-datalist> -->
 
-    <label>Input Product Size :</label>
-    <br />
+    <!-- <label>Input Product Size :</label>
+    <br /> -->
 
-    <b-row>
+    <!-- <b-row>
       <b-col class="beverage-size">
         <button class="button button-rounded">
           R
@@ -38,19 +56,43 @@
         <button class="button">Dine In</button>
         <button class="button disabled">Take Away</button>
       </b-col>
-    </b-row>
+    </b-row> -->
 
-    <button class="save-button">Save</button>
+    <button class="save-button" @click="rightData">Save</button>
     <br /><br />
     <button class="cancel-button">Cancel</button>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapGetters({
+      category_id: 'getCategoryId',
+      product_name: 'getProductName',
+      product_price: 'getProductPrice',
+      product_description: 'getProductDesc'
+    })
+  },
   data() {
     return {
-      options: ['Coffee', 'Non-Coffee', 'Food', 'Add On']
+      name: '',
+      price: '',
+      description: '',
+      category: ''
+      // options: ['Coffee', 'Non-Coffee', 'Food', 'Add On']
+    }
+  },
+  methods: {
+    ...mapMutations(['changeRightData']),
+    rightData() {
+      this.changeRightData(this)
+
+      console.log(this.category_id)
+      console.log(this.product_name)
+      console.log(this.product_price)
+      console.log(this.product_description)
     }
   }
 }

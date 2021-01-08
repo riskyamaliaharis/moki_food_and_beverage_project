@@ -10,7 +10,7 @@
         <b-col>
           <!-- Plain mode -->
           <div class="picture">
-            <!-- <div class="upload" v-for="item in items" :key="item">
+            <div class="upload" v-for="item in items" :key="item">
               <div v-if="!item.image">
                 <h4>Select product image</h4>
                 <input type="file" @change="onFileChange(item, $event)" />
@@ -18,10 +18,9 @@
               <div v-else>
                 <img :src="item.image" />
                 <button @click="removeImage(item)">Remove image</button>
-              </div> -->
-
-            <!-- </div> -->
-            <div class="upload">
+              </div>
+            </div>
+            <!-- <div class="upload">
               <div v-if="!image_src">
                 <h4>Select product image</h4>
                 <input type="file" @change="handleFile" />
@@ -30,7 +29,7 @@
                 <img :src="'http://localhost:3000/' + image_src" />
                 <button @click="removeImage(image_src)">Remove image</button>
               </div>
-            </div>
+            </div> -->
             <!-- <h4>Select product image</h4>
             <input type="file" @change="handleFile" />
             <img :src="'http://localhost/:3000/' + image_src" /> -->
@@ -262,25 +261,25 @@ export default {
     reset: function() {
       this.counter = 0
     },
-    // onFileChange(item, e) {
-    //   this.form.image_src = e.target.files[0].name
-    //   console.log(this.form.image_src)
-    //   var files = e.target.files || e.dataTransfer.files
-    //   console.log(files)
-    //   if (!files.length) return
-    //   this.createImage(item, files[0])
-    // },
-    // createImage(item, file) {
-    //   // var image = new Image();
-    //   var reader = new FileReader()
-    //   reader.onload = e => {
-    //     item.image = e.target.result
-    //   }
-    //   reader.readAsDataURL(file)
-    // },
-    // removeImage: function(item) {
-    //   item.image = false
-    // },
+    onFileChange(item, e) {
+      this.form.image_src = e.target.files[0]
+      console.log(this.form.image_src)
+      var files = e.target.files || e.dataTransfer.files
+      console.log(files)
+      if (!files.length) return
+      this.createImage(item, files[0])
+    },
+    createImage(item, file) {
+      // var image = new Image();
+      var reader = new FileReader()
+      reader.onload = e => {
+        item.image = e.target.result
+      }
+      reader.readAsDataURL(file)
+    },
+    removeImage: function(item) {
+      item.image = false
+    },
     handleFile(event) {
       this.form.image_src = event.target.files[0]
     },

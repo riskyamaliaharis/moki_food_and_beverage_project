@@ -100,7 +100,6 @@ export default {
         axios
           .delete(`http://localhost:3000/product/${payload}`)
           .then(response => {
-            // context.dispatch.getProducts()
             console.log(context.limit)
             alert('success delete')
             resolve(response)
