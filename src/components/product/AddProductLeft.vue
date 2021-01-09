@@ -5,22 +5,53 @@
     <b-form-timepicker
       list="input-list"
       id="input-with-list"
-      v-model="form.delivery_start_hour"
+      v-model="form.delivStartHour"
+      @change="leftData"
     ></b-form-timepicker>
     <br />
     <b-form-timepicker
       list="input-list2"
       id="input-with-list2"
       class="input-box"
-      v-model="form.delivery_end_hour"
+      v-model="form.delivEndHour"
+      @change="leftData"
     ></b-form-timepicker>
 
     <label for="input-stock">Input Stock:</label>
     <b-form-input
       id="input-stock"
       class="input-box"
-      v-model="form.product_stock"
+      type="number"
+      v-model="form.stock"
+      @change="leftData"
     ></b-form-input>
+
+    <label for="input-discount">Discount :</label>
+    <div>
+      <b-dropdown id="dropdown-buttons" text="Discount">
+        <b-dropdown-item-button @click="selectDisc(1)"
+          >0%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(2)"
+          >10%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(3)"
+          >15%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(4)"
+          >20%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(5)"
+          >30%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(6)"
+          >40%</b-dropdown-item-button
+        >
+        <b-dropdown-item-button @click="selectDisc(7)"
+          >50%</b-dropdown-item-button
+        >
+      </b-dropdown>
+    </div>
 
     <!-- <label>Input Product Size :</label>
     <div id="checkboxes">
@@ -40,168 +71,52 @@
 
       <h1>{{ size }}</h1>
     </div> -->
-
-    <!--  -->
-    <label class="label-title"> Input Product Size</label>
-    <div class="product-size">
-      <!-- (Checked: {{ checked3 }}) -->
-      <b-form-checkbox
-        button-variant="warning"
-        v-model="size[0]"
-        name="check-button"
-        button
-        pill
-      >
-        <b>R</b>
-      </b-form-checkbox>
-
-      <b-form-checkbox
-        button-variant="warning"
-        v-model="size[1]"
-        name="check-button"
-        button
-        pill
-      >
-        <b>L</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        button-variant="warning"
-        v-model="size[2]"
-        name="check-button"
-        button
-        pill
-      >
-        <b>XL</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        v-model="size[3]"
-        class="food-size"
-        name="check-button"
-        button
-      >
-        <b>250gr</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        v-model="size[4]"
-        class="food-size"
-        name="check-button"
-        button
-      >
-        <b>300gr</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        v-model="size[5]"
-        class="food-size"
-        name="check-button"
-        button
-      >
-        <b>500gr</b>
-      </b-form-checkbox>
-    </div>
-    <br />
-    <label class="label-title"> Input Delivery Method</label>
-
-    <div class="deliv-method">
-      <!-- (Checked: {{ checked3 }}) -->
-
-      <b-form-checkbox
-        v-model="checked[0]"
-        class="delivery"
-        name="check-button"
-        button
-      >
-        <b>(Dine In)</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        v-model="checked[1]"
-        class="delivery"
-        name="check-button"
-        button
-      >
-        <b>Door Delivery</b>
-      </b-form-checkbox>
-      <b-form-checkbox
-        v-model="checked[2]"
-        class="delivery"
-        name="check-button"
-        button
-      >
-        <b>Pick Up</b>
-      </b-form-checkbox>
-    </div>
-
-    <!--  -->
   </div>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      delivery_method_id: '',
-      size_id: '',
-      delivery_start_hour: '',
-      delivery_end_hour: '',
-      discount_id: 1,
-      checked: [false, false, false],
-      size: [false, false, false, false, false, false]
+      form: {
+        delivStartHour: '',
+        delivEndHour: '',
+        discountId: '',
+        stock: ''
+      }
     }
   },
+  computed: {
+    ...mapGetters({
+      delivery_start_hour: 'getProductStart',
+      delivery_end_hour: 'getProductEnd',
+      discount_id: 'getProductDisc',
+      product_stock: 'getProductStock'
+    })
+  },
   methods: {
-    chooseSizeAndDelivMethod() {
-      console.log(this.size)
-      if (this.size[3] == true && this.size[4] == true && this.size[5] == true)
-        this.form.size_id = 14
-      else if (
-        this.size[0] == true &&
-        this.size[1] == true &&
-        this.size[2] == true
-      )
-        this.form.size_id = 13
-      else if (this.size[4] == true && this.size[5] == true)
-        this.form.size_id = 12
-      else if (this.size[3] == true && this.size[5] == true)
-        this.form.size_id = 11
-      else if (this.size[3] == true && this.size[4] == true)
-        this.form.size_id = 10
-      else if (this.size[5] == true) this.form.size_id = 9
-      else if (this.size[4] == true) this.form.size_id = 8
-      else if (this.size[3] == true) this.form.size_id = 7
-      else if (this.size[1] == true && this.size[2] == true)
-        this.form.size_id = 6
-      else if (this.size[0] == true && this.size[2] == true)
-        this.form.size_id = 5
-      else if (this.size[0] == true && this.size[1] == true)
-        this.form.size_id = 4
-      else if (this.size[2] == true) this.form.size_id = 3
-      else if (this.size[1] == true) this.form.size_id = 2
-      else if (this.size[0] == true) this.form.size_id = 1
-      else console.log('choice is not available')
-      console.log('size ' + this.form.size_id)
-      if (
-        this.checked[0] == true &&
-        this.checked[1] == true &&
-        this.checked[2] == true
-      )
-        this.delivery_method_id = 7
-      else if (this.checked[1] == true && this.checked[2] == true)
-        this.form.delivery_method_id = 6
-      else if (this.checked[0] == true && this.checked[2] == true)
-        this.form.delivery_method_id = 5
-      else if (this.checked[0] == true && this.checked[1] == true)
-        this.delivery_method_id = 4
-      else if (this.checked[2] == true) this.form.delivery_method_id = 3
-      else if (this.checked[1] == true) this.form.delivery_method_id = 2
-      else if (this.checked[0] == true) this.form.delivery_method_id = 1
-      else console.log('choice is not available')
-      console.log(this.form.delivery_method_id)
+    ...mapMutations(['changeLeftData']),
+    leftData() {
+      console.log('left ' + this.form)
+      this.changeLeftData(this.form)
+    },
+    selectDisc(discount) {
+      if (discount === 1) this.discountId = 1
+      else if (discount === 2) this.discountId = 3
+      else if (discount === 3) this.discountId = 4
+      else if (discount === 4) this.discountId = 5
+      else if (discount === 5) this.discountId = 7
+      else if (discount === 6) this.discountId = 9
+      else if (discount === 7) this.discountId = 11
+      else this.discountId = 13
     }
   }
 }
 </script>
 <style scoped>
 div {
-  width: 300px;
+  width: 350px;
   padding-top: 0;
 }
 label {
@@ -213,7 +128,7 @@ label {
   margin-bottom: 30px;
 }
 
-.choose-size {
+/* .choose-size {
   background-color: rgba(106, 64, 41, 1);
   display: inline-block;
   width: 40px;
@@ -221,7 +136,7 @@ label {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-}
+} */
 
 #checkboxes input[type='checkbox'] {
   display: none;

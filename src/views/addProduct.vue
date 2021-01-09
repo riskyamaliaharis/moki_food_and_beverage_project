@@ -12,7 +12,7 @@
           <div class="picture">
             <div class="upload" v-for="item in items" :key="item">
               <div v-if="!item.image">
-                <h4>Select product image</h4>
+                <img src="../assets/img/unnamed.png" alt="" />
                 <input type="file" @change="onFileChange(item, $event)" />
               </div>
               <div v-else>
@@ -367,11 +367,9 @@ export default {
         .post('http://localhost:3000/product', data)
         .then(response => {
           console.log(response)
-          // this.totalRows = response.data.pagination.totalData
           this.alert = true
           this.isMsg = response.data.msg
           alert('Success Post data product')
-          // this.getProduct()
         })
         .catch(error => {
           console.log(error.response)
@@ -381,7 +379,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 div.picture {
   text-align: center;
   border-radius: 10px;
@@ -392,7 +390,8 @@ div.picture {
   padding-top: 80px;
 }
 .picture img {
-  width: 50%;
+  width: 50%x;
+
   margin: auto;
   display: block;
   margin-bottom: 10px;
