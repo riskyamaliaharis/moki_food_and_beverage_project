@@ -97,21 +97,25 @@
                     :placeholder="product.discount_id"
                   ></b-form-input>
                   <br /><br />
-                  <div class="form-group">
-                    <label class="label-title" for="">Product Category</label>
-                    <br />
 
-                    <select
-                      class="form-control category"
-                      id="exampleFormControlSelect1"
-                      :text="product.category_id"
-                    >
-                      <option @click="chooseCategory(1)">Coffee</option>
-                      <option @click="chooseCategory(2)">Non Coffee</option>
-                      <option @click="chooseCategory(3)">Food</option>
-                      <option @click="chooseCategory(4)">Add On</option>
-                    </select>
+                  <label class="label-title" for="">Product Category</label>
+                  <div>
+                    <b-dropdown id="dropdown-buttons" text="Category">
+                      <b-dropdown-item-button @click="selectCategoryProduct(1)"
+                        >Coffee</b-dropdown-item-button
+                      >
+                      <b-dropdown-item-button @click="selectCategoryProduct(2)"
+                        >Non Coffee</b-dropdown-item-button
+                      >
+                      <b-dropdown-item-button @click="selectCategoryProduct(3)"
+                        >Food</b-dropdown-item-button
+                      >
+                      <b-dropdown-item-button @click="selectCategory4"
+                        >Add On</b-dropdown-item-button
+                      >
+                    </b-dropdown>
                   </div>
+                  <br />
                   <label class="label-title"> Input Product Size</label>
                   <div class="product-size">
                     <b-form-checkbox
@@ -179,7 +183,7 @@
                       name="check-button"
                       button
                     >
-                      <b>(Dine In)</b>
+                      <b>Dine In</b>
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="checked[1]"
@@ -347,9 +351,9 @@ export default {
         this.checked = [true, true, true]
       }
     },
-    chooseCategory(params) {
-      this.form.up_discount_id = params
-      console.log(this.form.up_discount_id)
+    selectCategoryProduct(params) {
+      this.form.up_category_id = params
+      console.log('category id ' + this.form.up_category_id)
     },
     onFileChange(e) {
       this.form.up_image_src = e.target.files[0]
@@ -406,13 +410,13 @@ export default {
         this.checked[1] == true &&
         this.checked[2] == true
       )
-        this.delivery_method_id = 7
+        this.form.up_delivery_method_id = 7
       else if (this.checked[1] == true && this.checked[2] == true)
         this.form.up_delivery_method_id = 6
       else if (this.checked[0] == true && this.checked[2] == true)
         this.form.up_delivery_method_id = 5
       else if (this.checked[0] == true && this.checked[1] == true)
-        this.delivery_method_id = 4
+        this.form.up_delivery_method_id = 4
       else if (this.checked[2] == true) this.form.up_delivery_method_id = 3
       else if (this.checked[1] == true) this.form.up_delivery_method_id = 2
       else if (this.checked[0] == true) this.form.up_delivery_method_id = 1

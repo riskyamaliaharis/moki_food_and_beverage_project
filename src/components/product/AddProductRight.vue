@@ -260,18 +260,19 @@ export default {
       else if (this.size[0] == true) this.form.sizeId = 1
       else console.log('choice is not available')
       console.log('size ' + this.form.sizeId)
+
       if (
         this.checked[0] == true &&
         this.checked[1] == true &&
         this.checked[2] == true
       )
-        this.delivery_method_id = 7
+        this.form.delivMethod = 7
       else if (this.checked[1] == true && this.checked[2] == true)
         this.form.delivMethod = 6
       else if (this.checked[0] == true && this.checked[2] == true)
         this.form.delivMethod = 5
       else if (this.checked[0] == true && this.checked[1] == true)
-        this.delivMethod = 4
+        this.form.delivMethod = 4
       else if (this.checked[2] == true) this.form.delivMethod = 3
       else if (this.checked[1] == true) this.form.delivMethod = 2
       else if (this.checked[0] == true) this.form.delivMethod = 1
