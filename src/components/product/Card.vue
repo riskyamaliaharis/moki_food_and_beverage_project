@@ -190,6 +190,8 @@ button.act {
   margin: 0 auto;
   top: -30px;
   left: 24px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
 .toggle-add {

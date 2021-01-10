@@ -98,18 +98,24 @@ export default {
   methods: {
     ...mapMutations(['changeLeftData']),
     leftData() {
+      console.log('Yeay masuk left Data ')
       console.log('left ' + this.form)
       this.changeLeftData(this.form)
     },
     selectDisc(discount) {
-      if (discount === 1) this.discountId = 1
-      else if (discount === 2) this.discountId = 3
-      else if (discount === 3) this.discountId = 4
-      else if (discount === 4) this.discountId = 5
-      else if (discount === 5) this.discountId = 7
-      else if (discount === 6) this.discountId = 9
-      else if (discount === 7) this.discountId = 11
-      else this.discountId = 13
+      if (discount === 1) this.form.discountId = 1
+      else if (discount === 2) this.form.discountId = 3
+      else if (discount === 3) this.form.discountId = 4
+      else if (discount === 4) this.form.discountId = 5
+      else if (discount === 5) this.form.discountId = 7
+      else if (discount === 6) this.form.discountId = 9
+      else if (discount === 7) this.form.discountId = 11
+      else this.form.discountId = 13
+
+      console.log('Discount = ')
+      console.log(this.form.discountId)
+      console.log('Proses masuk left Data ')
+      this.leftData()
     }
   }
 }

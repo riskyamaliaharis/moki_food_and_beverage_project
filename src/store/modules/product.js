@@ -101,10 +101,11 @@ export default {
           .delete(`http://localhost:3000/product/${payload}`)
           .then(response => {
             console.log(context.limit)
-            alert('success delete')
+            alert(response.data.msg)
             resolve(response)
           })
           .catch(error => {
+            alert('Failed to delete this product ' + error.response.data.msg)
             reject(error)
           })
       })

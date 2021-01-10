@@ -9,14 +9,16 @@
       <b-row>
         <b-col>
           <div class="picture">
-            <div class="upload" v-for="item in items" :key="item">
-              <div v-if="!item.image">
-                <h4>Select product image</h4>
-                <input type="file" @change="onFileChange(item, $event)" />
+            <div>
+              <div v-if="!image">
+                <img :src="'http://localhost:3000/' + product.image_src" />
+                <input type="file" @change="onFileChange($event)" />
               </div>
               <div v-else>
-                <img :src="item.image" />
-                <button @click="removeImage(item)">Remove image</button>
+                <img :src="image" />
+                <b-button class="upload-btn" @click="removeImage"
+                  >Remove Image</b-button
+                >
               </div>
             </div>
           </div>
@@ -26,7 +28,7 @@
             <b-form-timepicker
               type="time"
               :placeholder="product.delivery_start_hour"
-              v-model="form.delivery_start_hour"
+              v-model="form.up_delivery_start_hour"
               class="form"
             ></b-form-timepicker>
             <br />
@@ -36,29 +38,9 @@
             <b-form-timepicker
               type="time"
               :placeholder="product.delivery_end_hour"
-              v-model="form.delivery_end_hour"
+              v-model="form.up_delivery_end_hour"
               class="form"
             ></b-form-timepicker>
-          </div>
-          <div>
-            <label class="label-title" for="">Product Stock</label>
-            <br />
-            <input
-              type="number"
-              v-model="form.product_stock"
-              :placeholder="product.product_stock"
-            />
-            <br /><br />
-          </div>
-          <div>
-            <label class="label-title" for="">Product Category</label>
-            <br />
-            <input
-              class="cat"
-              type="number"
-              :placeholder="product.category_id"
-              v-model="form.category_id"
-            />
           </div>
         </b-col>
 
@@ -71,7 +53,7 @@
                   <h1>
                     <input
                       type="text"
-                      v-model="form.product_name"
+                      v-model="form.up_product_name"
                       :placeholder="product.product_name"
                     />
                   </h1>
@@ -84,7 +66,7 @@
                     IDR
                     <input
                       type="number"
-                      v-model="form.product_price"
+                      v-model="form.up_product_price"
                       :placeholder="product.product_price"
                     />
                   </h2>
@@ -94,112 +76,163 @@
                 <td>
                   <label class="label-title">Input Product Description</label>
                   <p class="description">
-                    <textarea
-                      v-model="form.product_description"
+                    <!-- <textarea
+                      v-model="form.up_product_description"
                       :placeholder="product.product_description"
-                    ></textarea>
+                    ></textarea> -->
+                    <b-form-input
+                      v-model="form.up_product_description"
+                      :placeholder="product.product_description"
+                    ></b-form-input>
                   </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="label-title" for="">Discount</label>
+                  <br />
+                  <b-form-input
+                    type="number"
+                    v-model="form.up_discount_id"
+                    :placeholder="product.discount_id"
+                  ></b-form-input>
+                  <br /><br />
+                  <div class="form-group">
+                    <label class="label-title" for="">Product Category</label>
+                    <br />
+
+                    <select
+                      class="form-control category"
+                      id="exampleFormControlSelect1"
+                      :text="product.category_id"
+                    >
+                      <option @click="chooseCategory(1)">Coffee</option>
+                      <option @click="chooseCategory(2)">Non Coffee</option>
+                      <option @click="chooseCategory(3)">Food</option>
+                      <option @click="chooseCategory(4)">Add On</option>
+                    </select>
+                  </div>
+                  <label class="label-title"> Input Product Size</label>
+                  <div class="product-size">
+                    <b-form-checkbox
+                      button-variant="warning"
+                      v-model="size[0]"
+                      name="check-button"
+                      button
+                      pill
+                    >
+                      <b>R</b>
+                    </b-form-checkbox>
+
+                    <b-form-checkbox
+                      button-variant="warning"
+                      v-model="size[1]"
+                      name="check-button"
+                      button
+                      pill
+                    >
+                      <b>L</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      button-variant="warning"
+                      v-model="size[2]"
+                      name="check-button"
+                      button
+                      pill
+                    >
+                      <b>XL</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      v-model="size[3]"
+                      class="food-size"
+                      name="check-button"
+                      button
+                    >
+                      <b>250gr</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      v-model="size[4]"
+                      class="food-size"
+                      name="check-button"
+                      button
+                    >
+                      <b>300gr</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      v-model="size[5]"
+                      class="food-size"
+                      name="check-button"
+                      button
+                    >
+                      <b>500gr</b>
+                    </b-form-checkbox>
+                  </div>
+                  <br />
+                  <label class="label-title"> Input Delivery Method</label>
+
+                  <div class="deliv-method">
+                    <!-- (Checked: {{ checked3 }}) -->
+
+                    <b-form-checkbox
+                      v-model="checked[0]"
+                      class="delivery"
+                      name="check-button"
+                      button
+                    >
+                      <b>(Dine In)</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      v-model="checked[1]"
+                      class="delivery"
+                      name="check-button"
+                      button
+                    >
+                      <b>Door Delivery</b>
+                    </b-form-checkbox>
+                    <b-form-checkbox
+                      v-model="checked[2]"
+                      class="delivery"
+                      name="check-button"
+                      button
+                    >
+                      <b>Pick Up</b>
+                    </b-form-checkbox>
+                  </div>
+                  <div>
+                    <label class="label-title" for="">Product Stock</label>
+                    <br />
+                    <b-form-input
+                      type="number"
+                      v-model="form.up_product_stock"
+                      :placeholder="product.product_stock"
+                    ></b-form-input>
+                    <br /><br />
+                  </div>
+                  <b-row class="">
+                    <button
+                      class="save"
+                      type="button"
+                      block
+                      variant="warning"
+                      @click="patchProduct(product.product_id)"
+                    >
+                      Update Product
+                    </button>
+                  </b-row>
                 </td>
               </tr>
             </tbody>
           </table>
-          <label class="label-title"> Input Product Size</label>
-          <div class="product-size">
-            <b-form-checkbox
-              button-variant="warning"
-              v-model="size[0]"
-              name="check-button"
-              button
-              pill
-            >
-              <b>R</b>
-            </b-form-checkbox>
-
-            <b-form-checkbox
-              button-variant="warning"
-              v-model="size[1]"
-              name="check-button"
-              button
-              pill
-            >
-              <b>L</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              button-variant="warning"
-              v-model="size[2]"
-              name="check-button"
-              button
-              pill
-            >
-              <b>XL</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="size[3]"
-              class="food-size"
-              name="check-button"
-              button
-            >
-              <b>250gr</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="size[4]"
-              class="food-size"
-              name="check-button"
-              button
-            >
-              <b>300gr</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="size[5]"
-              class="food-size"
-              name="check-button"
-              button
-            >
-              <b>500gr</b>
-            </b-form-checkbox>
-          </div>
-          <br />
-          <label class="label-title"> Input Delivery Method</label>
-
-          <div class="deliv-method">
-            <!-- (Checked: {{ checked3 }}) -->
-
-            <b-form-checkbox
-              v-model="checked[0]"
-              class="delivery"
-              name="check-button"
-              button
-            >
-              <b>(Dine In)</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="checked[1]"
-              class="delivery"
-              name="check-button"
-              button
-            >
-              <b>Door Delivery</b>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="checked[2]"
-              class="delivery"
-              name="check-button"
-              button
-            >
-              <b>Pick Up</b>
-            </b-form-checkbox>
-          </div>
-          <b-row class="">
-            <button
-              class="save"
-              type="button"
-              block
-              variant="warning"
-              @click="patchProduct()"
-            >
-              Update Product
-            </button>
-          </b-row>
+          <!-- <div>
+            <label class="label-title" for="">Discount</label>
+            <br />
+            <input
+              type="number"
+              v-model="form.up_discount_id"
+              :placeholder="product.discount_id"
+            />
+            <br /><br />
+          </div> -->
         </b-col>
       </b-row>
     </b-container>
@@ -210,9 +243,7 @@
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-
-import axios from 'axios'
-// import axios from 'axios'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -222,88 +253,154 @@ export default {
         Footer
       },
       form: {
-        category_id: '',
-        product_name: '',
-        product_price: '',
-        product_stock: '',
-        image_src: '',
-        product_description: '',
-        delivery_method_id: '',
-        size_id: '',
-        delivery_start_hour: '',
-        delivery_end_hour: '',
-        discount_id: 1
+        up_category_id: '',
+        up_product_name: '',
+        up_product_price: '',
+        up_product_stock: '',
+        up_image_src: '',
+        up_product_description: '',
+        up_delivery_method_id: '',
+        up_size_id: '',
+        up_delivery_start_hour: '',
+        up_delivery_end_hour: '',
+        up_discount_id: ''
       },
       counter: 0,
       checked: [false, false, false],
-      items: [
-        {
-          image: false
-        }
-      ],
+      image: false,
       size: [false, false, false, false, false, false],
-      product_id: '',
-      product: ''
+      // product_id: '',
+      product_id: ''
+      // product: ''
     }
   },
   created() {
     this.product_id = this.$route.params.id
-    console.log(this.$route.params.id)
-    this.getProduct()
+    console.log('id ' + this.product_id)
+    this.getProductsByIdVuex(this.product_id)
+    this.sizeNDelivButtonManipulation()
   },
 
+  computed: {
+    ...mapGetters({
+      category_id: 'getCategoryId',
+      product_name: 'getProductName',
+      product_price: 'getProductPrice',
+      product_stock: 'getProductStock',
+      image_src: 'getProductImg',
+      product_description: 'getProductDesc',
+      delivery_method_id: 'getProductDeliv',
+      size_id: 'getProductSizeId',
+      delivery_start_hour: 'getProductStart',
+      delivery_end_hour: 'getProductEnd',
+      discount_id: 'getProductDiscount',
+      product: 'getDataProductUpdated'
+    })
+  },
   methods: {
-    onFileChange(item, e) {
-      this.form.image_src = e.target.files[0]
-      console.log(this.form.image_src)
+    ...mapActions(['getProductsByIdVuex', 'patchProductVuex']),
+    ...mapMutations(['sendDatatoUpdated']),
+    sizeNDelivButtonManipulation() {
+      if (this.product.size_id === 1) {
+        this.size = [true, false, false, false, false, false]
+      } else if (this.product.size_id === 2) {
+        this.size = [false, true, false, false, false, false]
+      } else if (this.product.size_id === 3) {
+        this.size = [false, false, true, false, false, false]
+      } else if (this.product.size_id === 4) {
+        this.size = [true, true, false, false, false, false]
+      } else if (this.product.size_id === 5) {
+        this.size = [true, false, true, false, false, false]
+      } else if (this.product.size_id === 6) {
+        this.size = [false, true, true, false, false, false]
+      } else if (this.product.size_id === 7) {
+        this.size = [false, false, false, true, false, false]
+      } else if (this.product.size_id === 8) {
+        this.size = [false, false, false, false, true, false]
+      } else if (this.product.size_id === 9) {
+        this.size = [false, false, false, false, false, true]
+      } else if (this.product.size_id === 10) {
+        this.size = [false, false, false, true, true, false]
+      } else if (this.product.size_id === 11) {
+        this.size = [false, false, false, true, false, true]
+      } else if (this.product.size_id === 12) {
+        this.size = [false, false, false, false, true, true]
+      } else if (this.product.size_id === 13) {
+        this.size = [true, true, true, false, false, false]
+      } else if (this.product.size_id === 14) {
+        this.size = [false, false, false, true, true, true]
+      }
+
+      if (this.product.delivery_method_id === 1) {
+        this.checked = [true, false, false]
+      } else if (this.product.delivery_method_id === 2) {
+        this.checked = [false, true, false]
+      } else if (this.product.delivery_method_id === 3) {
+        this.checked = [false, false, true]
+      } else if (this.product.delivery_method_id === 4) {
+        this.checked = [true, true, false]
+      } else if (this.product.delivery_method_id === 5) {
+        this.checked = [true, false, true]
+      } else if (this.product.delivery_method_id === 6) {
+        this.checked = [false, true, true]
+      } else if (this.product.delivery_method_id === 7) {
+        this.checked = [true, true, true]
+      }
+    },
+    chooseCategory(params) {
+      this.form.up_discount_id = params
+      console.log(this.form.up_discount_id)
+    },
+    onFileChange(e) {
+      this.form.up_image_src = e.target.files[0]
       var files = e.target.files || e.dataTransfer.files
       console.log(files)
       if (!files.length) return
-      this.createImage(item, files[0])
+      this.createImage(files[0])
     },
-    createImage(item, file) {
+    createImage(file) {
       var reader = new FileReader()
       reader.onload = e => {
-        item.image = e.target.result
+        this.image = e.target.result
       }
       reader.readAsDataURL(file)
     },
-    removeImage: function(item) {
-      item.image = false
+    removeImage: function() {
+      this.image = false
     },
     handleFile(event) {
-      this.form.image_src = event.target.files[0]
+      this.form.up_image_src = event.target.files[0]
     },
     chooseSizeAndDelivMethod() {
       console.log(this.size)
       if (this.size[3] == true && this.size[4] == true && this.size[5] == true)
-        this.form.size_id = 14
+        this.form.up_size_id = 14
       else if (
         this.size[0] == true &&
         this.size[1] == true &&
         this.size[2] == true
       )
-        this.form.size_id = 13
+        this.form.up_size_id = 13
       else if (this.size[4] == true && this.size[5] == true)
-        this.form.size_id = 12
+        this.form.up_size_id = 12
       else if (this.size[3] == true && this.size[5] == true)
-        this.form.size_id = 11
+        this.form.up_size_id = 11
       else if (this.size[3] == true && this.size[4] == true)
-        this.form.size_id = 10
-      else if (this.size[5] == true) this.form.size_id = 9
-      else if (this.size[4] == true) this.form.size_id = 8
-      else if (this.size[3] == true) this.form.size_id = 7
+        this.form.up_size_id = 10
+      else if (this.size[5] == true) this.form.up_size_id = 9
+      else if (this.size[4] == true) this.form.up_size_id = 8
+      else if (this.size[3] == true) this.form.up_size_id = 7
       else if (this.size[1] == true && this.size[2] == true)
-        this.form.size_id = 6
+        this.form.up_size_id = 6
       else if (this.size[0] == true && this.size[2] == true)
-        this.form.size_id = 5
+        this.form.up_size_id = 5
       else if (this.size[0] == true && this.size[1] == true)
-        this.form.size_id = 4
-      else if (this.size[2] == true) this.form.size_id = 3
-      else if (this.size[1] == true) this.form.size_id = 2
-      else if (this.size[0] == true) this.form.size_id = 1
+        this.form.up_size_id = 4
+      else if (this.size[2] == true) this.form.up_size_id = 3
+      else if (this.size[1] == true) this.form.up_size_id = 2
+      else if (this.size[0] == true) this.form.up_size_id = 1
       else console.log('choice is not available')
-      console.log('size ' + this.form.size_id)
+      console.log('size ' + this.form.up_size_id)
       if (
         this.checked[0] == true &&
         this.checked[1] == true &&
@@ -311,72 +408,25 @@ export default {
       )
         this.delivery_method_id = 7
       else if (this.checked[1] == true && this.checked[2] == true)
-        this.form.delivery_method_id = 6
+        this.form.up_delivery_method_id = 6
       else if (this.checked[0] == true && this.checked[2] == true)
-        this.form.delivery_method_id = 5
+        this.form.up_delivery_method_id = 5
       else if (this.checked[0] == true && this.checked[1] == true)
         this.delivery_method_id = 4
-      else if (this.checked[2] == true) this.form.delivery_method_id = 3
-      else if (this.checked[1] == true) this.form.delivery_method_id = 2
-      else if (this.checked[0] == true) this.form.delivery_method_id = 1
+      else if (this.checked[2] == true) this.form.up_delivery_method_id = 3
+      else if (this.checked[1] == true) this.form.up_delivery_method_id = 2
+      else if (this.checked[0] == true) this.form.up_delivery_method_id = 1
       else console.log('choice is not available')
-      console.log(this.form.delivery_method_id)
+      console.log(this.form.up_delivery_method_id)
     },
-    getProduct() {
-      axios
-        .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
-        .then(response => {
-          console.log(response)
-          this.product = response.data.data[0]
-          console.log(this.product.product_name)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    patchProduct() {
+    patchProduct(product_id) {
+      console.log('satu')
       this.chooseSizeAndDelivMethod()
-      console.log(this.form)
-      const {
-        product_name,
-        category_id,
-        product_price,
-        product_stock,
-        image_src,
-        product_description,
-        delivery_method_id,
-        size_id,
-        delivery_start_hour,
-        delivery_end_hour,
-        discount_id
-      } = this.form
-      const data = new FormData()
-      data.append('product_name', product_name)
-      data.append('category_id', category_id)
-      data.append('product_price', product_price)
-      data.append('product_stock', product_stock)
-      data.append('image_src', image_src)
-      data.append('product_description', product_description)
-      data.append('delivery_method_id', delivery_method_id)
-      data.append('size_id', size_id)
-      data.append('delivery_start_hour', delivery_start_hour)
-      data.append('delivery_end_hour', delivery_end_hour)
-      data.append('discount_id', discount_id)
-      for (var pair of data.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-      }
-
-      axios
-        .patch(`http://localhost:3000/product/${this.product_id}`, data)
-        .then(response => {
-          console.log(response)
-          this.alert = true
-          this.isMsg = response.data.msg
-          alert('Success Update data product')
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
+      console.log('dua')
+      this.sendDatatoUpdated(this.form)
+      console.log('tiga')
+      this.patchProductVuex(product_id)
+      console.log('success')
     }
   }
 }
@@ -388,16 +438,18 @@ div.picture {
   border-radius: 10px;
   box-shadow: black;
   width: 80%;
-  height: 400px;
+  height: 600px;
   background-color: rgba(255, 186, 51, 1);
-  padding-top: 80px;
+  padding-top: 30px;
 }
 .picture img {
-  width: 50%;
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
   margin: auto;
   display: block;
   margin-bottom: 10px;
-  border-radius: 50%;
+  border-radius: 5px;
 }
 div.product-size .food-size,
 div.deliv-method .delivery {
@@ -438,16 +490,16 @@ h4 {
   margin-bottom: 45px;
 }
 .save {
-  margin-top: 100px;
-  width: 50%;
-  border-radius: 5px;
+  margin-top: 30px;
+  width: 100%;
+  border-radius: 10px;
   background-color: rgba(106, 64, 41, 1);
   color: white;
-  margin-right: 100px;
+  margin-left: 15px;
   text-align: center;
   height: 50px;
 }
-.cat {
-  width: 300px;
+div.category {
+  width: 200px;
 }
 </style>

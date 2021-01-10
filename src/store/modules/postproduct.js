@@ -15,7 +15,7 @@ export default {
       delivery_end_hour: '',
       discount_id: ''
     },
-    isMsg: ''
+    product: ''
   },
   mutations: {
     changeRightData(state, payload) {
@@ -31,54 +31,140 @@ export default {
       console.log(payload)
       state.form.delivery_start_hour = payload.delivStartHour
       state.form.delivery_end_hour = payload.delivEndHour
-      state.form.discount_id = payload.discount
+      state.form.discount_id = payload.discountId
       state.form.product_stock = payload.stock
     },
     changeImage(state, payload) {
       state.form.image_src = payload
+    },
+    setProductThisId(state, payload) {
+      state.product = payload
+    },
+    sendDatatoUpdated(state, payload) {
+      // state.form = payload
+      // console.log('state.form')
+      // console.log(state.form)
+      state.form.category_id = payload.up_category_id
+      state.form.product_name = payload.up_product_name
+      state.form.product_price = payload.up_product_price
+      state.form.product_stock = payload.up_product_stock
+      state.form.image_src = payload.up_image_src
+      state.form.product_description = payload.up_product_description
+      state.form.delivery_method_id = payload.up_delivery_method_id
+      state.form.size_id = payload.up_size_id
+      state.form.delivery_start_hour = payload.up_delivery_start_hour
+      state.form.delivery_end_hour = payload.up_delivery_end_hour
+      state.form.discount_id = payload.up_discount_id
     }
   },
   actions: {
     postProductsVuex(context) {
-      console.log('masuk')
-      const {
-        product_name,
-        category_id,
-        product_price,
-        product_stock,
-        image_src,
-        product_description,
-        delivery_method_id,
-        size_id,
-        delivery_start_hour,
-        delivery_end_hour,
-        discount_id
-      } = context.state.form
-      console.log('product_name ' + product_name)
-      const data = new FormData()
-      data.append('product_name', product_name)
-      data.append('category_id', category_id)
-      data.append('product_price', product_price)
-      data.append('product_stock', product_stock)
-      data.append('image_src', image_src)
-      data.append('product_description', product_description)
-      data.append('delivery_method_id', delivery_method_id)
-      data.append('size_id', size_id)
-      data.append('delivery_start_hour', delivery_start_hour)
-      data.append('delivery_end_hour', delivery_end_hour)
-      data.append('discount_id', discount_id)
-      for (var pair of data.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-      }
-      axios
-        .post('http://localhost:3000/product', data)
-        .then(response => {
-          context.state.isMsg = response.data.msg
-          alert(context.state.isMsg)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
+      return new Promise((resolve, reject) => {
+        console.log('masuk')
+        const {
+          product_name,
+          category_id,
+          product_price,
+          product_stock,
+          image_src,
+          product_description,
+          delivery_method_id,
+          size_id,
+          delivery_start_hour,
+          delivery_end_hour,
+          discount_id
+        } = context.state.form
+        console.log('product_name ' + product_name)
+        const data = new FormData()
+        data.append('product_name', product_name)
+        data.append('category_id', category_id)
+        data.append('product_price', product_price)
+        data.append('product_stock', product_stock)
+        data.append('image_src', image_src)
+        data.append('product_description', product_description)
+        data.append('delivery_method_id', delivery_method_id)
+        data.append('size_id', size_id)
+        data.append('delivery_start_hour', delivery_start_hour)
+        data.append('delivery_end_hour', delivery_end_hour)
+        data.append('discount_id', discount_id)
+        for (var pair of data.entries()) {
+          console.log(pair[0] + ', ' + pair[1])
+        }
+        axios
+          .post('http://localhost:3000/product', data)
+          .then(response => {
+            alert(response.data.msg)
+            resolve(response)
+          })
+          .catch(error => {
+            alert('Failed to post new product ' + error.response.data.msg)
+            reject(error.response)
+          })
+      })
+    },
+    getProductsByIdVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log('Get Data Id process ... ')
+        console.log('payload ' + payload)
+        axios
+          .get(`http://localhost:3000/product/selectproduct/${payload}`)
+          .then(response => {
+            context.commit('setProductThisId', response.data.data[0])
+            alert(response.data.msg)
+            resolve(response)
+          })
+          .catch(error => {
+            alert(error.response.data.msg)
+            reject(error)
+          })
+      })
+    },
+    patchProductVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log('patch proces ... ' + payload)
+        console.log(context.state.product.product_id)
+        let {
+          product_name,
+          category_id,
+          product_price,
+          product_stock,
+          image_src,
+          product_description,
+          delivery_method_id,
+          size_id,
+          delivery_start_hour,
+          delivery_end_hour,
+          discount_id
+        } = context.state.form
+        console.log('context.state.form')
+        console.log(context.state.form)
+        let dataUpdate = new FormData()
+        dataUpdate.append('product_name', product_name)
+        dataUpdate.append('category_id', category_id)
+        dataUpdate.append('product_price', product_price)
+        dataUpdate.append('product_stock', product_stock)
+        dataUpdate.append('image_src', image_src)
+        dataUpdate.append('product_description', product_description)
+        dataUpdate.append('delivery_method_id', delivery_method_id)
+        dataUpdate.append('size_id', size_id)
+        dataUpdate.append('delivery_start_hour', delivery_start_hour)
+        dataUpdate.append('delivery_end_hour', delivery_end_hour)
+        dataUpdate.append('discount_id', discount_id)
+        for (var pair of dataUpdate.entries()) {
+          console.log(pair[0] + ', ' + pair[1])
+        }
+        axios
+          .patch(`http://localhost:3000/product/${payload}`, dataUpdate)
+          .then(response => {
+            alert(response.data.msg)
+            console.log(response)
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error.response.data.msg)
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {
@@ -112,8 +198,11 @@ export default {
     getProductEnd(state) {
       return state.form.delivery_end_hour
     },
-    getProductDisc(state) {
-      return state.form.discount_id
+    getDataProductUpdated(state) {
+      return state.product
+    },
+    getProductDiscount(state) {
+      return state.discount_id
     }
   }
 }
