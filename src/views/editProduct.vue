@@ -42,14 +42,14 @@
               class="form"
             ></b-form-timepicker>
           </div>
+
           <button
             class="gotopromo"
             type="button"
             block
-            variant="warning"
             @click="goToPromo(product.product_id)"
           >
-            Add Promo
+            Promo
           </button>
         </b-col>
 
@@ -448,6 +448,12 @@ div.picture {
   display: block;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.gotopromo {
+  border-radius: 10px;
+  background-color: rgba(106, 64, 41, 1);
+  color: white;
 }
 div.product-size .food-size,
 div.deliv-method .delivery {

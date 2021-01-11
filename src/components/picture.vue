@@ -13,7 +13,15 @@
       <div>
         <div v-if="!image">
           <img src="../assets/img/unnamed1.png" alt="" />
-          <input type="file" @change="onFileChange($event)" />
+
+          <span class="hiddenFileInput"
+            ><input
+              type="file"
+              id="files"
+              hidden
+              @change="onFileChange($event)"
+              style="display:none"
+          /></span>
         </div>
         <div v-else>
           <img :src="image" />
@@ -85,5 +93,21 @@ div.centered img {
 }
 div.centered .upload-btn {
   width: 300px;
+}
+
+.hiddenFileInput > input {
+  height: 100%;
+  width: 100;
+  opacity: 0;
+  cursor: pointer;
+}
+.hiddenFileInput {
+  border: 1px solid #ccc;
+  width: 80px;
+  height: 60px;
+  display: inline-block;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: rgba(255, 186, 51, 1);
 }
 </style>

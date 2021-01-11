@@ -68,7 +68,13 @@
           <div class="card-coldbrew3 mt-5">
             <h6>Choose Delivery and Time</h6>
             <button type="button" class="btn ">Dine In</button>
-            <button type="button" class="btn " disabled>Door Delivery</button>
+            <button
+              type="button"
+              class="btn "
+              :disabled="product.product_price === 20000 ? false : true"
+            >
+              Door Delivery
+            </button>
             <button type="button" class="btn " disabled>Pick Up</button>
           </div>
           <div class="input-group input-group-sm mb-3 mt-3 set-time">
@@ -143,10 +149,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     Header,
@@ -154,7 +159,6 @@ export default {
   },
   data() {
     return {
-      product: '',
       product_id: '',
       role: 1,
       value: 0
@@ -162,12 +166,17 @@ export default {
   },
   created() {
     this.product_id = this.$route.params.id
-    console.log(this.$route.params.id)
-    this.getProduct()
+    console.log(this.product_id)
+    this.getProductsByIdVuex(this.product_id)
+  },
+  computed: {
+    ...mapGetters({ product: 'getDataProductUpdated' })
   },
   methods: {
+    ...mapActions(['getProductsByIdVuex']),
     add() {
       this.value = parseInt(this.value) + 1
+      console.log(this.product)
     },
     sub() {
       if (this.value <= 0) {
@@ -175,19 +184,19 @@ export default {
       } else {
         this.value = parseInt(this.value) - 1
       }
-    },
-    getProduct() {
-      axios
-        .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
-        .then(response => {
-          console.log(response)
-          this.product = response.data.data[0]
-          console.log(this.product.product_name)
-        })
-        .catch(error => {
-          console.log(error)
-        })
     }
+    // getProduct() {
+    //   axios
+    //     .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
+    //     .then(response => {
+    //       console.log(response)
+    //       this.product = response.data.data[0]
+    //       console.log(this.product.product_name)
+    //     })
+    //     .catch(error => {
+    //       console.log(error)
+    //     })
+    // }
   }
 }
 </script>

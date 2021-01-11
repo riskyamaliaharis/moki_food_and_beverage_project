@@ -2,50 +2,71 @@
   <div class="left-side">
     <b-button v-b-toggle.sidebar-1 class="btn-coupon">Get Promo</b-button>
     <b-sidebar id="sidebar-1" title="Promo for you" shadow>
-      <div class="px-3 py-2">
+      <div class="px-3 py-2 show-card-promo">
         <p class="promo_info">
           Coupons will be updated every weeks. Check them out!
         </p>
-        <div class="box1">
-          <img
-            class="rounded-circle"
-            src="../assets/img/product/image 29.png"
-            alt="spaghetti"
-          />
-          <h3 class="poppins">Beef Spaghetti</h3>
-          <h3>20% OFF</h3>
-          <p class="poppins">
-            Buy 1 Choco Oreo and get 20% off for Beef Spaghetti
-          </p>
-          <div class="line"></div>
-          <p>COUPON CODE</p>
-          <h2>FNPR15RG</h2>
-          <p>Valid untill October 10th 2020</p>
+        <div class="card-coupon">
+          <div class="box1" v-for="(item, index) in cards" :key="index">
+            <img
+              class="rounded-circle"
+              src="../assets/img/product/image 29.png"
+              alt="spaghetti"
+            />
+            <h3 class="poppins">Beef</h3>
+            <h3>{{ item.coupon_discount * 100 }}% OFF</h3>
+            <p class="poppins">
+              {{ item.promo_description }}
+            </p>
+            <div class="line"></div>
+            <p>COUPON CODE</p>
+            <h2>{{ item.coupon_code }}</h2>
+            <p>Valid until {{ item.end_coupon }}</p>
+          </div>
         </div>
 
-        <div class="box2"></div>
-        <div class="box3"></div>
+        <vue-card-stack :cards="cards" :stack-width="480" :card-width="320">
+          <template v-slot:card="{ card }">
+            <div
+              style="width: 100%; height: 100%;"
+              :style="{ background: card.background }"
+            ></div>
+          </template>
+        </vue-card-stack>
+
+        <!-- <div class="box2"></div>
+          <div class="box3"></div> -->
 
         <b-button class="button-promo" variant="dark" size="lg"
-          >Add Promo</b-button
+          >Edit Promo</b-button
         >
-        <!-- <button class="btn apply_coupon" type="submit">Apply Coupon</button>
-        <div id="terms">
-          <p class="coupon">Terms and Condition</p>
-          <p class="coupon">1. You can only apply 1 coupon per day</p>
-          <p class="coupon">2. It only for dine in</p>
-          <p class="coupon">3. Buy 1 get 1 only for new user</p>
-          <p class="coupon">4. Should make member card to apply coupon</p>
-        </div> -->
       </div>
     </b-sidebar>
   </div>
 </template>
 
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import VueCardStack from 'vue-card-stack'
+export default {
+  components: {
+    VueCardStack
+  },
+  data() {
+    return {}
+  },
+  created() {
+    this.getPromosVuex()
+  },
+  computed: {
+    ...mapGetters({ cards: 'getAllCoupons' })
+  },
+  methods: {
+    ...mapActions(['getPromosVuex'])
+  }
+}
+</script>
 <style>
-/* .left-side {
-  position: relative;
-} */
 div.left-side .btn-coupon {
   background-color: black;
   width: 150px;
@@ -54,6 +75,11 @@ div.left-side .btn-coupon {
 }
 .promo_info {
   position: absolute;
+}
+
+div.show-card-promo {
+  height: 600px;
+  overflow: auto;
 }
 
 .box1,

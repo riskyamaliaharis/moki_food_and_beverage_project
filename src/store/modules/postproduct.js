@@ -39,6 +39,8 @@ export default {
     },
     setProductThisId(state, payload) {
       state.product = payload
+      console.log('state.product')
+      console.log(state.product)
     },
     sendDatatoUpdated(state, payload) {
       // state.form = payload
@@ -109,6 +111,7 @@ export default {
         axios
           .get(`http://localhost:3000/product/selectproduct/${payload}`)
           .then(response => {
+            console.log(response.data.data[0].product_name)
             context.commit('setProductThisId', response.data.data[0])
             resolve(response)
           })

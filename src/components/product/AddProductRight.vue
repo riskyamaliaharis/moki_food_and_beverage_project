@@ -5,6 +5,7 @@
       class="input-text"
       id="input-name"
       v-model="form.name"
+      required
     ></b-form-input>
 
     <label for="input-price">Price :</label>
@@ -13,6 +14,7 @@
       id="input-price"
       v-model="form.price"
       type="number"
+      required
     ></b-form-input>
 
     <label for="input-desc">Description :</label>
@@ -20,6 +22,7 @@
       class="input-text"
       id="input-desc"
       v-model="form.description"
+      required
     ></b-form-input>
 
     <!-- <label for="input-cat">Input Category :</label>

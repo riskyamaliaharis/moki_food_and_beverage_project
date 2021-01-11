@@ -67,7 +67,7 @@ export default {
               context.state.category_name !== 'addon'
             ) {
               context.state.category_name = ''
-              context.dispatch.getProducts()
+              context.dispatch('getProducts')
             } else {
               context.commit('setDataAfterClickCategory', response.data)
             }

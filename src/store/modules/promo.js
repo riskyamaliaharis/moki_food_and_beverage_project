@@ -11,7 +11,8 @@ export default {
       promo_deliv_method: '',
       promo_description: ''
     },
-    productPromo: ''
+    productPromo: '',
+    cards: []
   },
   mutations: {
     setProductThisIdPromo(state, payload) {
@@ -21,7 +22,6 @@ export default {
     },
     inputForm2ToStore(state, payload) {
       state.form.coupon_discount = payload.promoCouponDiscount
-      // state.form.product_id = payload.promoProductId
       state.form.promo_size = payload.promoSize
       state.form.promo_deliv_method = payload.promoDelivMethod
       state.form.promo_description = payload.promoDescription
@@ -30,6 +30,10 @@ export default {
       state.form.coupon_code = payload.promoCouponCode
       state.form.start_coupon = payload.promoStartCoupon
       state.form.end_coupon = payload.promoEndCoupon
+    },
+    setPromoAfterGetPromo(state, payload) {
+      state.cards = payload
+      console.log(state.cards)
     }
   },
   actions: {
@@ -63,6 +67,21 @@ export default {
             reject(error.response)
           })
       })
+    },
+
+    getPromosVuex(context) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`http://localhost:3000/promo`)
+          .then(response => {
+            console.log(response.data.data)
+            context.commit('setPromoAfterGetPromo', response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   },
 
@@ -93,6 +112,9 @@ export default {
     },
     getProductIdPromo(state) {
       return state.form.product_id
+    },
+    getAllCoupons(state) {
+      return state.cards
     }
   }
 }

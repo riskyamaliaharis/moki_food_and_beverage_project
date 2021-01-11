@@ -50,7 +50,7 @@ const routes = [
     component: addProduct
   },
   {
-    path: '/editproduct',
+    path: '/editproduct/:id',
     name: 'editProduct',
     component: editProduct
   },
