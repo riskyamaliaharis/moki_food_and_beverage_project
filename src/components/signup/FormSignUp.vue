@@ -24,6 +24,14 @@
     <b-row align-h="center" class="signup-form">
       <b-col cols="4">
         <b-form>
+          <label for="username">User Name</label>
+          <b-form-input
+            id="text-username"
+            type="text"
+            v-model="form.username"
+            placeholder="Input Your User Name ..."
+          />
+          <br />
           <label for="text-email">Email Address</label>
           <b-form-input
             id="text-email"
@@ -39,14 +47,7 @@
             placeholder="Input Your Password ..."
           />
           <br />
-          <label for="text-phone">Phone Number</label>
-          <b-form-input
-            id="text-phone"
-            type="number"
-            v-model="form.mobile"
-            placeholder="Input Your Phone Number ..."
-          />
-          <br /><br />
+          <br />
           <button type="submit" class="w3-btn w3-orange w3-round-xlarge submit">
             Sign Up
           </button>
@@ -66,13 +67,35 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       form: {
         email: '',
         password: '',
-        mobile: ''
+        username: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['register']),
+    onSubmit() {
+      console.log(this.form)
+      this.register(this.form)
+        .then(result => {
+          console.log(result)
+          this.$router.push('/login')
+        })
+        .catch(error => {
+          alert(error.data.msg)
+        })
+    },
+    onReset() {
+      this.form = {
+        email: '',
+        password: '',
+        username: ''
       }
     }
   }

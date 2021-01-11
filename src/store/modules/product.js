@@ -42,7 +42,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://localhost:3000/product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`
+            `http://${process.env.VUE_APP_ROOT_URL}/product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`
           )
           .then(response => {
             context.commit('setProduct', response.data)
@@ -57,7 +57,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://localhost:3000/product/category?page=${context.state.page}&limit=${context.state.limit}&category_name=${context.state.category_name}`
+            `http://${process.env.VUE_APP_ROOT_URL}/product/category?page=${context.state.page}&limit=${context.state.limit}&category_name=${context.state.category_name}`
           )
           .then(response => {
             if (
@@ -84,7 +84,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://localhost:3000/product/searching?page=${context.state.page}&limit=${context.state.limit}&search=${context.state.search}`
+            `http://${process.env.VUE_APP_ROOT_URL}/product/searching?page=${context.state.page}&limit=${context.state.limit}&search=${context.state.search}`
           )
           .then(response => {
             context.commit('setProductAfterInputSearch', response.data)
@@ -98,7 +98,7 @@ export default {
     deleteProducts(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`http://localhost:3000/product/${payload}`)
+          .delete(`http://${process.env.VUE_APP_ROOT_URL}/product/${payload}`)
           .then(response => {
             console.log(context.limit)
             alert(response.data.msg)

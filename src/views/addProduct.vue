@@ -364,7 +364,7 @@ export default {
       }
 
       axios
-        .post('http://localhost:3000/product', data)
+        .post(`http://${process.env.VUE_APP_ROOT_URL}/product`, data)
         .then(response => {
           console.log(response)
           this.alert = true

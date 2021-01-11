@@ -321,7 +321,9 @@ export default {
     },
     getProduct() {
       axios
-        .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
+        .get(
+          `http://process.env.VUE_APP_ROOT_URL/product/selectproduct/${this.product_id}`
+        )
         .then(response => {
           console.log(response)
           this.product = response.data.data[0]
@@ -364,7 +366,10 @@ export default {
       }
 
       axios
-        .patch(`http://localhost:3000/product/${this.product_id}`, data)
+        .patch(
+          `http://process.env.VUE_APP_ROOT_URL/product/${this.product_id}`,
+          data
+        )
         .then(response => {
           console.log(response)
           this.alert = true

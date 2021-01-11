@@ -13,7 +13,10 @@
       </b-col>
       <b-col cols="3" class="sign-up">
         <p>
-          <button class="w3-button w3-orange w3-round-xlarge sign-up">
+          <button
+            class="w3-button w3-orange w3-round-xlarge sign-up"
+            to="/signup"
+          >
             Sign-Up
           </button>
         </p>

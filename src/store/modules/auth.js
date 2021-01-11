@@ -3,7 +3,19 @@ import router from '../../router/index'
 export default {
   state: {
     user: {},
-    token: localStorage.getItem('token') || null
+    token: localStorage.getItem('token') || null,
+    form: {
+      user_name: '',
+      email: '',
+      password: '',
+      first_name: '',
+      last_name: '',
+      mobile: '',
+      gender: '',
+      address: '',
+      member_card_status: ''
+    },
+    users: ''
   },
   mutations: {
     setUser(state, payload) {
@@ -16,6 +28,10 @@ export default {
     delUser(state) {
       state.user = {}
       state.token = null
+    },
+    setNewUser(state, payload) {
+      state.users = payload
+      console.log(state.users)
     }
   },
   actions: {
@@ -24,7 +40,7 @@ export default {
       return new Promise((resolve, reject) => {
         //akses mutation
         axios
-          .post('http://localhost:3000/user/login', payload)
+          .post(`http://${process.env.VUE_APP_ROOT_URL}/user/login`, payload)
           .then(result => {
             console.log(result)
             context.commit('setUser', result.data.data)
@@ -41,6 +57,20 @@ export default {
       localStorage.removeItem('token')
       context.commit('delUser')
       router.push('/login')
+    },
+    register(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`http://localhost:3000/user/register`, payload)
+          .then(result => {
+            context.commit('setNewUser', result.data.data)
+            resolve(result)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
     },
     interceptorRequest(context) {
       console.log('Interceptor Request Works !')

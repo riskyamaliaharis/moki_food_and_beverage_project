@@ -93,7 +93,7 @@ export default {
           console.log(pair[0] + ', ' + pair[1])
         }
         axios
-          .post('http://localhost:3000/product', data)
+          .post(`http://${process.env.VUE_APP_ROOT_URL}/product`, data)
           .then(response => {
             alert(response.data.msg)
             resolve(response)
@@ -109,7 +109,9 @@ export default {
         console.log('Get Data Id process ... ')
         console.log('payload ' + payload)
         axios
-          .get(`http://localhost:3000/product/selectproduct/${payload}`)
+          .get(
+            `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
+          )
           .then(response => {
             console.log(response.data.data[0].product_name)
             context.commit('setProductThisId', response.data.data[0])
@@ -156,7 +158,10 @@ export default {
           console.log(pair[0] + ', ' + pair[1])
         }
         axios
-          .patch(`http://localhost:3000/product/${payload}`, dataUpdate)
+          .patch(
+            `http://${process.env.VUE_APP_ROOT_URL}/product/${payload}`,
+            dataUpdate
+          )
           .then(response => {
             alert(response.data.msg)
             console.log(response)

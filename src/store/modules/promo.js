@@ -42,7 +42,9 @@ export default {
         console.log('Get Data Id process ... ')
         console.log('payload ' + payload)
         axios
-          .get(`http://localhost:3000/product/selectproduct/${payload}`)
+          .get(
+            `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
+          )
           .then(response => {
             context.commit('setProductThisIdPromo', response.data.data[0])
             resolve(response)
@@ -57,7 +59,10 @@ export default {
       return new Promise((resolve, reject) => {
         console.log('masuk post promo')
         axios
-          .post(`http://localhost:3000/promo`, context.state.form)
+          .post(
+            `http://${process.env.VUE_APP_ROOT_URL}/promo`,
+            context.state.form
+          )
           .then(response => {
             alert(response.data.msg)
             resolve(response)
@@ -72,7 +77,7 @@ export default {
     getPromosVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://localhost:3000/promo`)
+          .get(`http://${process.env.VUE_APP_ROOT_URL}/promo`)
           .then(response => {
             console.log(response.data.data)
             context.commit('setPromoAfterGetPromo', response.data.data)
