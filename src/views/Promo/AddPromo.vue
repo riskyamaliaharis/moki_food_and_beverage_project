@@ -22,6 +22,7 @@ import AddPromoForm1 from '@/components/promo/AddPromoForm1.vue'
 import AddPromoForm2 from '@/components/promo/AddPromoForm2.vue'
 import Coupon from '@/components/promo/coupon.vue'
 import Footer from '@/components/Footer.vue'
+import { mapActions } from 'vuex'
 export default {
   name: 'AddPromo',
   components: {
@@ -30,6 +31,17 @@ export default {
     Coupon,
     Header,
     Footer
+  },
+  data() {
+    return {
+      ...mapActions(['getProductsByIdVuexPromo']),
+      promoProductId: ''
+    }
+  },
+  created() {
+    this.promoProductId = this.$route.params.id
+    console.log('id ' + this.promoProductId)
+    this.getProductsByIdVuexPromo(this.promoProductId)
   }
 }
 </script>

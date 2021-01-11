@@ -42,6 +42,15 @@
               class="form"
             ></b-form-timepicker>
           </div>
+          <button
+            class="gotopromo"
+            type="button"
+            block
+            variant="warning"
+            @click="goToPromo(product.product_id)"
+          >
+            Add Promo
+          </button>
         </b-col>
 
         <b-col class="right">
@@ -76,10 +85,6 @@
                 <td>
                   <label class="label-title">Input Product Description</label>
                   <p class="description">
-                    <!-- <textarea
-                      v-model="form.up_product_description"
-                      :placeholder="product.product_description"
-                    ></textarea> -->
                     <b-form-input
                       v-model="form.up_product_description"
                       :placeholder="product.product_description"
@@ -175,8 +180,6 @@
                   <label class="label-title"> Input Delivery Method</label>
 
                   <div class="deliv-method">
-                    <!-- (Checked: {{ checked3 }}) -->
-
                     <b-form-checkbox
                       v-model="checked[0]"
                       class="delivery"
@@ -227,16 +230,6 @@
               </tr>
             </tbody>
           </table>
-          <!-- <div>
-            <label class="label-title" for="">Discount</label>
-            <br />
-            <input
-              type="number"
-              v-model="form.up_discount_id"
-              :placeholder="product.discount_id"
-            />
-            <br /><br />
-          </div> -->
         </b-col>
       </b-row>
     </b-container>
@@ -372,8 +365,9 @@ export default {
     removeImage: function() {
       this.image = false
     },
-    handleFile(event) {
-      this.form.up_image_src = event.target.files[0]
+    goToPromo(productid) {
+      console.log('ngirim id ' + productid)
+      this.$router.push({ name: 'AddPromo', params: { id: productid } })
     },
     chooseSizeAndDelivMethod() {
       console.log(this.size)

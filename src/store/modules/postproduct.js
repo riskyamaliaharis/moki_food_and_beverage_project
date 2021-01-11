@@ -110,7 +110,6 @@ export default {
           .get(`http://localhost:3000/product/selectproduct/${payload}`)
           .then(response => {
             context.commit('setProductThisId', response.data.data[0])
-            alert(response.data.msg)
             resolve(response)
           })
           .catch(error => {

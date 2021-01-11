@@ -26,14 +26,17 @@
         <div class="box2"></div>
         <div class="box3"></div>
 
-        <button class="btn apply_coupon" type="submit">Apply Coupon</button>
+        <b-button class="button-promo" variant="dark" size="lg"
+          >Add Promo</b-button
+        >
+        <!-- <button class="btn apply_coupon" type="submit">Apply Coupon</button>
         <div id="terms">
           <p class="coupon">Terms and Condition</p>
           <p class="coupon">1. You can only apply 1 coupon per day</p>
           <p class="coupon">2. It only for dine in</p>
           <p class="coupon">3. Buy 1 get 1 only for new user</p>
           <p class="coupon">4. Should make member card to apply coupon</p>
-        </div>
+        </div> -->
       </div>
     </b-sidebar>
   </div>
@@ -75,6 +78,13 @@ div.left-side .btn-coupon {
 div.box1 img {
   margin-top: 20px;
   width: 100px;
+}
+
+.button-promo {
+  position: absolute;
+  z-index: 10;
+  margin-top: 520px;
+  margin-left: 40px;
 }
 
 .col-lg-3 .box1 p {
