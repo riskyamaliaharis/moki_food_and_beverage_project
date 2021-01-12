@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Auth from './modules/auth'
+import Register from './modules/register'
+import Cart from './modules/cart'
 import Product from './modules/product'
 import Promo from './modules/promo'
 import PostProduct from './modules/postproduct'
@@ -9,7 +11,7 @@ import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: { Auth, Product, PostProduct, Promo },
+  modules: { Auth, Product, PostProduct, Promo, Register, Cart },
   state: {
     name: 'Risky Amalia Haris'
   },

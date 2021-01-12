@@ -23,7 +23,11 @@
             <br />
 
             <div class="button-set">
-              <button type="button" class="btn btn-1 rounded btn-md btn-block">
+              <button
+                type="button"
+                @click="addToCart(product)"
+                class="btn btn-1 rounded btn-md btn-block"
+              >
                 Add to Cart
               </button>
               <button
@@ -58,24 +62,84 @@
             </p>
             <h5>Choose a Size</h5>
             <div class="d-flex justify-content-around">
-              <button type="button" class="btn btn-sm rounded-circle">R</button>
-              <button type="button" class="btn btn-sm rounded-circle">L</button>
-              <button type="button" class="btn btn-sm rounded-circle">
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(1)"
+                :disabled="size[0] === true ? false : true"
+              >
+                R
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(2)"
+                :disabled="size[1] === true ? false : true"
+              >
+                L
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(3)"
+                :disabled="size[2] === true ? false : true"
+              >
                 XL
+              </button>
+            </div>
+            <div class="d-flex justify-content-around food-size">
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(4)"
+                :disabled="size[3] === true ? false : true"
+              >
+                150
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(5)"
+                :disabled="size[4] === true ? false : true"
+              >
+                200
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                @click="generateSize(6)"
+                :disabled="size[5] === true ? false : true"
+              >
+                300
               </button>
             </div>
           </div>
           <div class="card-coldbrew3 mt-5">
             <h6>Choose Delivery and Time</h6>
-            <button type="button" class="btn ">Dine In</button>
             <button
               type="button"
               class="btn "
-              :disabled="product.product_price === 20000 ? false : true"
+              :disabled="checked[0] === true ? false : true"
+              @click="generateDeliv(1)"
+            >
+              Dine In
+            </button>
+            <button
+              type="button"
+              class="btn "
+              :disabled="checked[1] === true ? false : true"
+              @click="generateDeliv(2)"
             >
               Door Delivery
             </button>
-            <button type="button" class="btn " disabled>Pick Up</button>
+            <button
+              type="button"
+              class="btn "
+              :disabled="checked[3] === true ? false : true"
+              @click="generateDeliv(3)"
+            >
+              Pick Up
+            </button>
           </div>
           <div class="input-group input-group-sm mb-3 mt-3 set-time">
             <span class="input-group-text left-time">Set time :</span>
@@ -143,6 +207,7 @@
         <!-- END SECOND COLUMN -->
       </b-row>
       <!-- END SECOND ROW -->
+      <AddToCart />
     </b-container>
     <Footer />
   </b-container>
@@ -151,29 +216,37 @@
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import AddToCart from '@/components/cart/AddToCart.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    AddToCart
   },
   data() {
     return {
       product_id: '',
       role: 1,
-      value: 0
+      value: 0,
+      checked: [false, false, false],
+      size: [false, false, false, false, false, false],
+      sizeType: '',
+      delivMethodType: '',
+      priceBasedOnSize: ''
     }
   },
   created() {
     this.product_id = this.$route.params.id
     console.log(this.product_id)
     this.getProductsByIdVuex(this.product_id)
+    this.enableDisableSizeDeliv()
   },
   computed: {
     ...mapGetters({ product: 'getDataProductUpdated' })
   },
   methods: {
-    ...mapActions(['getProductsByIdVuex']),
+    ...mapActions(['getProductsByIdVuex', 'addToCart']),
     add() {
       this.value = parseInt(this.value) + 1
       console.log(this.product)
@@ -184,18 +257,77 @@ export default {
       } else {
         this.value = parseInt(this.value) - 1
       }
+    },
+    enableDisableSizeDeliv() {
+      if (this.product.size_id === 1) {
+        this.size = [true, false, false, false, false, false]
+      } else if (this.product.size_id === 2) {
+        this.size = [false, true, false, false, false, false]
+      } else if (this.product.size_id === 3) {
+        this.size = [false, false, true, false, false, false]
+      } else if (this.product.size_id === 4) {
+        this.size = [true, true, false, false, false, false]
+      } else if (this.product.size_id === 5) {
+        this.size = [true, false, true, false, false, false]
+      } else if (this.product.size_id === 6) {
+        this.size = [false, true, true, false, false, false]
+      } else if (this.product.size_id === 7) {
+        this.size = [false, false, false, true, false, false]
+      } else if (this.product.size_id === 8) {
+        this.size = [false, false, false, false, true, false]
+      } else if (this.product.size_id === 9) {
+        this.size = [false, false, false, false, false, true]
+      } else if (this.product.size_id === 10) {
+        this.size = [false, false, false, true, true, false]
+      } else if (this.product.size_id === 11) {
+        this.size = [false, false, false, true, false, true]
+      } else if (this.product.size_id === 12) {
+        this.size = [false, false, false, false, true, true]
+      } else if (this.product.size_id === 13) {
+        this.size = [true, true, true, false, false, false]
+      } else if (this.product.size_id === 14) {
+        this.size = [false, false, false, true, true, true]
+      }
+
+      if (this.product.delivery_method_id === 1) {
+        this.checked = [true, false, false]
+      } else if (this.product.delivery_method_id === 2) {
+        this.checked = [false, true, false]
+      } else if (this.product.delivery_method_id === 3) {
+        this.checked = [false, false, true]
+      } else if (this.product.delivery_method_id === 4) {
+        this.checked = [true, true, false]
+      } else if (this.product.delivery_method_id === 5) {
+        this.checked = [true, false, true]
+      } else if (this.product.delivery_method_id === 6) {
+        this.checked = [false, true, true]
+      } else if (this.product.delivery_method_id === 7) {
+        this.checked = [true, true, true]
+      }
+    },
+    generateSize(num) {
+      if (num === 1) {
+        this.sizeType = 'R'
+        this.priceBasedOnSize = this.product.product_price
+      } else if (num === 2) {
+        this.sizeType = 'L'
+        this.priceBasedOnSize = 1.3 * this.product.product_price
+      } else if (num === 3) {
+        this.sizeType = 'XL'
+        this.priceBasedOnSize = 1.5 * this.product.product_price
+      } else if (num === 4) {
+        this.sizeType = '250 gr'
+        this.priceBasedOnSize = 1 * this.product.product_price
+      } else if (num === 5) {
+        this.sizeType = '300 gr'
+        this.priceBasedOnSize = 1.2 * this.product.product_price
+      } else if (num === 6) {
+        this.sizeType = '500 gr'
+        this.priceBasedOnSize = 2 * this.product.product_price
+      }
     }
-    // getProduct() {
-    //   axios
-    //     .get(`http://localhost:3000/product/selectproduct/${this.product_id}`)
-    //     .then(response => {
-    //       console.log(response)
-    //       this.product = response.data.data[0]
-    //       console.log(this.product.product_name)
-    //     })
-    //     .catch(error => {
-    //       console.log(error)
-    //     })
+    // generateDelivMethod(num){
+    //   if (num ===1 )
     // }
   }
 }
@@ -238,7 +370,15 @@ export default {
   height: 30px;
   background-color: rgba(255, 186, 51, 1);
   margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.card-coldbrew2 .food-size button {
+  width: 35px;
+  height: 35px;
+  background-color: rgba(255, 186, 51, 1);
   margin-bottom: 30px;
+  padding: 0;
 }
 
 .card-coldbrew2 button:hover {

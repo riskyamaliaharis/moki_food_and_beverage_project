@@ -6,24 +6,28 @@
         <p class="promo_info">
           Coupons will be updated every weeks. Check them out!
         </p>
-        <div class="card-coupon">
-          <div class="box1" v-for="(item, index) in cards" :key="index">
-            <img
-              class="rounded-circle"
-              src="../assets/img/product/image 29.png"
-              alt="spaghetti"
-            />
-            <h3 class="poppins">Beef</h3>
-            <h3>{{ item.coupon_discount * 100 }}% OFF</h3>
-            <p class="poppins">
-              {{ item.promo_description }}
-            </p>
-            <div class="line"></div>
-            <p>COUPON CODE</p>
-            <h2>{{ item.coupon_code }}</h2>
-            <p>Valid until {{ item.end_coupon }}</p>
-          </div>
-        </div>
+        <ul class="list-group">
+          <li v-for="item in cards" :key="item.coupon_id">
+            <div class="card-coupon">
+              <div class="box1">
+                <img
+                  class="rounded-circle"
+                  src="../assets/img/product/image 29.png"
+                  alt="spaghetti"
+                />
+                <h3 class="poppins">Beef</h3>
+                <h3>{{ item.coupon_discount * 100 }}% OFF</h3>
+                <p class="poppins">
+                  {{ item.promo_description }}
+                </p>
+                <div class="line"></div>
+                <p>COUPON CODE</p>
+                <h2>{{ item.coupon_code }}</h2>
+                <p>Valid until {{ item.end_coupon }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
 
         <vue-card-stack :cards="cards" :stack-width="480" :card-width="320">
           <template v-slot:card="{ card }">
@@ -74,7 +78,7 @@ div.left-side .btn-coupon {
   top: 160px;
 }
 .promo_info {
-  position: absolute;
+  position: relative;
 }
 
 div.show-card-promo {
@@ -86,7 +90,7 @@ div.show-card-promo {
 .box2,
 .box3 {
   border-radius: 20px;
-  position: absolute;
+  position: relative;
   width: 240px;
 }
 .box1 {
@@ -95,7 +99,8 @@ div.show-card-promo {
   height: 420px;
   background-color: #ffcb65;
 
-  top: 150px;
+  top: 100px;
+  margin-bottom: 20px;
   left: 10px;
   z-index: 3;
   text-align: center;

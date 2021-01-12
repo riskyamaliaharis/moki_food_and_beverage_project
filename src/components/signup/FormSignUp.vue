@@ -28,7 +28,7 @@
           <b-form-input
             id="text-username"
             type="text"
-            v-model="form.username"
+            v-model="form.user_name"
             placeholder="Input Your User Name ..."
           />
           <br />
@@ -48,7 +48,10 @@
           />
           <br />
           <br />
-          <button type="submit" class="w3-btn w3-orange w3-round-xlarge submit">
+          <button
+            @click="postDataUser"
+            class="w3-btn w3-orange w3-round-xlarge submit"
+          >
             Sign Up
           </button>
           <button type="reset" class="w3-btn w3-orange w3-round-xlarge">
@@ -67,22 +70,23 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
       form: {
         email: '',
         password: '',
-        username: ''
+        user_name: ''
       }
     }
   },
   methods: {
-    ...mapActions(['register']),
-    onSubmit() {
+    // ...mapActions(['registerVuex']),
+    ...mapMutations(['setDataUserRegister']),
+    postDataUser() {
       console.log(this.form)
-      this.register(this.form)
+      this.setDataUserRegister(this.form)
         .then(result => {
           console.log(result)
           this.$router.push('/login')

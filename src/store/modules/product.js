@@ -5,6 +5,7 @@ export default {
     limit: 8,
     page: 1,
     products: [],
+    cart: [],
     sort: '',
     totalRows: null,
     category_name: '',
@@ -35,6 +36,16 @@ export default {
     setProductAfterInputSearch(state, payload) {
       state.products = payload.data
       state.totalRows = payload.pagination.totalData
+    },
+    addItemToCart(state, payload) {
+      const addedItem = state.cart.find(
+        product => product.product_id === payload.product_id
+      )
+      if (addedItem) {
+        addedItem.qty
+      } else {
+        state.cart.push({ ...payload, qty: 1 })
+      }
     }
   },
   actions: {
@@ -95,6 +106,9 @@ export default {
           })
       })
     },
+    addToCart(context, payload) {
+      context.commit('addItemToCart', payload)
+    },
     deleteProducts(context, payload) {
       return new Promise((resolve, reject) => {
         axios
@@ -132,6 +146,9 @@ export default {
     },
     getSearchProduct(state) {
       return state.search
+    },
+    getCart(state) {
+      return state.cart
     }
   }
 }

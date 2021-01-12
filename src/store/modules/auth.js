@@ -3,19 +3,19 @@ import router from '../../router/index'
 export default {
   state: {
     user: {},
-    token: localStorage.getItem('token') || null,
-    form: {
-      user_name: '',
-      email: '',
-      password: '',
-      first_name: '',
-      last_name: '',
-      mobile: '',
-      gender: '',
-      address: '',
-      member_card_status: ''
-    },
-    users: ''
+    token: localStorage.getItem('token') || null
+    // form: {
+    //   user_name: '',
+    //   email: '',
+    //   password: '',
+    //   first_name: '',
+    //   last_name: '',
+    //   mobile: '',
+    //   gender: '',
+    //   address: '',
+    //   member_card_status: ''
+    // },
+    // users: ''
   },
   mutations: {
     setUser(state, payload) {
@@ -28,11 +28,16 @@ export default {
     delUser(state) {
       state.user = {}
       state.token = null
-    },
-    setNewUser(state, payload) {
-      state.users = payload
-      console.log(state.users)
     }
+    // setNewUser(state, payload) {
+    //   state.users = payload
+    //   console.log(state.users)
+    // },
+    // setDataUserRegister(state, payload) {
+    //   state.form.user_name = payload.user_name
+    //   state.form.password = payload.password
+    //   state.form.email = payload.user_name
+    // }
   },
   actions: {
     login(context, payload) {
@@ -58,20 +63,20 @@ export default {
       context.commit('delUser')
       router.push('/login')
     },
-    register(context, payload) {
-      return new Promise((resolve, reject) => {
-        axios
-          .post(`http://localhost:3000/user/register`, payload)
-          .then(result => {
-            context.commit('setNewUser', result.data.data)
-            resolve(result)
-          })
-          .catch(error => {
-            console.log(error)
-            reject(error)
-          })
-      })
-    },
+    // registerVuex(context) {
+    //   return new Promise((resolve, reject) => {
+    //     axios
+    //       .post(`http://localhost:3000/user/register`, context.state.form)
+    //       .then(result => {
+    //         context.commit('setNewUser', result.data.data)
+    //         resolve(result)
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //         reject(error)
+    //       })
+    //   })
+    // },
     interceptorRequest(context) {
       console.log('Interceptor Request Works !')
       axios.interceptors.request.use(

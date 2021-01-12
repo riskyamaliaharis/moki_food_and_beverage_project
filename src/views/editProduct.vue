@@ -115,7 +115,7 @@
                       <b-dropdown-item-button @click="selectCategoryProduct(3)"
                         >Food</b-dropdown-item-button
                       >
-                      <b-dropdown-item-button @click="selectCategory4"
+                      <b-dropdown-item-button @click="selectCategoryProduct(4)"
                         >Add On</b-dropdown-item-button
                       >
                     </b-dropdown>
