@@ -8,7 +8,7 @@
     <b-container>
       <header>
         <b-navbar toggleable="lg" class="header-set">
-          <b-navbar-brand class="satisfy">Moki</b-navbar-brand>
+          <b-navbar-brand class="satisfy" v-color="brown">Moki</b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

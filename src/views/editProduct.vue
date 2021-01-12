@@ -12,7 +12,16 @@
             <div>
               <div v-if="!image">
                 <img :src="'http://localhost:3000/' + product.image_src" />
-                <input type="file" @change="onFileChange($event)" />
+                <input
+                  type="file"
+                  @change="onFileChange($event)"
+                  style="display:none"
+                  class="hidden"
+                  id="files"
+                />
+                <label class="uploadPicture" for="files"
+                  >Select From Galery</label
+                >
               </div>
               <div v-else>
                 <img :src="image" />
@@ -448,6 +457,15 @@ div.picture {
   display: block;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+label.uploadPicture {
+  width: 160px;
+  height: 50px;
+  padding-top: 12px;
+  color: white;
+  border-radius: 5px;
+  background-color: rgba(106, 64, 41, 1);
 }
 
 .gotopromo {

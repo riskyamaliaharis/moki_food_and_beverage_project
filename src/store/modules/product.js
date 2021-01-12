@@ -116,6 +116,7 @@ export default {
           .then(response => {
             console.log(context.limit)
             alert(response.data.msg)
+            context.dispatch('getProducts')
             resolve(response)
           })
           .catch(error => {

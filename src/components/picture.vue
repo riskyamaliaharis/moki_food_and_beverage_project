@@ -14,14 +14,14 @@
         <div v-if="!image">
           <img src="../assets/img/unnamed1.png" alt="" />
 
-          <span class="hiddenFileInput"
-            ><input
-              type="file"
-              id="files"
-              hidden
-              @change="onFileChange($event)"
-              style="display:none"
-          /></span>
+          <input
+            type="file"
+            id="files"
+            class="hidden"
+            @change="onFileChange($event)"
+            style="display:none"
+          />
+          <label class="uploadimg" for="files">Select From Galery</label>
         </div>
         <div v-else>
           <img :src="image" />
@@ -84,6 +84,15 @@ div.picture {
   display: block;
   margin-bottom: 10px;
   border-radius: 50%;
+}
+label.uploadimg {
+  background-color: rgba(106, 64, 41, 1);
+  color: white;
+  width: 180px;
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-top: 12px;
 }
 div.centered {
   text-align: center;

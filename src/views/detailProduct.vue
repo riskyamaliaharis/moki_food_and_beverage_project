@@ -13,7 +13,7 @@
           <section>
             <img
               class="img-set rounded-circle"
-              :src="'http://localhost:3000/' + product.image_src"
+              :src="`http://${process.env.VUE_APP_ROOT_URL}/product.image_src`"
               alt="coldbrew"
             />
             <h2 class="poppins">
@@ -165,7 +165,9 @@
             <div class="p-2">
               <img
                 class="img-coldbrew rounded-circle "
-                :src="'http://localhost:3000/' + product.image_src"
+                :src="
+                  `http://${process.env.VUE_APP_ROOT_URL}/product.image_src`
+                "
                 alt="coldbrew"
               />
             </div>
@@ -354,6 +356,8 @@ export default {
 .img-set {
   border-radius: 50%;
   width: 250px;
+  height: 250px;
+  object-fit: cover;
   padding-top: 10px;
 }
 .card-coldbrew2 {

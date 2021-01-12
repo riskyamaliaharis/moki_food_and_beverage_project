@@ -36,7 +36,7 @@
                   type="button"
                   class="btn a rounded-circle act"
                   @click="deleteProduct(item.product_id)"
-                  v-if="role === 1"
+                  v-if="user_role === 1"
                 >
                   <i class="fa fa-trash "></i>
                 </b-button>
@@ -44,7 +44,7 @@
                   type="button"
                   class="btn a rounded-circle act"
                   @click="patchProduct(item.product_id)"
-                  v-if="role === 1"
+                  v-if="user_role === 1"
                 >
                   <i class="fa fa-edit "></i>
                 </b-button>
@@ -100,7 +100,7 @@ export default {
       alert: false,
       isMsg: '',
       product_id: '',
-      role: 1
+      user_role: 1
     }
   },
   methods: {

@@ -9,13 +9,21 @@
         <ul class="list-group">
           <li v-for="item in cards" :key="item.coupon_id">
             <div class="card-coupon">
+              <b-button
+                type="button"
+                class="btn a rounded-circle act"
+                @click="deleteProduct(item.product_id)"
+                v-if="user_role === 1"
+              >
+                <i class="fa fa-trash "></i>
+              </b-button>
               <div class="box1">
                 <img
                   class="rounded-circle"
                   src="../assets/img/product/image 29.png"
                   alt="spaghetti"
                 />
-                <h3 class="poppins">Beef</h3>
+                <h3 class="poppins">abc</h3>
                 <h3>{{ item.coupon_discount * 100 }}% OFF</h3>
                 <p class="poppins">
                   {{ item.promo_description }}
@@ -29,21 +37,17 @@
           </li>
         </ul>
 
-        <vue-card-stack :cards="cards" :stack-width="480" :card-width="320">
+        <!-- <vue-card-stack :cards="cards" :stack-width="480" :card-width="320">
           <template v-slot:card="{ card }">
             <div
               style="width: 100%; height: 100%;"
               :style="{ background: card.background }"
             ></div>
           </template>
-        </vue-card-stack>
+        </vue-card-stack> -->
 
         <!-- <div class="box2"></div>
           <div class="box3"></div> -->
-
-        <b-button class="button-promo" variant="dark" size="lg"
-          >Edit Promo</b-button
-        >
       </div>
     </b-sidebar>
   </div>
@@ -51,11 +55,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import VueCardStack from 'vue-card-stack'
+// import VueCardStack from 'vue-card-stack'
 export default {
-  components: {
-    VueCardStack
-  },
+  // components: {
+  //   VueCardStack
+  // },
   data() {
     return {}
   },
