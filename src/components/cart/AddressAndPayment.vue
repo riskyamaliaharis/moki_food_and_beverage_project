@@ -6,9 +6,6 @@
         <a class="p-2 align-bottom" href="">edit</a>
       </div>
       <div class="p-2 box-address-details">
-        <!-- <p>Delivery to Iskandar Street</p>
-        <p>Km 5 refinery road oppsite re public road, effurun, Jakarta</p>
-        <p>+62 81348287878</p> -->
         Delivery to Iskandar Street Km 5 refinery road oppsite re public road,
         effurun, Jakarta +62 81348287878
       </div>
@@ -89,15 +86,6 @@
 .box-payment-method .p-2 {
   padding-left: 15px;
 }
-
-/* p.checkout-item {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 47px;
-  color: #ffffff;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.8);
-  margin-top: 230px;
-} */
 
 div.box-details h4 {
   font-weight: bold;

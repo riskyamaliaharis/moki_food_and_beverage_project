@@ -36,7 +36,6 @@
               >
             </b-navbar-nav>
 
-            <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
               <b-nav-form>
                 <b-form-input
@@ -56,8 +55,6 @@
                 /></a>
               </b-nav-item>
               <b-nav-item-dropdown right class="my-2">
-                <!-- Using 'button-content' slot -->
-
                 <template #button-content>
                   <img
                     class="profile_img"
@@ -97,8 +94,6 @@ export default {
     ...mapMutations(['newSearch']),
     searchData() {
       console.log(this.inputSearch)
-      // localStorage.setItem('searching', JSON.stringify(this.inputSearch))
-      // console.log(this.inputSearch)
       this.newSearch(this.inputSearch)
       this.getProductsSearching()
     }

@@ -52,25 +52,6 @@
         >
       </b-dropdown>
     </div>
-
-    <!-- <label>Input Product Size :</label>
-    <div id="checkboxes">
-      <input
-        type="checkbox"
-        name="rGroup"
-        value="1"
-        id="r1"
-        checked="checked"
-        :size[0]="true"
-      />
-      <label class="choose-size" for="r1">R</label>
-      <input type="checkbox" name="rGroup" value="2" id="r2" :size[1]="true" />
-      <label class="choose-size" for="r2">L</label>
-      <input type="checkbox" name="rGroup" value="3" id="r3" :size[2]="true" />
-      <label class="choose-size" for="r3">XL</label>
-
-      <h1>{{ size }}</h1>
-    </div> -->
   </div>
 </template>
 

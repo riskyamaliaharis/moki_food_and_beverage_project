@@ -185,7 +185,7 @@
               >
                 -
               </button>
-              <!-- <input type="text" id="qtyBox" readonly="" value="0" /> -->
+
               <span>{{ value }}</span>
               <button
                 id="add"
@@ -328,9 +328,6 @@ export default {
         this.priceBasedOnSize = 2 * this.product.product_price
       }
     }
-    // generateDelivMethod(num){
-    //   if (num ===1 )
-    // }
   }
 }
 </script>
@@ -339,7 +336,6 @@ export default {
 .main-set {
   background-color: white;
   min-height: 700px;
-  /* background-color: #bcbaba; */
 }
 .breadcrumb {
   background-color: white;
@@ -421,7 +417,6 @@ export default {
 
   width: 35%;
   height: 130px;
-  /* height: 120px; */
   margin-top: 50px;
   margin-bottom: -80px;
   margin-left: 0px;

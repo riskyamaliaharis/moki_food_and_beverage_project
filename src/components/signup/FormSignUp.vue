@@ -82,7 +82,6 @@ export default {
     }
   },
   methods: {
-    // ...mapActions(['registerVuex']),
     ...mapMutations(['setDataUserRegister']),
     postDataUser() {
       console.log(this.form)

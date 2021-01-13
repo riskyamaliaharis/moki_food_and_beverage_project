@@ -18,7 +18,6 @@
             order-xs="3"
           >
             <div class="about">
-              <!-- <img src="../img/coffee 1.png" alt="coffee-logo" /> -->
               <p class="satisfy">Moki</p>
               <div class="description">
                 <p class="font-weight-light">
@@ -109,7 +108,6 @@ footer {
 }
 footer .product,
 footer .engage {
-  /* flex: 1; */
   font-weight: 700;
 }
 

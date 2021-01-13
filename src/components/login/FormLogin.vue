@@ -72,16 +72,10 @@ export default {
     }
   },
   computed: {
-    // 1st
-    // dataName() {
-    //   return this.$store.state.name
-    // }
-    // 2nd
     ...mapState(['name']),
     ...mapState({ dataName: 'name' })
   },
   methods: {
-    //mapActions & mapMutations
     onSubmit() {
       console.log(this.form)
       this.login(this.form)

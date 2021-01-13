@@ -13,14 +13,11 @@
       </b-row>
     </b-container>
 
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-
     <Footer />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Jumbotron from '@/components/home/Jumbotron.vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'

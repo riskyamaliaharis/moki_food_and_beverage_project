@@ -88,9 +88,6 @@ export default {
     return {
       name: 'AddPromoForm2',
       form: {
-        // promoCouponCode: '',
-        // promoStartCoupon: '',
-        // promoEndCoupon: '',
         promoCouponDiscount: '',
         promoSize: '',
         promoDelivMethod: '',

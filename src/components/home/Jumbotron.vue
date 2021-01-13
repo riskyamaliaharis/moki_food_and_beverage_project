@@ -4,14 +4,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <!-- <b-jumbotron
-      class="jumbotron"
-      header="BootstrapVue"
-      lead="Bootstrap v4 Components for Vue.js 2"
-    >
-      <p>For more information visit website</p>
-      <b-button variant="primary" href="#">More Info</b-button>
-    </b-jumbotron> -->
     <div class="jumbotron">
       <b-container>
         <h1 class="title">

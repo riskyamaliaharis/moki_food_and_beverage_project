@@ -25,20 +25,7 @@
       required
     ></b-form-input>
 
-    <!-- <label for="input-cat">Input Category :</label>
-    <b-form-input
-      class="input-text"
-      id="input-cat"
-      v-model="form.category"
-    ></b-form-input> -->
-
     <label for="input-cat">Input Category:</label>
-    <!-- <b-form-input list="input-list" id="input-cat"></b-form-input>
-    <b-form-datalist
-      id="input-list"
-      :options="options"
-      @change="selectCategory"
-    ></b-form-datalist> -->
     <div>
       <b-dropdown id="dropdown-buttons" text="Category">
         <b-dropdown-item-button @click="selectCategory1"
@@ -117,7 +104,6 @@
     <br />
 
     <div class="deliv-method">
-      <!-- (Checked: {{ checked3 }}) -->
       <label class="label-title"> Input Delivery Method</label>
       <b-row>
         <b-col cols="3">
@@ -137,33 +123,6 @@
         </b-col>
       </b-row>
     </div>
-
-    <!-- <label>Input Product Size :</label>
-    <br /> -->
-
-    <!-- <b-row>
-      <b-col class="beverage-size">
-        <button class="button button-rounded">
-          R
-        </button>
-        <button class="button button-rounded">L</button>
-        <button class="button button-rounded">XL</button>
-      </b-col>
-      <b-col class="food-size">
-        <button class="button button-rounded">150</button>
-        <button class="button button-rounded">200</button>
-        <button class="button button-rounded">250</button>
-      </b-col>
-    </b-row>
-
-    <label>Input Delivery Methods :</label>
-    <b-row>
-      <b-col class="deliv-method">
-        <button class="button">Home Delivery</button>
-        <button class="button">Dine In</button>
-        <button class="button disabled">Take Away</button>
-      </b-col>
-    </b-row> -->
 
     <button class="save-button" @click="rightData">Save</button>
     <br /><br />

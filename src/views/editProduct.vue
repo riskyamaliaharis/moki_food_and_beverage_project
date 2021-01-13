@@ -275,9 +275,8 @@ export default {
       checked: [false, false, false],
       image: false,
       size: [false, false, false, false, false, false],
-      // product_id: '',
+
       product_id: ''
-      // product: ''
     }
   },
   created() {

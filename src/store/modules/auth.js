@@ -4,18 +4,6 @@ export default {
   state: {
     user: {},
     token: localStorage.getItem('token') || null
-    // form: {
-    //   user_name: '',
-    //   email: '',
-    //   password: '',
-    //   first_name: '',
-    //   last_name: '',
-    //   mobile: '',
-    //   gender: '',
-    //   address: '',
-    //   member_card_status: ''
-    // },
-    // users: ''
   },
   mutations: {
     setUser(state, payload) {
@@ -29,21 +17,11 @@ export default {
       state.user = {}
       state.token = null
     }
-    // setNewUser(state, payload) {
-    //   state.users = payload
-    //   console.log(state.users)
-    // },
-    // setDataUserRegister(state, payload) {
-    //   state.form.user_name = payload.user_name
-    //   state.form.password = payload.password
-    //   state.form.email = payload.user_name
-    // }
   },
   actions: {
     login(context, payload) {
       console.log('payload ' + payload)
       return new Promise((resolve, reject) => {
-        //akses mutation
         axios
           .post(`http://${process.env.VUE_APP_ROOT_URL}/user/login`, payload)
           .then(result => {
@@ -63,30 +41,14 @@ export default {
       context.commit('delUser')
       router.push('/login')
     },
-    // registerVuex(context) {
-    //   return new Promise((resolve, reject) => {
-    //     axios
-    //       .post(`http://localhost:3000/user/register`, context.state.form)
-    //       .then(result => {
-    //         context.commit('setNewUser', result.data.data)
-    //         resolve(result)
-    //       })
-    //       .catch(error => {
-    //         console.log(error)
-    //         reject(error)
-    //       })
-    //   })
-    // },
     interceptorRequest(context) {
       console.log('Interceptor Request Works !')
       axios.interceptors.request.use(
         function(config) {
           config.headers.authorization = `Bearer ${context.state.token}`
-          // Do something before request is sent
           return config
         },
         function(error) {
-          // Do something with request error
           return Promise.reject(error)
         }
       )
@@ -95,13 +57,9 @@ export default {
       console.log('Interceptor Response Works !')
       axios.interceptors.response.use(
         function(response) {
-          // Any status code that lie within the range of 2xx cause this function to trigger
-          // Do something with response data
           return response
         },
         function(error) {
-          // Any status codes that falls outside the range of 2xx cause this function to trigger
-          // Do something with response error
           if (
             error.response.data.status === 403 &&
             (error.response.data.msg === 'invalid token' ||
