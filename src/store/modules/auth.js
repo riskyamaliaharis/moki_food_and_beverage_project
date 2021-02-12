@@ -32,7 +32,8 @@ export default {
           })
           .catch(error => {
             console.log(error)
-            reject(error)
+            console.log(error.response)
+            reject(error.response)
           })
       })
     },

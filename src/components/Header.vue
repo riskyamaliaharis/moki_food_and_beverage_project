@@ -142,7 +142,7 @@ header .satisfy {
   background-color: rgba(106, 64, 41, 1);
 }
 
-.profile-img {
+img.profile_img {
   border-radius: 50%;
 }
 </style>

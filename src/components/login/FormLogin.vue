@@ -13,19 +13,16 @@
       </b-col>
       <b-col cols="3" class="sign-up">
         <p>
-          <button
-            class="w3-button w3-orange w3-round-xlarge sign-up"
-            to="/signup"
-          >
+          <button class="w3-button  w3-round-xlarge sign-up" to="/signup">
             Sign-Up
           </button>
         </p>
       </b-col>
     </b-row>
     <h3 class="centered">Login</h3>
-    <h3>{{ dataName }}</h3>
+
     <b-row align-h="center">
-      <b-col cols="4">
+      <b-col cols="10">
         <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
           <label for="text-email">Email</label>
           <b-form-input
@@ -42,16 +39,18 @@
             placeholder="Input Your Password ..."
           />
           <br /><br />
-          <button type="submit" class="w3-btn w3-orange w3-round-xlarge submit">
+          <button type="submit" class="w3-btn w3-round-xlarge submit">
             Submit
           </button>
-          <button type="reset" class="w3-btn w3-orange w3-round-xlarge">
+          <br />
+          <br />
+          <button type="reset" class="w3-btn w3-round-xlarge">
             Reset
           </button>
           <br /><br />
           <br /><br />
           <br /><br />
-          <button class="w3-button w3-orange w3-block w3-center-align">
+          <button class="w3-button create-new w3-block w3-center-align">
             Create New
           </button>
         </b-form>
@@ -62,7 +61,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { alert } from '../../mixins/alert'
 export default {
+  mixins: [alert],
   data() {
     return {
       form: {
@@ -76,15 +77,18 @@ export default {
     ...mapState({ dataName: 'name' })
   },
   methods: {
+    ...mapActions(['login']),
     onSubmit() {
       console.log(this.form)
       this.login(this.form)
         .then(result => {
           console.log(result)
+          this.successAlert(result.data.msg)
           this.$router.push('/product')
         })
         .catch(error => {
-          alert(error.data.msg)
+          console.log(error)
+          this.errorAlert(error.data.msg)
         })
     },
     onReset() {
@@ -92,13 +96,21 @@ export default {
         email: '',
         password: ''
       }
-    },
-    ...mapActions(['login'])
+    }
   }
 }
 </script>
 
 <style scoped>
+button.w3-button,
+.w3-btn {
+  text-align: center;
+  background-color: #ffba33;
+}
+.w3-btn {
+  width: 100%;
+}
+
 .satisfy {
   font-family: 'Satisfy', cursive;
   font-size: 40px;
@@ -119,6 +131,5 @@ button.sign-up {
   width: 100px;
   border-radius: 10px;
   margin-top: 15px;
-  padding-right: 30px;
 }
 </style>

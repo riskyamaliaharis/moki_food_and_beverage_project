@@ -5,11 +5,11 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import store from './store'
-// import moment from 'moment'
-// Vue.prototype.moment = moment
+import VueSweetalert2 from 'vue-sweetalert2'
 
-// var moment = require('moment')
-// moment().format("MMM Do YY");
+Vue.config.productionTip = false
+
+Vue.use(VueSweetalert2)
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
