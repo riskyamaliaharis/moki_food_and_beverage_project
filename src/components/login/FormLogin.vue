@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="white">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
@@ -7,16 +7,16 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <b-row class="head" align-h="between">
-      <b-col cols="3">
+    <b-row class="head " align-v="center" align-h="center">
+      <b-col cols="5">
         <h2 class="satisfy">Moki</h2>
       </b-col>
-      <b-col cols="3" class="sign-up">
-        <p>
+      <b-col cols="5" class="sign-up">
+        <div style="text-align: right;">
           <button class="w3-button  w3-round-xlarge sign-up" to="/signup">
             Sign-Up
           </button>
-        </p>
+        </div>
       </b-col>
     </b-row>
     <h3 class="centered">Login</h3>
@@ -73,7 +73,6 @@ export default {
     }
   },
   computed: {
-    ...mapState(['name']),
     ...mapState({ dataName: 'name' })
   },
   methods: {
@@ -110,7 +109,9 @@ button.w3-button,
 .w3-btn {
   width: 100%;
 }
-
+.create-new {
+  margin-bottom: 20px;
+}
 .satisfy {
   font-family: 'Satisfy', cursive;
   font-size: 40px;
@@ -119,17 +120,19 @@ button.w3-button,
   text-align: center;
 }
 .head {
-  margin-top: 50px;
-  margin-bottom: 70px;
-}
-
-button.submit {
-  margin-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 button.sign-up {
   width: 100px;
   border-radius: 10px;
   margin-top: 15px;
+}
+
+@media only screen and (max-width: 991px) {
+  .white {
+    color: white;
+  }
 }
 </style>

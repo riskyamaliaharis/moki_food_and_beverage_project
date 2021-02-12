@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="white">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
@@ -7,32 +7,31 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <b-row class="head" align-h="between">
-      <b-col cols="3">
+    <b-row class="head " align-v="center" align-h="center">
+      <b-col cols="5">
         <h2 class="satisfy">Moki</h2>
       </b-col>
-      <b-col cols="3" class="sign-up">
-        <p>
-          <button class="w3-button w3-orange w3-round-xlarge sign-up">
-            Login
+      <b-col cols="5" class="sign-up">
+        <div style="text-align: right;">
+          <button class="w3-button  w3-round-xlarge sign-up" to="/signup">
+            Sign-Up
           </button>
-        </p>
+        </div>
       </b-col>
     </b-row>
-    <h3 class="centered form-title">Sign Up</h3>
+    <h3 class="centered">Sign Up</h3>
 
-    <b-row align-h="center" class="signup-form">
-      <b-col cols="4">
-        <b-form>
-          <label for="username">User Name</label>
+    <b-row align-h="center">
+      <b-col cols="10">
+        <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
+          <label for="text-username">Username</label>
           <b-form-input
             id="text-username"
             type="text"
             v-model="form.user_name"
-            placeholder="Input Your User Name ..."
-          />
-          <br />
-          <label for="text-email">Email Address</label>
+            placeholder="Input Your Username ..."
+          /><br />
+          <label for="text-email">Email</label>
           <b-form-input
             id="text-email"
             type="email"
@@ -45,24 +44,20 @@
             type="password"
             v-model="form.password"
             placeholder="Input Your Password ..."
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            required
           />
-          <br />
-          <br />
-          <button
-            @click="postDataUser"
-            class="w3-btn w3-orange w3-round-xlarge submit"
-          >
-            Sign Up
+          <br /><br />
+          <button type="submit" class="w3-btn w3-round-xlarge submit">
+            Submit
           </button>
-          <button type="reset" class="w3-btn w3-orange w3-round-xlarge">
+          <br />
+          <br />
+          <button type="reset" class="w3-btn w3-round-xlarge">
             Reset
           </button>
           <br /><br />
-          <br /><br />
-          <br /><br />
-          <button class="w3-button w3-orange w3-block w3-center-align">
-            Create New
-          </button>
         </b-form>
       </b-col>
     </b-row>
@@ -70,35 +65,36 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
+import { alert } from '../../mixins/alert'
 export default {
+  mixins: [alert],
   data() {
     return {
       form: {
+        user_name: '',
         email: '',
-        password: '',
-        user_name: ''
+        password: ''
       }
     }
   },
   methods: {
-    ...mapMutations(['setDataUserRegister']),
-    postDataUser() {
-      console.log(this.form)
-      this.setDataUserRegister(this.form)
+    ...mapActions(['register']),
+    onSubmit() {
+      this.register(this.form)
         .then(result => {
-          console.log(result)
+          this.successAlert(result.data.msg)
           this.$router.push('/login')
         })
         .catch(error => {
-          alert(error.data.msg)
+          this.errorAlert(error.data.msg)
         })
     },
     onReset() {
       this.form = {
+        user_name: '',
         email: '',
-        password: '',
-        username: ''
+        password: ''
       }
     }
   }
@@ -106,6 +102,17 @@ export default {
 </script>
 
 <style scoped>
+button.w3-button,
+.w3-btn {
+  text-align: center;
+  background-color: #ffba33;
+}
+.w3-btn {
+  width: 100%;
+}
+.create-new {
+  margin-bottom: 20px;
+}
 .satisfy {
   font-family: 'Satisfy', cursive;
   font-size: 40px;
@@ -115,21 +122,21 @@ export default {
 }
 .head {
   margin-top: 30px;
-  margin-bottom: 55px;
-}
-
-.form-title {
-  margin-bottom: 30px;
-}
-
-button.submit {
-  margin-right: 10px;
+  margin-bottom: 50px;
 }
 
 button.sign-up {
   width: 100px;
   border-radius: 10px;
   margin-top: 15px;
-  padding-right: 30px;
+}
+
+button[type='reset'] {
+  margin-bottom: 65px;
+}
+@media only screen and (max-width: 991px) {
+  .white {
+    color: white;
+  }
 }
 </style>

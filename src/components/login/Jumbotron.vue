@@ -15,18 +15,19 @@
 
 <style scoped>
 .jumbotron {
+  width: 100%;
   margin: 0;
   background-color: white;
   object-fit: cover;
-  height: 800px;
+  height: 600px;
 }
 .jumbotron img {
   position: relative;
   object-fit: cover;
   left: -150px;
   top: -100px;
-  width: 600px;
-  height: 800px;
+  width: 540px;
+  height: 700px;
 }
 .info {
   width: 60%;
@@ -37,5 +38,11 @@
   background-color: white;
   border-radius: 6px;
   padding: 10px;
+}
+
+@media only screen and (max-width: 1124px) {
+  .jumbotron img {
+    width: 450px;
+  }
 }
 </style>
