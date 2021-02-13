@@ -52,13 +52,15 @@
               </div>
             </b-col>
           </b-row>
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="limit"
-            aria-controls="my-table"
-            @change="handlePageChange"
-          ></b-pagination>
+          <div class="centered pagination">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="rows"
+              :per-page="limit"
+              aria-controls="my-table"
+              @change="handlePageChange"
+            ></b-pagination>
+          </div>
         </b-container>
       </div>
     </div>
@@ -137,6 +139,9 @@ export default {
 <style scoped>
 .centered {
   text-align: center;
+}
+.pagination {
+  margin: 20px auto 0;
 }
 .product-page {
   margin: 100px auto;

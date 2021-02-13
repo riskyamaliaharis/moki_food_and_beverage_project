@@ -14,7 +14,7 @@
     </div>
 
     <Coupon />
-    <Sorting />
+    <Sorting class="sort" />
 
     <Card />
     <Footer />
@@ -43,6 +43,9 @@ export default {
 </script>
 
 <style scoped>
+.sort {
+  margin-top: 20px;
+}
 .toggle-add {
   background-color: rgba(106, 64, 41, 1);
   width: 60%;

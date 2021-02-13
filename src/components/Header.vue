@@ -10,7 +10,7 @@
         <b-navbar toggleable="lg" class="header-set">
           <b-navbar-brand class="satisfy" v-color="brown">Moki</b-navbar-brand>
 
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <b-navbar-toggle class="dd" target="nav-collapse"></b-navbar-toggle>
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="menu-nav">
@@ -40,7 +40,7 @@
               <b-nav-form>
                 <b-form-input
                   size="sm"
-                  class="mr-sm-2"
+                  class="mr-sm-2 search"
                   v-model="inputSearch"
                   @keydown.enter.prevent="searchData"
                   placeholder="Search"
@@ -144,5 +144,9 @@ header .satisfy {
 
 img.profile_img {
   border-radius: 50%;
+}
+#nav-collapse {
+  background: white;
+  padding-left: 50px;
 }
 </style>

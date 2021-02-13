@@ -43,4 +43,7 @@ div.sort .btn-sort {
   width: 150px;
   border-radius: 5px;
 }
+div.sort {
+  text-align: center;
+}
 </style>

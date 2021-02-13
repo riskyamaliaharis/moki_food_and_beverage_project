@@ -13,6 +13,7 @@ import Login from '../views/auth/Login.vue'
 import SignUp from '../views/auth/SignUp.vue'
 import AddPromo from '../views/Promo/AddPromo.vue'
 import EditPromo from '../views/Promo/EditPromo.vue'
+import ForgotPassword from '../views/auth/ForgotPassword.vue'
 // import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
 Vue.use(VueRouter)
@@ -85,6 +86,11 @@ const routes = [
     path: '/user/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/forgot',
+    name: 'Forgot',
+    component: ForgotPassword
   }
   // {
   //   path: '/admin/dashboard',

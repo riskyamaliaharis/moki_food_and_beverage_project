@@ -3,39 +3,29 @@
     <b-button v-b-toggle.sidebar-1 class="btn-coupon">Get Promo</b-button>
     <b-sidebar id="sidebar-1" title="Promo for you" shadow>
       <div class="px-3 py-2 show-card-promo">
-        <p class="promo_info">
-          Coupons will be updated every weeks. Check them out!
-        </p>
-        <ul class="list-group">
-          <li v-for="item in cards" :key="item.coupon_id">
-            <div class="card-coupon">
-              <b-button
-                type="button"
-                class="btn a rounded-circle act"
-                @click="deleteProduct(item.product_id)"
-                v-if="user_role === 1"
-              >
-                <i class="fa fa-trash "></i>
-              </b-button>
-              <div class="box1">
-                <img
-                  class="rounded-circle"
-                  src="../assets/img/product/image 29.png"
-                  alt="spaghetti"
-                />
-                <h3 class="poppins">abc</h3>
-                <h3>{{ item.coupon_discount * 100 }}% OFF</h3>
-                <p class="poppins">
-                  {{ item.promo_description }}
-                </p>
-                <div class="line"></div>
-                <p>COUPON CODE</p>
-                <h2>{{ item.coupon_code }}</h2>
-                <p>Valid until {{ item.end_coupon }}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <div
+          :class="i % 2 === 0 ? 'card brown' : 'card orange'"
+          v-for="(el, i) in cards"
+          :key="i"
+        >
+          <b-row align-v="baseline">
+            <b-col cols="5">
+              <img
+                v-if="el.image_src"
+                :src="'http://localhost:3000/' + el.image_src"
+                alt="product"
+                class="image"
+              />
+              <img
+                v-else
+                src="../assets/img/unnamed1.png"
+                alt="product"
+                class="image"
+              />
+            </b-col>
+            <b-col cols="7">{{ el }}</b-col>
+          </b-row>
+        </div>
       </div>
     </b-sidebar>
   </div>
@@ -59,120 +49,41 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 div.left-side .btn-coupon {
-  background-color: black;
-  width: 150px;
+  background-color: white;
+  width: 106px;
   position: absolute;
-  top: 160px;
-}
-.promo_info {
-  position: relative;
+  top: 190px;
+  color: #895537;
+  border-color: #895537;
+  border-radius: 20px 0 0 20px;
 }
 
 div.show-card-promo {
-  height: 600px;
+  height: 670px;
   overflow: auto;
+  padding: 10px;
 }
 
-.box1,
-.box2,
-.box3 {
-  border-radius: 20px;
-  position: relative;
-  width: 240px;
-}
-.box1 {
-  font-family: 'Rubik', sans-serif;
-
-  height: 420px;
-  background-color: #ffcb65;
-
-  top: 100px;
+.card {
+  height: 125px;
   margin-bottom: 20px;
-  left: 10px;
-  z-index: 3;
-  text-align: center;
+  padding: 7px;
+  border-radius: 10px;
 }
-
-div.box1 img {
-  margin-top: 20px;
-  width: 100px;
-}
-
-.button-promo {
-  position: absolute;
-  z-index: 10;
-  margin-top: 520px;
-  margin-left: 40px;
-}
-
-.col-lg-3 .box1 p {
-  font-size: 12px;
-  line-height: 18px;
-  margin-bottom: 5px;
-}
-
-.col-lg-3 h1.promo_info {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 18px;
-  text-align: center;
-  margin-bottom: 0px;
-  left: 70px;
-  top: 40px;
-  z-index: 5;
-}
-p.promo_info {
-  top: 70px;
-  z-index: 6;
-}
-
-.col-lg-3 p {
-  text-align: center;
-}
-
-.box2 {
-  height: 380px;
-  top: 170px;
-  left: 30px;
-  z-index: 2;
-  background-color: black;
-}
-.box3 {
-  z-index: 1;
-
-  height: 300px;
-  top: 210px;
-  left: 45px;
-  background-color: rgba(106, 64, 41, 1);
-}
-
-.apply_coupon {
-  position: absolute;
-  z-index: 5;
-  top: 680px;
-  left: -18px;
-  width: 270px;
-  border-radius: 15px;
-  background-color: #895537;
+.brown {
+  background: #895537;
   color: white;
 }
-
-#terms {
-  position: absolute;
-  z-index: 6;
-  top: 760px;
-  left: -18px;
+.orange {
+  background: #ffba33;
+  color: black;
 }
-
-#terms .coupon {
-  text-align: left;
-  font-size: 12px;
-  line-height: 0.2;
-}
-.line {
-  border: 1px dashed rgba(106, 64, 41, 1);
-  margin-bottom: 10px;
+.image {
+  width: 107px;
+  height: 107px;
+  object-fit: cover;
+  border-radius: 30px;
 }
 </style>
