@@ -19,13 +19,14 @@
         </div>
       </b-col>
     </b-row>
-    <h3 class="centered">Login</h3>
+    <h3 class="centered">Sign In</h3>
 
     <b-row align-h="center">
       <b-col cols="10">
         <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
           <label for="text-email">Email</label>
           <b-form-input
+            v-focus
             id="text-email"
             type="email"
             v-model="form.email"
@@ -40,7 +41,7 @@
           />
           <br /><br />
           <button type="submit" class="w3-btn w3-round-xlarge submit">
-            Submit
+            Sign In
           </button>
           <br />
           <br />
@@ -48,8 +49,51 @@
             Reset
           </button>
           <br /><br />
+          <div class="centered">
+            <b-button
+              variant="light"
+              id="show-btn"
+              @click="$bvModal.show('bv-modal-example')"
+              >Forgot Password ?</b-button
+            >
+          </div>
+
+          <b-modal id="bv-modal-example" hide-footer>
+            <template #modal-title>
+              Forgot Your Password ?
+            </template>
+            <div class="d-block text-center">
+              <b-row align-v="center">
+                <b-col cols="3"
+                  ><img src="../../assets/img/keylock.png" width="80" alt=""
+                /></b-col>
+                <b-col cols="8"
+                  >Don't worry! Fill your email in this form below and we'll
+                  send you a link to reset your password</b-col
+                >
+              </b-row>
+              <b-row align-h="center">
+                <b-col cols="8">
+                  <br />
+                  <b-form-input
+                    id="email"
+                    type="email"
+                    v-model="emailForgot"
+                    placeholder="Input Your Email ..."
+                  />
+                </b-col>
+              </b-row>
+            </div>
+            <b-button
+              block
+              variant="outline-warning"
+              class="mt-3"
+              @click="reset"
+              >Reset Password</b-button
+            >
+          </b-modal>
           <br /><br />
-          <br /><br />
+          <br />
           <button class="w3-button create-new w3-block w3-center-align">
             Create New
           </button>
@@ -69,14 +113,22 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      emailForgot: ''
     }
   },
   computed: {
     ...mapState({ dataName: 'name' })
   },
+  directives: {
+    focus: {
+      inserted: function(el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'sendEmailForgot']),
     onSubmit() {
       console.log(this.form)
       this.login(this.form)
@@ -95,6 +147,19 @@ export default {
         email: '',
         password: ''
       }
+    },
+    reset() {
+      const email = this.emailForgot
+      this.sendEmailForgot({ email })
+        .then(result => {
+          console.log(result)
+          this.successAlert(result.data.msg)
+          this.emailForgot = ''
+        })
+        .catch(error => {
+          console.log(error)
+          this.errorAlert(error.data.msg)
+        })
     }
   }
 }

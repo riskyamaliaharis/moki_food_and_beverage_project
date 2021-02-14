@@ -62,6 +62,48 @@ export default {
         }
       )
     },
+    sendEmailForgot(context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log('payload' + payload)
+        axios
+          .post(`http://${process.env.VUE_APP_ROOT_URL}/user/forgot`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    changePassBecauseForgot(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `http://${process.env.VUE_APP_ROOT_URL}/user/changepasswordforgot`,
+            payload
+          )
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    verifyAccount(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `http://${process.env.VUE_APP_ROOT_URL}/user/updatestatus/${payload}`
+          )
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
     interceptorResponse(context) {
       console.log('Interceptor Response Works !')
       axios.interceptors.response.use(

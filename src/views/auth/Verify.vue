@@ -1,40 +1,38 @@
 <template>
   <div class="login bg">
-    <div class="forgot">
+    <div class="verify">
       <b-container fluid>
         <b-row align-h="center">
           <b-col xl="5" lg="6" md="6" sm="10" cols="10">
-            <Forgot />
+            <Verify />
           </b-col>
         </b-row>
       </b-container>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
-import Forgot from '../../components/forgot/ForgotPasswordComponent.vue'
-import Footer from '@/components/Footer.vue'
+import Verify from '@/components/signup/VerifyComponent.vue'
+
 export default {
-  name: 'ForgotPassword',
+  name: 'Verification',
   components: {
-    Footer,
-    Forgot
+    Verify
   }
 }
 </script>
 
-<style>
+<style scoped>
 div.col {
   padding: 0;
 }
 
-.forgot {
+.verify {
   background-image: url('../../assets/img/product/nani-williams-6PpLqUlCA0s-unsplash 1.png');
   color: white;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 180px 0;
+  padding: 22% 0;
 }
 </style>

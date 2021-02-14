@@ -14,6 +14,7 @@ import SignUp from '../views/auth/SignUp.vue'
 import AddPromo from '../views/Promo/AddPromo.vue'
 import EditPromo from '../views/Promo/EditPromo.vue'
 import ForgotPassword from '../views/auth/ForgotPassword.vue'
+import Verify from '../views/auth/Verify.vue'
 // import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
 Vue.use(VueRouter)
@@ -88,10 +89,16 @@ const routes = [
     component: Profile
   },
   {
-    path: '/forgot',
+    path: '/forgot/:keys',
     name: 'Forgot',
     component: ForgotPassword
+  },
+  {
+    path: '/verify/:keys',
+    name: 'Verification',
+    component: Verify
   }
+
   // {
   //   path: '/admin/dashboard',
   //   name: 'Dashboard',
