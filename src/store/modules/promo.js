@@ -12,7 +12,8 @@ export default {
       promo_description: ''
     },
     productPromo: '',
-    cards: []
+    cards: [],
+    coupons: ''
   },
   mutations: {
     setProductThisIdPromo(state, payload) {
@@ -34,6 +35,9 @@ export default {
     setPromoAfterGetPromo(state, payload) {
       state.cards = payload
       console.log(state.cards)
+    },
+    setPromoByIdAfterGetPromo(state, payload) {
+      state.coupons = payload
     }
   },
   actions: {
@@ -87,6 +91,19 @@ export default {
             reject(error)
           })
       })
+    },
+    getPromoByIdVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`http://${process.env.VUE_APP_ROOT_URL}/promo/${payload}`)
+          .then(response => {
+            context.commit('setPromoByIdAfterGetPromo', response.data.data[0])
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
 
@@ -120,6 +137,9 @@ export default {
     },
     getAllCoupons(state) {
       return state.cards
+    },
+    getOneCoupons(state) {
+      return state.coupons
     }
   }
 }

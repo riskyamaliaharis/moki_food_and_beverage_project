@@ -1,8 +1,10 @@
 <template>
   <div>
     <br /><br /><br /><br /><br />
-    <b-button v-b-toggle.sidebar-right>Go To My Cart</b-button>
-    <b-sidebar id="sidebar-right" title="My Cart" right shadow>
+    <button v-b-toggle.sidebar-right class="btn-cart">
+      <span>Go To My Cart</span>
+    </button>
+    <b-sidebar id="sidebar-right" title="My Cart" width="350px" right shadow>
       <ul class="list-group">
         <li class="list-group-item" v-for="item in cart" :key="item.product_id">
           <b-card>
@@ -24,10 +26,27 @@
               </template>
 
               <h6 class="mt-0">{{ item.product_name }}</h6>
-              <p>Price : {{ item.product_price }}</p>
+              <p>Normal Price : {{ item.product_price }}</p>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Size</th>
+                    <th scope="col">Qty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(e, i) in item.mycarts" :key="i">
+                    <td>{{ e.name }}</td>
+                    <td>{{ e.qnt }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </b-media>
           </b-card>
         </li>
+        <h5 v-if="total_price != 0">Total : Rp.{{ total_price }},-</h5>
+        <h1 v-else>NO DATA</h1>
       </ul>
     </b-sidebar>
   </div>
@@ -36,8 +55,45 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  created() {},
   computed: {
-    ...mapGetters({ cart: 'getCart' })
+    ...mapGetters({ cart: 'getCart', total_price: 'totalPrice' })
+  },
+  data() {
+    return {}
   }
 }
 </script>
+
+<style scoped>
+.btn-cart {
+  background-color: rgba(255, 186, 51, 1);
+  border: none;
+  padding: 20px 20px;
+  border-radius: 20px;
+}
+.btn-cart span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-cart span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn-cart:hover span {
+  padding-right: 25px;
+}
+
+.btn-cart:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>

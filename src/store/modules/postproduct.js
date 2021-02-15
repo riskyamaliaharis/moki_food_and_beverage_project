@@ -43,9 +43,6 @@ export default {
       console.log(state.product)
     },
     sendDatatoUpdated(state, payload) {
-      // state.form = payload
-      // console.log('state.form')
-      // console.log(state.form)
       state.form.category_id = payload.up_category_id
       state.form.product_name = payload.up_product_name
       state.form.product_price = payload.up_product_price

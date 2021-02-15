@@ -28,7 +28,7 @@
 
     <label for="input-discount">Discount :</label>
     <div>
-      <b-dropdown id="dropdown-buttons" text="Discount">
+      <b-dropdown class="btn-brown" id="dropdown-buttons" text="Discount">
         <b-dropdown-item-button @click="selectDisc(1)"
           >0%</b-dropdown-item-button
         >
@@ -79,8 +79,6 @@ export default {
   methods: {
     ...mapMutations(['changeLeftData']),
     leftData() {
-      console.log('Yeay masuk left Data ')
-      console.log('left ' + this.form)
       this.changeLeftData(this.form)
     },
     selectDisc(discount) {
@@ -92,10 +90,6 @@ export default {
       else if (discount === 6) this.form.discountId = 9
       else if (discount === 7) this.form.discountId = 11
       else this.form.discountId = 13
-
-      console.log('Discount = ')
-      console.log(this.form.discountId)
-      console.log('Proses masuk left Data ')
       this.leftData()
     }
   }
@@ -114,16 +108,6 @@ label {
 .input-box {
   margin-bottom: 30px;
 }
-
-/* .choose-size {
-  background-color: rgba(106, 64, 41, 1);
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-} */
 
 #checkboxes input[type='checkbox'] {
   display: none;

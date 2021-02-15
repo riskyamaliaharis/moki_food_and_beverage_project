@@ -9,11 +9,11 @@ export default {
     sort: '',
     totalRows: null,
     category_name: '',
-    search: ''
+    search: '',
+    total_price: 0
   },
   mutations: {
     setProduct(state, payload) {
-      //   payload =response.data
       state.products = payload.data
       state.totalRows = payload.pagination.totalData
     },
@@ -41,11 +41,23 @@ export default {
       const addedItem = state.cart.find(
         product => product.product_id === payload.product_id
       )
+      const index = state.cart.findIndex(
+        product => product.product_id === payload.product_id
+      )
       if (addedItem) {
-        addedItem.qty
+        console.log(state.cart)
+        state.cart[index] = payload
       } else {
         state.cart.push({ ...payload, qty: 1 })
       }
+      let subpay = 0
+      for (let i = 0; i <= state.cart.length - 1; i++) {
+        for (let j = 0; j <= state.cart[i].mycarts.length - 1; j++) {
+          subpay = subpay + state.cart[i].mycarts[j].total
+        }
+      }
+      console.log('subpay' + subpay)
+      state.total_price = subpay
     }
   },
   actions: {
@@ -150,6 +162,9 @@ export default {
     },
     getCart(state) {
       return state.cart
+    },
+    totalPrice(state) {
+      return state.total_price
     }
   }
 }

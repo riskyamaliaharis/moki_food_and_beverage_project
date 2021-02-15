@@ -46,7 +46,7 @@
 
     <div class="product-size">
       <label>Input Product Size :</label>
-      <b-row>
+      <b-row align-h="between">
         <b-col cols="1">
           <b-form-checkbox
             button-variant="warning"
@@ -105,19 +105,34 @@
 
     <div class="deliv-method">
       <label class="label-title"> Input Delivery Method</label>
-      <b-row>
+      <b-row align-h="between">
         <b-col cols="3">
-          <b-form-checkbox v-model="checked[0]" name="check-button" button>
+          <b-form-checkbox
+            button-variant="warning"
+            v-model="checked[0]"
+            name="check-button"
+            button
+          >
             <b>Dine In</b>
           </b-form-checkbox>
         </b-col>
-        <b-col cols="4">
-          <b-form-checkbox v-model="checked[1]" name="check-button" button>
+        <b-col cols="5">
+          <b-form-checkbox
+            button-variant="warning"
+            v-model="checked[1]"
+            name="check-button"
+            button
+          >
             <b>Door Delivery</b>
           </b-form-checkbox>
         </b-col>
         <b-col cols="4">
-          <b-form-checkbox v-model="checked[2]" name="check-button" button>
+          <b-form-checkbox
+            button-variant="warning"
+            v-model="checked[2]"
+            name="check-button"
+            button
+          >
             <b>Pick Up</b>
           </b-form-checkbox>
         </b-col>
@@ -246,6 +261,14 @@ export default {
 </script>
 
 <style scoped>
+.btn-group-toggle.d-inline-block {
+  width: auto;
+}
+input {
+  border: none;
+  border-bottom: 2px solid rgba(106, 64, 41, 1);
+  border-radius: 0;
+}
 div {
   width: 450px;
 }

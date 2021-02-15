@@ -13,7 +13,7 @@
           <section>
             <img
               class="img-set rounded-circle"
-              :src="`http://${process.env.VUE_APP_ROOT_URL}/product.image_src`"
+              :src="`http://${url}/${product.image_src}`"
               alt="coldbrew"
             />
             <h2 class="poppins">
@@ -25,7 +25,7 @@
             <div class="button-set">
               <button
                 type="button"
-                @click="addToCart(product)"
+                @click="addToMyCart"
                 class="btn btn-1 rounded btn-md btn-block"
               >
                 Add to Cart
@@ -40,9 +40,10 @@
               <button
                 type="button"
                 class="btn btn-2 rounded btn-md btn-block"
-                v-if="role === 1"
+                v-if="coupons.product_id === product.product_id"
+                @click="applyCoupon"
               >
-                EDIT
+                APPLY COUPON
               </button>
             </div>
           </section>
@@ -65,24 +66,24 @@
               <button
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="generateSize(1)"
-                :disabled="size[0] === true ? false : true"
+                :disabled="product.R == 1 ? false : true"
+                @click="goSize(1)"
               >
                 R
               </button>
               <button
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="generateSize(2)"
-                :disabled="size[1] === true ? false : true"
+                :disabled="product.L == 1 ? false : true"
+                @click="goSize(1.3)"
               >
                 L
               </button>
               <button
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="generateSize(3)"
-                :disabled="size[2] === true ? false : true"
+                :disabled="product.XL == 1 ? false : true"
+                @click="goSize(1.5)"
               >
                 XL
               </button>
@@ -91,26 +92,26 @@
               <button
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="generateSize(4)"
-                :disabled="size[3] === true ? false : true"
+                :disabled="product.gram250 == 1 ? false : true"
+                @click="goSize(1.02)"
               >
-                150
+                250
               </button>
               <button
                 type="button"
                 class="btn btn-sm rounded-circle"
-                @click="generateSize(5)"
-                :disabled="size[4] === true ? false : true"
-              >
-                200
-              </button>
-              <button
-                type="button"
-                class="btn btn-sm rounded-circle"
-                @click="generateSize(6)"
-                :disabled="size[5] === true ? false : true"
+                :disabled="product.gram300 == 1 ? false : true"
+                @click="goSize(1.4)"
               >
                 300
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm rounded-circle"
+                :disabled="product.gram500 == 1 ? false : true"
+                @click="goSize(2)"
+              >
+                500
               </button>
             </div>
           </div>
@@ -119,24 +120,24 @@
             <button
               type="button"
               class="btn "
-              :disabled="checked[0] === true ? false : true"
-              @click="generateDeliv(1)"
+              :disabled="product.dine_in == 1 ? false : true"
+              @click="goDelivMethod('dine_in')"
             >
               Dine In
             </button>
             <button
               type="button"
               class="btn "
-              :disabled="checked[1] === true ? false : true"
-              @click="generateDeliv(2)"
+              :disabled="product.door_delivery == 1 ? false : true"
+              @click="goDelivMethod('door_delivery')"
             >
               Door Delivery
             </button>
             <button
               type="button"
               class="btn "
-              :disabled="checked[3] === true ? false : true"
-              @click="generateDeliv(3)"
+              :disabled="product.pick_up == 1 ? false : true"
+              @click="goDelivMethod('pick_up')"
             >
               Pick Up
             </button>
@@ -165,16 +166,13 @@
             <div class="p-2">
               <img
                 class="img-coldbrew rounded-circle "
-                :src="
-                  `http://${process.env.VUE_APP_ROOT_URL}/product.image_src`
-                "
+                :src="`http://${url}/${product.image_src}`"
                 alt="coldbrew"
               />
             </div>
             <div class="p-1 text-coldbrew ">
               <h6><strong>COLD BREW</strong></h6>
-              <p>x {{ value }} (Large)</p>
-              <p>x {{ value }} (Regular)</p>
+              <p>x {{ value }} {{ save.sizeName }}</p>
             </div>
             <div class="p-2 counter-coldbrew d-flex justify-content-around">
               <button
@@ -208,8 +206,8 @@
         </b-col>
         <!-- END SECOND COLUMN -->
       </b-row>
-      <!-- END SECOND ROW -->
       <AddToCart />
+      <!-- END SECOND ROW -->
     </b-container>
     <Footer />
   </b-container>
@@ -228,30 +226,36 @@ export default {
   },
   data() {
     return {
+      url: process.env.VUE_APP_ROOT_URL,
       product_id: '',
       role: 1,
       value: 0,
-      checked: [false, false, false],
-      size: [false, false, false, false, false, false],
-      sizeType: '',
-      delivMethodType: '',
-      priceBasedOnSize: ''
+      myCarts: [],
+      save: {
+        m: 0,
+        qty: 0,
+        sizeName: '',
+        total: 0
+      },
+      getPromoSale: 0
     }
   },
   created() {
     this.product_id = this.$route.params.id
-    console.log(this.product_id)
     this.getProductsByIdVuex(this.product_id)
-    this.enableDisableSizeDeliv()
+    this.getPromoByIdVuex(this.product_id)
   },
   computed: {
-    ...mapGetters({ product: 'getDataProductUpdated' })
+    ...mapGetters({
+      product: 'getDataProductUpdated',
+      coupons: 'getOneCoupons'
+    })
   },
   methods: {
-    ...mapActions(['getProductsByIdVuex', 'addToCart']),
+    ...mapActions(['getProductsByIdVuex', 'addToCart', 'getPromoByIdVuex']),
     add() {
       this.value = parseInt(this.value) + 1
-      console.log(this.product)
+      this.goSize(this.save.m)
     },
     sub() {
       if (this.value <= 0) {
@@ -259,74 +263,60 @@ export default {
       } else {
         this.value = parseInt(this.value) - 1
       }
+      this.goSize(this.save.m)
     },
-    enableDisableSizeDeliv() {
-      if (this.product.size_id === 1) {
-        this.size = [true, false, false, false, false, false]
-      } else if (this.product.size_id === 2) {
-        this.size = [false, true, false, false, false, false]
-      } else if (this.product.size_id === 3) {
-        this.size = [false, false, true, false, false, false]
-      } else if (this.product.size_id === 4) {
-        this.size = [true, true, false, false, false, false]
-      } else if (this.product.size_id === 5) {
-        this.size = [true, false, true, false, false, false]
-      } else if (this.product.size_id === 6) {
-        this.size = [false, true, true, false, false, false]
-      } else if (this.product.size_id === 7) {
-        this.size = [false, false, false, true, false, false]
-      } else if (this.product.size_id === 8) {
-        this.size = [false, false, false, false, true, false]
-      } else if (this.product.size_id === 9) {
-        this.size = [false, false, false, false, false, true]
-      } else if (this.product.size_id === 10) {
-        this.size = [false, false, false, true, true, false]
-      } else if (this.product.size_id === 11) {
-        this.size = [false, false, false, true, false, true]
-      } else if (this.product.size_id === 12) {
-        this.size = [false, false, false, false, true, true]
-      } else if (this.product.size_id === 13) {
-        this.size = [true, true, true, false, false, false]
-      } else if (this.product.size_id === 14) {
-        this.size = [false, false, false, true, true, true]
-      }
+    addToMyCart() {
+      const merged = { ...this.product, mycarts: this.myCarts }
+      console.log(merged)
+      this.addToCart(merged)
+      this.$bvToast.toast(`Check It By Click "GO TO MY CART"`, {
+        title: 'Your Order has been added to your cart',
+        variant: 'warning',
+        solid: true
+      })
+    },
+    goSize(n) {
+      this.save.m = n
+      if (n == 1) this.save.sizeName = 'Regular'
+      else if (n == 1.3) this.save.sizeName = 'Large'
+      else if (n == 1.5) this.save.sizeName = 'Xtra Large'
+      else if (n == 1.02) {
+        n = 1
+        this.save.sizeName = '250 Gram'
+      } else if (n == 1.4) this.save.sizeName = '300 Gram'
+      else if (n == 2) this.save.sizeName = '500 Gram'
 
-      if (this.product.delivery_method_id === 1) {
-        this.checked = [true, false, false]
-      } else if (this.product.delivery_method_id === 2) {
-        this.checked = [false, true, false]
-      } else if (this.product.delivery_method_id === 3) {
-        this.checked = [false, false, true]
-      } else if (this.product.delivery_method_id === 4) {
-        this.checked = [true, true, false]
-      } else if (this.product.delivery_method_id === 5) {
-        this.checked = [true, false, true]
-      } else if (this.product.delivery_method_id === 6) {
-        this.checked = [false, true, true]
-      } else if (this.product.delivery_method_id === 7) {
-        this.checked = [true, true, true]
+      this.save.qty = this.value
+      this.save.total =
+        this.save.qty * n * this.product.product_price -
+        this.save.qty * n * this.product.product_price * this.getPromoSale
+
+      const setData = {
+        name: this.save.sizeName,
+        mul: this.save.m,
+        qnt: this.save.qty,
+        total: Math.round(this.save.total)
       }
+      if (this.myCarts.length < 1) {
+        this.myCarts.push(setData)
+      } else {
+        const item = this.myCarts.find(el => el.name === setData.name)
+        if (item === undefined) {
+          this.myCarts.push(setData)
+        } else {
+          const index = this.myCarts.findIndex(el => el.name === setData.name)
+          this.myCarts[index] = setData
+        }
+      }
+      console.log(this.myCarts)
     },
-    generateSize(num) {
-      if (num === 1) {
-        this.sizeType = 'R'
-        this.priceBasedOnSize = this.product.product_price
-      } else if (num === 2) {
-        this.sizeType = 'L'
-        this.priceBasedOnSize = 1.3 * this.product.product_price
-      } else if (num === 3) {
-        this.sizeType = 'XL'
-        this.priceBasedOnSize = 1.5 * this.product.product_price
-      } else if (num === 4) {
-        this.sizeType = '250 gr'
-        this.priceBasedOnSize = 1 * this.product.product_price
-      } else if (num === 5) {
-        this.sizeType = '300 gr'
-        this.priceBasedOnSize = 1.2 * this.product.product_price
-      } else if (num === 6) {
-        this.sizeType = '500 gr'
-        this.priceBasedOnSize = 2 * this.product.product_price
-      }
+    applyCoupon() {
+      this.getPromoSale = this.coupons.coupon_discount
+      this.$bvToast.toast(`You got discount ${this.getPromoSale * 100}%`, {
+        title: 'Coupon is applied',
+        variant: 'danger',
+        solid: true
+      })
     }
   }
 }

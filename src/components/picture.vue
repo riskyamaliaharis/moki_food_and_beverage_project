@@ -84,7 +84,7 @@ label.uploadimg {
   height: 50px;
   border-radius: 5px;
   cursor: pointer;
-
+  padding-top: 10px;
 }
 div.centered {
   text-align: center;
