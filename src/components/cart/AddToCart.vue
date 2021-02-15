@@ -46,7 +46,14 @@
           </b-card>
         </li>
         <h5 v-if="total_price != 0">Total : Rp.{{ total_price }},-</h5>
-        <h1 v-else>NO DATA</h1>
+
+        <img
+          width="200px"
+          v-else
+          src="../../assets/img/ariya-empty-cart.png"
+          style="margin-top:60%; margin-left: 90px"
+          alt=""
+        />
       </ul>
     </b-sidebar>
   </div>
