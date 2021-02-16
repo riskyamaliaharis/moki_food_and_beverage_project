@@ -10,7 +10,11 @@ export default {
     totalRows: null,
     category_name: '',
     search: '',
-    total_price: 0
+    tax: 8000,
+    shipping: 10000,
+    total_price: 0,
+    total_pay: 0,
+    myOrderData: ''
   },
   mutations: {
     setProduct(state, payload) {
@@ -37,6 +41,10 @@ export default {
       state.products = payload.data
       state.totalRows = payload.pagination.totalData
     },
+    setTotalPay(state, payload) {
+      console.log('masuk' + state.total_pay)
+      state.total_pay = payload
+    },
     addItemToCart(state, payload) {
       const addedItem = state.cart.find(
         product => product.product_id === payload.product_id
@@ -58,6 +66,11 @@ export default {
       }
       console.log('subpay' + subpay)
       state.total_price = subpay
+    },
+    setOrderCart(state, payload) {
+      console.log(payload)
+      state.myOrderData = payload
+      console.log(state.myOrderData)
     }
   },
   actions: {
@@ -136,6 +149,46 @@ export default {
             reject(error)
           })
       })
+    },
+    postOrderVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        const setData = {
+          order_invoice: payload.invoice,
+          subtotal: context.state.total_pay,
+          user_id: payload.id
+        }
+        axios
+          .post(`http://${process.env.VUE_APP_ROOT_URL}/order`, setData)
+          .then(response => {
+            console.log(response.data.data)
+            context.commit('setOrderCart', response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    postHistoryVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log(context.state.myOrderData)
+        const setData = []
+        for (let k = 0; k < payload.length; k++) {
+          setData.push({
+            ...payload[k],
+            order_id: context.state.myOrderData.order_id
+          })
+        }
+        console.log(setData)
+        axios
+          .post(`http://${process.env.VUE_APP_ROOT_URL}/order/history`, setData)
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {
@@ -165,6 +218,18 @@ export default {
     },
     totalPrice(state) {
       return state.total_price
+    },
+    totalPay(state) {
+      return state.total_pay
+    },
+    orderData(state) {
+      return state.myOrderData
+    },
+    taxs(state) {
+      return state.tax
+    },
+    shippings(state) {
+      return state.shipping
     }
   }
 }

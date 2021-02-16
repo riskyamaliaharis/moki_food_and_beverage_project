@@ -12,13 +12,14 @@
       <div class="d-flex flex-column ">
         <h4 class="p-3">Payment Method</h4>
         <div class="box-payment-method">
-          <div class="p-4 form-check ">
+          <div class="p-4 form-check " aria-required="true">
             <input
               class="form-check-input"
               type="radio"
               name="inlineRadioOptions"
               id="inlineRadio1"
               value="option1"
+              required="required"
             />
             <label class="form-check-label media" for="inlineRadio1">
               <span class="fa fa-credit-card fa-2x mr-3 align-self-top"></span>
@@ -59,10 +60,58 @@
           </div>
         </div>
       </div>
-      <input class="btn btn-primary" type="submit" value="Confirm and Pay  " />
+      <input
+        class="btn btn-primary"
+        type="button"
+        value="Confirm and Pay"
+        @click="wannaOrder"
+      />
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import { alert } from '../../mixins/alert'
+export default {
+  mixins: [alert],
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      cart: 'getCart'
+    })
+  },
+  methods: {
+    ...mapActions(['postOrderVuex', 'postHistoryVuex']),
+    async wannaOrder() {
+      const invoice = 'MOKI-' + Math.round(Math.random() * 9456)
+      await this.postOrderVuex({ invoice, id: this.user.user_id })
+      const mydataorder = []
+      const data = this.cart
+      for (let i = 0; i < data.length; i++) {
+        let mine = {
+          product_id: data[i].product_id,
+          total: 0,
+          qty: 0
+        }
+        for (let j = 0; j < data[i].mycarts.length; j++) {
+          mine.total = mine.total + data[i].mycarts[j].total
+          mine.qty = mine.qty + data[i].mycarts[j].qnt
+        }
+        mydataorder.push(mine)
+      }
+      console.log(mydataorder)
+      await this.postHistoryVuex(mydataorder)
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .box-details {

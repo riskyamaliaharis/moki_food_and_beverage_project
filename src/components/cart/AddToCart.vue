@@ -6,6 +6,11 @@
     </button>
     <b-sidebar id="sidebar-right" title="My Cart" width="350px" right shadow>
       <ul class="list-group">
+        <p style="text-align:left; padding:5px 20px">
+          <b style="color: red">Noted</b> : Normal price just for Regular and
+          250gr size. Other than that, you have to pay more. Thank you. Enjoy
+          your shopping 😊
+        </p>
         <li class="list-group-item" v-for="item in cart" :key="item.product_id">
           <b-card>
             <button

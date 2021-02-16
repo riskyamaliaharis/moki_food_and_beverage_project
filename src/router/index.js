@@ -15,6 +15,7 @@ import AddPromo from '../views/Promo/AddPromo.vue'
 import EditPromo from '../views/Promo/EditPromo.vue'
 import ForgotPassword from '../views/auth/ForgotPassword.vue'
 import Verify from '../views/auth/Verify.vue'
+import PaymentReceipt from '../views/print/PrintReceipt.vue'
 // import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
 Vue.use(VueRouter)
@@ -97,6 +98,11 @@ const routes = [
     path: '/verify/:keys',
     name: 'Verification',
     component: Verify
+  },
+  {
+    path: '/cart/myreceipt',
+    name: 'PaymentReceipt',
+    component: PaymentReceipt
   }
 
   // {

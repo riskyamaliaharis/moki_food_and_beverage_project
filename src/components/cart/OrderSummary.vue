@@ -61,16 +61,18 @@
           </tr>
           <tr>
             <td>TAX & FEES</td>
-            <td class="right">IDR {{ tax }}</td>
+            <td class="right" v-if="total_price">IDR {{ tax }}</td>
+            <td class="right" v-else>IDR 0</td>
           </tr>
           <tr>
             <td>SHIPPING</td>
-            <td class="right">IDR {{ shipping }}</td>
+            <td class="right" v-if="total_price">IDR {{ shipping }}</td>
+            <td class="right" v-else>IDR 0</td>
           </tr>
           <tr>
             <td><strong>TOTAL</strong></td>
             <td class="right">
-              <strong>IDR {{ total_price + (tax + shipping) }}</strong>
+              <strong>IDR {{ totals }}</strong>
             </td>
           </tr>
         </tbody>
@@ -80,16 +82,32 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
-      tax: 8000,
-      shipping: 10000
+      totals: 0
     }
   },
+  created() {
+    if (this.total_price) {
+      this.totals = this.total_price + (this.tax + this.shipping)
+    } else {
+      this.totals = 0
+    }
+    console.log(this.totals)
+    this.setTotalPay(this.totals)
+  },
   computed: {
-    ...mapGetters({ cart: 'getCart', total_price: 'totalPrice' })
+    ...mapGetters({
+      cart: 'getCart',
+      total_price: 'totalPrice',
+      tax: 'taxs',
+      shipping: 'shippings'
+    })
+  },
+  methods: {
+    ...mapMutations(['setTotalPay'])
   }
 }
 </script>
