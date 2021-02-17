@@ -92,11 +92,9 @@ export default {
         axios
           .post(`http://${process.env.VUE_APP_ROOT_URL}/product`, data)
           .then(response => {
-            alert(response.data.msg)
             resolve(response)
           })
           .catch(error => {
-            alert('Failed to post new product ' + error.response.data.msg)
             reject(error.response)
           })
       })

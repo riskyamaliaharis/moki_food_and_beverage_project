@@ -83,7 +83,9 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { alert } from '../../mixins/alert'
 export default {
+  mixins: [alert],
   data() {
     return {
       name: 'AddPromoForm2',
@@ -137,6 +139,12 @@ export default {
       this.inputForm2ToStore(this.form)
       console.log('two')
       this.postPromoVuex()
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
       console.log('vuex')
     }
   }

@@ -86,6 +86,12 @@ export default {
     async wannaOrder() {
       const invoice = 'MOKI-' + Math.round(Math.random() * 9456)
       await this.postOrderVuex({ invoice, id: this.user.user_id })
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
       const mydataorder = []
       const data = this.cart
       for (let i = 0; i < data.length; i++) {
@@ -102,12 +108,6 @@ export default {
       }
       console.log(mydataorder)
       await this.postHistoryVuex(mydataorder)
-        .then(result => {
-          this.successAlert(result.data.msg)
-        })
-        .catch(error => {
-          this.errorAlert(error.data.msg)
-        })
     }
   }
 }

@@ -10,7 +10,7 @@
         >
           <i
             class="fa fa-close 3x"
-            style="position: absolute;  margin-left: 320px; cursor: pointer"
+            style="position: absolute;  margin-left: 300px; cursor: pointer"
           ></i>
           <b-row align-v="center">
             <b-col cols="4">

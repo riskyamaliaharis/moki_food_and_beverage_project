@@ -56,9 +56,19 @@
             class="gotopromo"
             type="button"
             block
+            v-if="coupons.product_id !== product.product_id"
             @click="goToPromo(product.product_id)"
           >
-            Promo
+            Add Promo
+          </button>
+          <button
+            class="gotopromo"
+            type="button"
+            block
+            v-else
+            @click="goToPromo(product.product_id)"
+          >
+            Edit Promo
           </button>
         </b-col>
 
@@ -284,6 +294,7 @@ export default {
     console.log('id ' + this.product_id)
     this.getProductsByIdVuex(this.product_id)
     this.sizeNDelivButtonManipulation()
+    this.getPromoByIdVuex(this.product_id)
   },
 
   computed: {
@@ -299,11 +310,16 @@ export default {
       delivery_start_hour: 'getProductStart',
       delivery_end_hour: 'getProductEnd',
       discount_id: 'getProductDiscount',
-      product: 'getDataProductUpdated'
+      product: 'getDataProductUpdated',
+      coupons: 'getOneCoupons'
     })
   },
   methods: {
-    ...mapActions(['getProductsByIdVuex', 'patchProductVuex']),
+    ...mapActions([
+      'getProductsByIdVuex',
+      'patchProductVuex',
+      'getPromoByIdVuex'
+    ]),
     ...mapMutations(['sendDatatoUpdated']),
     sizeNDelivButtonManipulation() {
       if (this.product.size_id === 1) {

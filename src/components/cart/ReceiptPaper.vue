@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="receipt">
+    <div ref="content" class="receipt">
       <div class="centered">
         <div>
           <h5>MOKI Food & Beverage</h5>
@@ -37,15 +37,41 @@
         </b-col>
       </b-row>
     </div>
+    <div style="text-align:center">
+      <button @click="download">Download</button>
+    </div>
   </div>
 </template>
+
+<script>
+import jsPDF from 'jspdf'
+export default {
+  methods: {
+    download() {
+      var doc = new jsPDF('p', 'pt', 'A4')
+      const margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 522
+      }
+
+      doc.fromHTML(this.$refs.content, margins.left, margins.top, {
+        width: margins.width
+      })
+
+      doc.save('test.pdf')
+    }
+  }
+}
+</script>
+
 <style scoped>
 .receipt {
   width: 300px;
   background: #eee;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 15px 8px;
-  margin-top: 10%;
   box-shadow: 2px 3px #888888;
 }
 .centered {
@@ -53,5 +79,8 @@
 }
 hr.line {
   border-top: 3px dotted black;
+}
+button {
+  border-radius: 5px;
 }
 </style>

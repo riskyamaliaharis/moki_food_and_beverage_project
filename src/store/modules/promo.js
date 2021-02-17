@@ -68,11 +68,9 @@ export default {
             context.state.form
           )
           .then(response => {
-            alert(response.data.msg)
             resolve(response)
           })
           .catch(error => {
-            alert('Failed to post new promo ' + error.response.data.msg)
             reject(error.response)
           })
       })

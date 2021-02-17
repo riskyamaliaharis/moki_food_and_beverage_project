@@ -147,7 +147,9 @@
 
 <script>
 import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { alert } from '../../mixins/alert'
 export default {
+  mixins: [alert],
   computed: {
     ...mapGetters({
       category_id: 'getCategoryId',
@@ -205,6 +207,12 @@ export default {
       this.changeRightData(this.form)
       console.log('empat')
       this.postProductsVuex()
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
       console.log('succeess')
     },
     chooseSizeAndDelivMethod() {

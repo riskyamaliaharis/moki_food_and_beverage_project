@@ -41,6 +41,12 @@
                 type="button"
                 class="btn btn-2 rounded btn-md btn-block"
                 v-if="coupons.product_id === product.product_id"
+                :disabled="
+                  formatTime(coupons.start_coupon) > formatTime(new Date()) ||
+                  formatTime(coupons.start_coupon) < formatTime(new Date())
+                    ? true
+                    : false
+                "
                 @click="applyCoupon"
               >
                 APPLY COUPON
@@ -75,7 +81,7 @@
                 type="button"
                 class="btn btn-sm rounded-circle"
                 :disabled="product.L == 1 ? false : true"
-                @click="goSize(1.3)"
+                @click="goSize(1.19)"
               >
                 L
               </button>
@@ -83,7 +89,7 @@
                 type="button"
                 class="btn btn-sm rounded-circle"
                 :disabled="product.XL == 1 ? false : true"
-                @click="goSize(1.5)"
+                @click="goSize(1.4)"
               >
                 XL
               </button>
@@ -93,7 +99,7 @@
                 type="button"
                 class="btn btn-sm rounded-circle"
                 :disabled="product.gram250 == 1 ? false : true"
-                @click="goSize(1.02)"
+                @click="goSize(1.000001)"
               >
                 250
               </button>
@@ -101,7 +107,7 @@
                 type="button"
                 class="btn btn-sm rounded-circle"
                 :disabled="product.gram300 == 1 ? false : true"
-                @click="goSize(1.4)"
+                @click="goSize(1.1)"
               >
                 300
               </button>
@@ -109,7 +115,7 @@
                 type="button"
                 class="btn btn-sm rounded-circle"
                 :disabled="product.gram500 == 1 ? false : true"
-                @click="goSize(2)"
+                @click="goSize(1.9)"
               >
                 500
               </button>
@@ -218,6 +224,7 @@ import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import AddToCart from '@/components/cart/AddToCart.vue'
 import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
   components: {
     Header,
@@ -265,6 +272,10 @@ export default {
       }
       this.goSize(this.save.m)
     },
+    formatTime(value) {
+      moment.locale('en')
+      return moment(String(value)).format('dddd')
+    },
     addToMyCart() {
       const merged = { ...this.product, mycarts: this.myCarts }
       console.log(merged)
@@ -278,13 +289,13 @@ export default {
     goSize(n) {
       this.save.m = n
       if (n == 1) this.save.sizeName = 'Regular'
-      else if (n == 1.3) this.save.sizeName = 'Large'
-      else if (n == 1.5) this.save.sizeName = 'Xtra Large'
-      else if (n == 1.02) {
+      else if (n == 1.19) this.save.sizeName = 'Large'
+      else if (n == 1.4) this.save.sizeName = 'Xtra Large'
+      else if (n == 1.000001) {
         n = 1
         this.save.sizeName = '250 Gram'
-      } else if (n == 1.4) this.save.sizeName = '300 Gram'
-      else if (n == 2) this.save.sizeName = '500 Gram'
+      } else if (n == 1.1) this.save.sizeName = '300 Gram'
+      else if (n == 1.9) this.save.sizeName = '500 Gram'
 
       this.save.qty = this.value
       this.save.total =

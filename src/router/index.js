@@ -16,7 +16,7 @@ import EditPromo from '../views/Promo/EditPromo.vue'
 import ForgotPassword from '../views/auth/ForgotPassword.vue'
 import Verify from '../views/auth/Verify.vue'
 import PaymentReceipt from '../views/print/PrintReceipt.vue'
-// import Dashboard from '../views/Dashboard.vue'
+import Dashboard from '../views/DashboardShow.vue'
 import store from '../store'
 Vue.use(VueRouter)
 
@@ -25,6 +25,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+    // meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin/dashadmin',
+    name: 'Dashboard',
+    component: Dashboard
     // meta: { requiresAuth: true }
   },
   {
@@ -104,12 +110,6 @@ const routes = [
     name: 'PaymentReceipt',
     component: PaymentReceipt
   }
-
-  // {
-  //   path: '/admin/dashboard',
-  //   name: 'Dashboard',
-  //   component: Dashboard
-  // }
 ]
 
 const router = new VueRouter({
