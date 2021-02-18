@@ -8,11 +8,11 @@
     <b-container>
       <header>
         <b-navbar toggleable="lg" class="header-set">
-          <b-navbar-brand class="satisfy" v-color="brown">Moki</b-navbar-brand>
+          <b-navbar-brand class="satisfy">Moki</b-navbar-brand>
 
           <b-navbar-toggle class="dd" target="nav-collapse"></b-navbar-toggle>
 
-          <b-collapse id="nav-collapse" is-nav>
+          <b-collapse id="nav-collapse" is-nav v-if="isLogin">
             <b-navbar-nav class="menu-nav">
               <b-nav-item
                 ><router-link class="menunav" to="/"
@@ -83,13 +83,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ search: 'getSearchProduct' })
+    ...mapGetters({
+      search: 'getSearchProduct',
+      user: 'setUser',
+      isLogin: 'isLogin'
+    })
   },
   methods: {
     ...mapActions(['logout', 'getProductsSearching']),
     handleLogout() {
       this.logout()
-      alert('Success Logout')
+      this.$router.push('/')
     },
     ...mapMutations(['newSearch']),
     searchData() {

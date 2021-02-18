@@ -42,7 +42,9 @@
               <p>Subtotal : {{ el.total }}</p>
             </b-media>
             <hr class="line" />
-            <h6>TOTAL : {{ item.subtotal }}</h6>
+
+            <h6><b>TOTAL</b> : {{ item.subtotal }}</h6>
+            <p>*total includes tax & shipping</p>
           </div>
         </b-col>
       </b-row>
@@ -58,7 +60,10 @@ export default {
     this.getHistoriesVuex(this.user.user_id)
   },
   computed: {
-    ...mapGetters({ getHistories: 'setMyHistories', user: 'setUser' })
+    ...mapGetters({
+      getHistories: 'setMyHistories',
+      user: 'setUser'
+    })
   },
   methods: {
     ...mapActions(['getHistoriesVuex']),
@@ -86,7 +91,7 @@ hr.line {
   background: white;
   padding: 12px;
   border-radius: 10px 0 10px 0;
-  height: 400px;
+  height: 450px;
   overflow: auto;
   margin-bottom: 20px;
 }

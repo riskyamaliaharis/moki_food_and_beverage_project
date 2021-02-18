@@ -17,12 +17,11 @@
         <b-button class="sign in" to="/login" variant="warning" href="#"
           >Login</b-button
         >
-        <div class="data">
+        <div class="data-long-card">
           <b-row align-h="center">
             <b-col>
               <div class="">
-                <i class="fa fa-user staff fa-2x"></i
-                ><span><b>90+ staff</b></span>
+                <i class="fa fa-user staff fa-2x"></i><span>90+ staff</span>
               </div>
             </b-col>
             <b-col>
@@ -55,15 +54,16 @@ h1.title,
   max-width: 450px;
   color: white;
 }
-.data {
+.data-long-card {
   background-color: white;
   position: absolute;
   bottom: 110px;
-  width: 80%;
+  width: 74%;
   text-align: center;
   padding: 20px;
   box-shadow: 2px 2px 8px 1px rgb(155, 154, 154);
   border-radius: 10px;
+  z-index: 10;
 }
 .staff {
   background-color: rgba(255, 186, 51, 1);

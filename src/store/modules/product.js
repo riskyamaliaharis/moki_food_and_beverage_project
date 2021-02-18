@@ -10,8 +10,8 @@ export default {
     totalRows: null,
     category_name: '',
     search: '',
-    tax: 8000,
-    shipping: 10000,
+    tax: 2000,
+    shipping: 0,
     total_price: 0,
     total_pay: 0,
     myOrderData: ''

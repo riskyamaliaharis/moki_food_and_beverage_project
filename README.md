@@ -1,20 +1,21 @@
-# moki_project
-
-This project is named Moki Food and Beverage. This name is inspired from an adorable kitten called Moki.
-Moki food and beverage application is a web based application which have many features making oredering food and beverage easier
-
-<h1 align='center'>Vue JS - Moki Food And Beverage</h1>
+<h1 align='center'>ExpressJS - MOKI FOOD AND BEVERAGE</h1>
   <p align="center">
-    <a href="link_deploy">View Demo</a>
+    <a href="">View Demo</a>
     ·
-    <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project">Report Bug</a>
+    <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project/issues">Report Bug</a>
     ·
-    <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project">Request Feature</a>
+    <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project/pulls">Request Feature</a>
   </p>
+
+![Image Banner](src/assets/img/moki.png)
 
 ## About The Project
 
-#background_projek.
+Moki Food and Beverage is online foods and beverages ordering application.
+This is a web based application, so that you do not need to download it first.
+You could access the application everywhere and everytime on your browser.
+It would be easier. The Backend of Moki Food an Beverage Project is built using Node JS framework, that is express JS.
+[More about Express](https://en.wikipedia.org/wiki/Express.js)
 
 ## Built With
 
@@ -25,17 +26,27 @@ Moki food and beverage application is a web based application which have many fe
 
 1. <a href="https://nodejs.org/en/download/">Node Js</a>
 2. Node_modules `npm install` or `yarn install`
-3. Backend API Moki Food and Beverage [`here`](https://github.com/riskyamaliaharis/moki_food_and_beverage_project)
+3. Backend API Moki [`here`](https://github.com/riskyamaliaharis/moki_backend)
+
+## Optional
+
+1. <a href="https://documenter.getpostman.com/view/13454431/TVsoGpzz">Postman, for ensure the endpoint is running well</a>
 
 ## Getting Started
 
-1. Download this Project or you can type `git clone #link_git`
+1. Download this Project or you can type `git clone https://github.com/riskyamaliaharis/moki_food_and_beverage_project.git`
 2. Open app's directory in CMD or Terminal
 3. Type `npm install` or `yarn install`
 4. Add .env file at root folder project
 
-```sh
-VUE_APP_ROOT_URL = localhost:3000
+```
+DB_HOST=localhost // Database host
+DB_USER=root // Database Username
+DB_PASS= // Database Password
+DB_NAME=moki_food_beverage // Table Name
+DB_TIMEZONE=UTC // Database Timezone
+port=3000 // Port
+URL_FE =http://localhost:8080/
 ```
 
 5. Type `npm run serve`
@@ -47,4 +58,4 @@ VUE_APP_ROOT_URL = localhost:3000
 
 ## License
 
-© [Risky Amalia Haris](https://github.com/riskyamaliaharis)
+© [Risky Amalia Haris](https://github.com/riskyamaliaharis)<br>

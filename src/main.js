@@ -6,7 +6,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import store from './store'
 import VueSweetalert2 from 'vue-sweetalert2'
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
 
+Vue.use(Chartkick.use(Chart))
 Vue.config.productionTip = false
 
 Vue.use(VueSweetalert2)

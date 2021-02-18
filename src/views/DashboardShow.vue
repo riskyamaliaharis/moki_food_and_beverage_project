@@ -9,7 +9,7 @@
           </b-col>
         </b-row>
 
-        <MainChartShow />
+        <!-- <MainChartShow /> -->
       </b-container>
     </div>
     <Footer />
@@ -19,15 +19,18 @@
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import MainChartShow from '@/components/dashboard/MainChartComponent.vue'
+
+// import MainChartShow from '@/components/dashboard/MainChartComponent.vue'
 import MainInfoShow from '@/components/dashboard/MainInfoComponent.vue'
 export default {
   components: {
     Header,
     Footer,
-    MainChartShow,
+    // MainChartShow,
     MainInfoShow
-  }
+    // 'pie-chart': VueChartkick
+  },
+  mounted() {}
 }
 </script>
 
