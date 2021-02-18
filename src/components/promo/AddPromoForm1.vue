@@ -7,7 +7,7 @@
       v-model="form.promoStartCoupon"
       @change="sendThisForm1"
     ></b-form-datepicker>
-
+    <br />
     <b-form-datepicker
       list="input-list2"
       id="input-with-list2"
@@ -57,9 +57,6 @@ export default {
 }
 </script>
 <style scoped>
-div {
-  width: 300px;
-}
 label {
   color: rgba(106, 64, 41, 1);
   font-weight: 500;

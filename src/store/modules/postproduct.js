@@ -19,7 +19,6 @@ export default {
   },
   mutations: {
     changeRightData(state, payload) {
-      console.log(payload)
       state.form.product_name = payload.name
       state.form.product_price = payload.price
       state.form.product_description = payload.description
@@ -28,7 +27,6 @@ export default {
       state.form.size_id = payload.sizeId
     },
     changeLeftData(state, payload) {
-      console.log(payload)
       state.form.delivery_start_hour = payload.delivStartHour
       state.form.delivery_end_hour = payload.delivEndHour
       state.form.discount_id = payload.discountId
@@ -39,8 +37,6 @@ export default {
     },
     setProductThisId(state, payload) {
       state.product = payload
-      console.log('state.product')
-      console.log(state.product)
     },
     sendDatatoUpdated(state, payload) {
       state.form.category_id = payload.up_category_id
@@ -158,7 +154,6 @@ export default {
             dataUpdate
           )
           .then(response => {
-            alert(response.data.msg)
             console.log(response)
             resolve(response)
           })

@@ -3,21 +3,39 @@
     <div class="box1">
       <img
         class="rounded-circle"
-        src="../../assets/img/product/image 29.png"
+        :src="`http://localhost:3000/${data.image_src}`"
         alt="spaghetti"
       />
-      <h3 class="poppins">Beef Spaghetti</h3>
-      <h3>20% OFF</h3>
+      <h3 class="poppins">{{ data.product_name }}</h3>
+      <h3>{{ data.coupon_discount * 100 }}% OFF</h3>
       <p class="poppins">
-        Buy 1 Choco Oreo and get 20% off for Beef Spaghetti
+        {{ data.product_description }}
       </p>
       <div class="line"></div>
       <p>COUPON CODE</p>
-      <h2>FNPR15RG</h2>
-      <p>Valid untill October 10th 2020</p>
+      <h2>{{ data.coupon_code }}</h2>
+      <p>Valid until {{ formatTime1(data.end_coupon) }}</p>
     </div>
   </div>
 </template>
+
+<script>
+import moment from 'moment'
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      data: 'getproductPromo'
+    })
+  },
+  methods: {
+    formatTime1(value) {
+      moment.locale('en')
+      return moment(String(value)).format('MMM Do YY')
+    }
+  }
+}
+</script>
 
 <style scoped>
 .box1 {

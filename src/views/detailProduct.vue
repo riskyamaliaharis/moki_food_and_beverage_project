@@ -42,10 +42,10 @@
                 class="btn btn-2 rounded btn-md btn-block"
                 v-if="coupons.product_id === product.product_id"
                 :disabled="
-                  formatTime(coupons.start_coupon) > formatTime(new Date()) ||
-                  formatTime(coupons.start_coupon) < formatTime(new Date())
-                    ? true
-                    : false
+                  formatTime(coupons.start_coupon) <= formatTime(new Date()) &&
+                  formatTime(coupons.end_coupon) >= formatTime(new Date())
+                    ? false
+                    : true
                 "
                 @click="applyCoupon"
               >
@@ -274,7 +274,11 @@ export default {
     },
     formatTime(value) {
       moment.locale('en')
-      return moment(String(value)).format('dddd')
+      return moment(String(value)).format('ll')
+    },
+    formatTime1(value) {
+      moment.locale('en')
+      return moment(String(value)).format("MMMM Do, YYYY h:mm:ss a'")
     },
     addToMyCart() {
       const merged = { ...this.product, mycarts: this.myCarts }

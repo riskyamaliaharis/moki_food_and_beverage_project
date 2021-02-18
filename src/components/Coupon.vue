@@ -9,9 +9,34 @@
           :key="i"
         >
           <i
+            v-b-modal="modalId(i)"
             class="fa fa-close 3x"
             style="position: absolute;  margin-left: 300px; cursor: pointer"
           ></i>
+          <b-modal :id="'modal' + i" hide-footer hide-header>
+            <h1 class="text-center">Delete Coupon</h1>
+            <h6 class="my-4 text-center">
+              Are you sure you want to delete this item?
+            </h6>
+            <b-row align-h="end">
+              <b-col cols="3"
+                ><b-button
+                  variant="primary"
+                  block
+                  @click="$bvModal.hide('modal' + i)"
+                  >No</b-button
+                ></b-col
+              >
+              <b-col cols="3"
+                ><b-button
+                  @click="deletePromo(el.promo_id)"
+                  variant="danger"
+                  block
+                  >Yes</b-button
+                ></b-col
+              >
+            </b-row>
+          </b-modal>
           <b-row align-v="center">
             <b-col cols="4">
               <img
@@ -29,6 +54,7 @@
             </b-col>
             <b-col cols="7" class="coupon-info">
               <p class="name">{{ el.product_name.toUpperCase() }}</p>
+              <h6>CODE : {{ el.coupon_code }}</h6>
               <h5>Discount {{ el.coupon_discount * 100 }}%</h5>
               <p>
                 FROM {{ formatTime1(el.start_coupon) }} UNTIL
@@ -46,8 +72,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { alert } from '../mixins/alert'
 import moment from 'moment'
 export default {
+  mixins: [alert],
   data() {
     return {}
   },
@@ -58,21 +86,36 @@ export default {
     ...mapGetters({ cards: 'getAllCoupons' })
   },
   methods: {
-    ...mapActions(['getPromosVuex']),
+    ...mapActions(['getPromosVuex', 'delPromo']),
     formatTime(value) {
       moment.locale('en')
       return moment(String(value))
         .endOf('day')
         .fromNow()
     },
+    modalId(i) {
+      return 'modal' + i
+    },
     formatTime1(value) {
       moment.locale('en')
-      return moment(String(value)).format('MMM Do YY')
+      return moment(String(value)).format('ll')
+    },
+    deletePromo(id) {
+      this.delPromo(id)
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
     }
   }
 }
 </script>
 <style scoped>
+.centered {
+  text-align: center;
+}
 .coupon-info p {
   font-size: 13px;
   margin-bottom: 10px;

@@ -66,7 +66,7 @@
             type="button"
             block
             v-else
-            @click="goToPromo(product.product_id)"
+            @click="goToEditPromo(product.product_id)"
           >
             Edit Promo
           </button>
@@ -260,7 +260,9 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import { mapActions, mapMutations, mapGetters } from 'vuex'
+import { alert } from '../mixins/alert'
 export default {
+  mixins: [alert],
   data() {
     return {
       name: 'editProduct',
@@ -370,7 +372,6 @@ export default {
     },
     selectCategoryProduct(params) {
       this.form.up_category_id = params
-      console.log('category id ' + this.form.up_category_id)
     },
     onFileChange(e) {
       this.form.up_image_src = e.target.files[0]
@@ -392,6 +393,9 @@ export default {
     goToPromo(productid) {
       console.log('ngirim id ' + productid)
       this.$router.push({ name: 'AddPromo', params: { id: productid } })
+    },
+    goToEditPromo(productid) {
+      this.$router.push({ name: 'EditPromo', params: { id: productid } })
     },
     chooseSizeAndDelivMethod() {
       console.log(this.size)
@@ -448,6 +452,12 @@ export default {
       this.sendDatatoUpdated(this.form)
       console.log('tiga')
       this.patchProductVuex(product_id)
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
       console.log('success')
     }
   }

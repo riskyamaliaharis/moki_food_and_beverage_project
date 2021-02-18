@@ -13,7 +13,8 @@ export default {
     },
     productPromo: '',
     cards: [],
-    coupons: ''
+    coupons: '',
+    promos: ''
   },
   mutations: {
     setProductThisIdPromo(state, payload) {
@@ -38,6 +39,9 @@ export default {
     },
     setPromoByIdAfterGetPromo(state, payload) {
       state.coupons = payload
+    },
+    setPromoByIdProduct(state, payload) {
+      state.promos = payload
     }
   },
   actions: {
@@ -102,6 +106,49 @@ export default {
             reject(error.response)
           })
       })
+    },
+    getPromoJoinProductVuex(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            `http://${process.env.VUE_APP_ROOT_URL}/promo/product/${payload}`
+          )
+          .then(response => {
+            context.commit('setPromoByIdProduct', response.data.data[0])
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    updatePromo(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `http://${process.env.VUE_APP_ROOT_URL}/promo/${payload.id}`,
+            payload.data
+          )
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    delPromo(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`http://${process.env.VUE_APP_ROOT_URL}/promo/${payload}`)
+          .then(response => {
+            context.dispatch('getPromosVuex')
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   },
 
@@ -138,6 +185,9 @@ export default {
     },
     getOneCoupons(state) {
       return state.coupons
+    },
+    getproductPromo(state) {
+      return state.promos
     }
   }
 }

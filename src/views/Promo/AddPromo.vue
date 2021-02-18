@@ -2,12 +2,12 @@
   <div>
     <Header />
     <b-container class="addpromo">
-      <b-row align-h="center">
-        <b-col cols="5">
+      <b-row align-h="between">
+        <b-col xl="4" lg="5" md="6" sm="12" cols="12">
           <Coupon />
           <AddPromoForm1 />
         </b-col>
-        <b-col cols="5">
+        <b-col xl="6" lg="7" md="6" sm="12" cols="12">
           <AddPromoForm2 />
         </b-col>
       </b-row>
@@ -34,9 +34,11 @@ export default {
   },
   data() {
     return {
-      ...mapActions(['getProductsByIdVuexPromo']),
       promoProductId: ''
     }
+  },
+  methods: {
+    ...mapActions(['getProductsByIdVuexPromo'])
   },
   created() {
     this.promoProductId = this.$route.params.id

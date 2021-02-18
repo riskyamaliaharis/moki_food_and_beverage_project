@@ -3,26 +3,24 @@
     <label for="input-name" class="name">Name :</label>
     <b-form-input
       class="input-text"
-      v-model="productPromo.product_name"
       id="input-name"
+      v-model="data.product_name"
       readonly="readonly"
-      >{{ productPromo.product_name }}</b-form-input
-    >
+    ></b-form-input>
 
-    <label for="input-pice">Normal Price :</label>
+    <label for="input-pice"></label>
     <b-form-input
       class="input-text"
-      v-model="productPromo.product_price"
       id="input-price"
+      v-model="data.product_price"
       readonly="readonly"
-      >{{ productPromo.product_price }}</b-form-input
-    >
+    ></b-form-input>
 
     <label for="input-desc">Description :</label>
     <b-form-input
       class="input-text"
       id="input-desc"
-      v-model="form.promoDescription"
+      v-model="data.product_description"
     ></b-form-input>
 
     <label>Input Product Size :</label>
@@ -82,67 +80,51 @@
       <b-dropdown-item @click="addDiscountPromo(6)">70%</b-dropdown-item>
     </b-dropdown>
 
-    <button class="save-button mt-4" @click="addPromoToStore">Save</button>
+    <button class="save-button mt-4" @click="editPromo">Save</button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { alert } from '../../mixins/alert'
 export default {
   mixins: [alert],
   data() {
     return {
-      name: 'AddPromoForm2',
-      form: {
-        promoCouponDiscount: '',
-        promoSize: '',
-        promoDelivMethod: '',
-        promoDescription: '',
-        promoProductId: ''
-      }
+      name: 'AddPromoForm2'
     }
   },
 
   computed: {
-    ...mapGetters({ productPromo: 'getDataProductUpdatedPromo' })
-  },
-  created() {
-    this.form.promoProductId = this.productPromo.product_id
+    ...mapGetters({ data: 'getproductPromo' })
   },
   methods: {
-    ...mapMutations(['inputForm2ToStore']),
-    ...mapActions(['postPromoVuex']),
+    ...mapActions(['updatePromo']),
     addDiscountPromo(num) {
-      if (num === 1) this.form.promoCouponDiscount = 0.15
-      else if (num === 2) this.form.promoCouponDiscount = 0.2
-      else if (num === 3) this.form.promoCouponDiscount = 0.3
-      else if (num === 4) this.form.promoCouponDiscount = 0.4
-      else if (num === 5) this.form.promoCouponDiscount = 0.5
-      else this.form.promoCouponDiscount = 0.7
-      console.log('promo ' + this.form.promoCouponDiscount)
+      if (num === 1) this.data.coupon_discount = 0.15
+      else if (num === 2) this.data.coupon_discount = 0.2
+      else if (num === 3) this.data.coupon_discount = 0.3
+      else if (num === 4) this.data.coupon_discount = 0.4
+      else if (num === 5) this.data.coupon_discount = 0.5
+      else this.data.coupon_discount = 0.7
     },
     generateThisSize(num) {
-      if (num === 1) this.form.promoSize = 1
-      else if (num === 2) this.form.promoSize = 1.35
-      else if (num === 3) this.form.promoSize = 1.7
-      else if (num === 4) this.form.promoSize = 1
-      else if (num === 5) this.form.promoSize = 1.4
-      else if (num === 6) this.form.promoSize = 1.72
-      console.log('Size ' + this.form.promoSize)
+      if (num === 1) this.data.promo_size = 1
+      else if (num === 2) this.data.promo_size = 1.35
+      else if (num === 3) this.data.promo_size = 1.7
+      else if (num === 4) this.data.promo_size = 1
+      else if (num === 5) this.data.promo_size = 1.4
+      else if (num === 6) this.data.promo_size = 1.72
+      console.log('Size ' + this.data.promo_size)
     },
     generateThisDelivMethod(num) {
-      if (num === 1) this.form.promoDelivMethod = 1
-      else if (num === 2) this.form.promoDelivMethod = 2
-      else if (num === 3) this.form.promoDelivMethod = 3
-      console.log('Deliv ' + this.form.promoDelivMethod)
+      if (num === 1) this.data.promo_deliv_method = 1
+      else if (num === 2) this.data.promo_deliv_method = 2
+      else if (num === 3) this.data.promo_deliv_method = 3
+      console.log('Deliv ' + this.data.promo_deliv_method)
     },
-    addPromoToStore() {
-      console.log('one')
-      console.log(this.form)
-      this.inputForm2ToStore(this.form)
-      console.log('two')
-      this.postPromoVuex()
+    editPromo() {
+      this.updatePromo({ id: this.data.promo_id, data: this.data })
         .then(result => {
           this.successAlert(result.data.msg)
         })
