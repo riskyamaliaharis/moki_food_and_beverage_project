@@ -1,13 +1,13 @@
 <h1 align='center'>ExpressJS - MOKI FOOD AND BEVERAGE</h1>
   <p align="center">
-    <a href="">View Demo</a>
+    <a href="https://mokifoodbeverage.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project/issues">Report Bug</a>
     ·
     <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project/pulls">Request Feature</a>
   </p>
 
-![Image Banner](src/assets/img/moki.png)
+![Image Banner](src/assets/img/moki.PNG)
 
 ## About The Project
 
@@ -40,13 +40,7 @@ It would be easier. The Backend of Moki Food an Beverage Project is built using 
 4. Add .env file at root folder project
 
 ```
-DB_HOST=localhost // Database host
-DB_USER=root // Database Username
-DB_PASS= // Database Password
-DB_NAME=moki_food_beverage // Table Name
-DB_TIMEZONE=UTC // Database Timezone
-port=3000 // Port
-URL_FE =http://localhost:8080/
+VUE_APP_ROOT_URL = localhost:3000
 ```
 
 5. Type `npm run serve`

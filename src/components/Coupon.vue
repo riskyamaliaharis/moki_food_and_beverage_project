@@ -143,6 +143,7 @@ div.show-card-promo {
 }
 
 .card {
+  /* height: 125px; */
   margin-bottom: 20px;
   padding: 10px 15px;
   border-radius: 10px;

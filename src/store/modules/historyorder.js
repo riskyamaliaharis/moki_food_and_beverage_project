@@ -1,13 +1,15 @@
 import axios from 'axios'
 export default {
   state: {
-    getHistories: []
+    getHistories: [],
+    getAllHistories: []
   },
   mutations: {
     setHistories(state, payload) {
-      console.log(payload)
       state.getHistories = payload.data
-      console.log(state.getHistories)
+    },
+    setAllHistories(state, payload) {
+      state.getAllHistories = payload.data
     }
   },
   actions: {
@@ -37,11 +39,27 @@ export default {
             reject(error)
           })
       })
+    },
+    getAllHistoriesVuex(context) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get('http://${process.env.VUE_APP_ROOT_URL}/order/data/history/all')
+          .then(response => {
+            context.commit('setAllHistories', response.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {
     setMyHistories(state) {
       return state.getHistories
+    },
+    setAllHistories(state) {
+      return state.getAllHistories
     }
   }
 }

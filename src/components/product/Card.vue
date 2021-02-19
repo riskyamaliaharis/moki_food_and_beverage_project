@@ -38,7 +38,7 @@
                   v-b-modal="modalId(index)"
                   v-if="user_role === 1"
                 >
-                  <b-modal :id="'modal' + index" hide-footer hide-header>
+                  <b-modal :id="'modal' + index" hide-footer>
                     <h1 class="text-center">Delete Coupon</h1>
                     <h6 class="my-4 text-center">
                       Are you sure you want to delete this item?
