@@ -63,7 +63,7 @@ h1.title,
   padding: 20px;
   box-shadow: 2px 2px 8px 1px rgb(155, 154, 154);
   border-radius: 10px;
-  z-index: 10;
+  z-index: 8;
 }
 .staff {
   background-color: rgba(255, 186, 51, 1);
@@ -74,6 +74,10 @@ h1.title,
   color: white;
   border-radius: 50%;
   margin-right: 10px;
+}
+.fa-heart,
+.fa-map-marker {
+  padding-top: 11px;
 }
 .sign {
   margin-right: 20px;
