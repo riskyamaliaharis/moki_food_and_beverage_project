@@ -28,9 +28,13 @@ import Navbar from '@/components/Navbar.vue'
 import Coupon from '@/components/Coupon.vue'
 import Card from '@/components/product/Card.vue'
 import Sorting from '@/components/Sorting.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Product',
+  created() {
+    this.getProfileVuex(this.user.user_id)
+  },
   components: {
     Header,
     Footer,
@@ -38,6 +42,12 @@ export default {
     Coupon,
     Card,
     Sorting
+  },
+  computed: {
+    ...mapGetters({ user: 'setUser' })
+  },
+  methods: {
+    ...mapActions(['getProfileVuex'])
   }
 }
 </script>
