@@ -42,7 +42,6 @@ export default {
   },
   created() {
     this.promoProductId = this.$route.params.id
-    console.log('id ' + this.promoProductId)
     this.getProductsByIdVuexPromo(this.promoProductId)
   }
 }

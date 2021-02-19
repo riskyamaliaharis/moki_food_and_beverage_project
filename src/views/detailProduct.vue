@@ -6,9 +6,7 @@
       <b-breadcrumb-item active>{{ product.product_name }}</b-breadcrumb-item>
     </b-breadcrumb>
     <b-container class="detail-page">
-      <!-- START FIRST ROW -->
       <b-row>
-        <!-- START FIRST COLUMN -->
         <b-col>
           <section>
             <img
@@ -54,9 +52,7 @@
             </div>
           </section>
         </b-col>
-        <!-- END FIRST COLUMN -->
 
-        <!-- START SECOND COLUMN -->
         <b-col>
           <div class="card-coldbrew2">
             <p>
@@ -158,13 +154,9 @@
             />
           </div>
         </b-col>
-        <!-- END SECOND COLUMN -->
       </b-row>
-      <!-- END FIRST ROW -->
 
-      <!-- START SECOND ROW -->
       <b-row>
-        <!-- START FIRST COLUMN -->
         <b-col lg="6" md="12">
           <div
             class="card-coldbrew4 d-inline-flex flex-row align-items-center justify-content-around flex-wrap"
@@ -202,18 +194,14 @@
             </div>
           </div>
         </b-col>
-        <!-- END FIRST COLUMN -->
 
-        <!-- START SECOND COLUMN -->
         <b-col lg="6" md="12">
           <div class="card-coldbrew5 poppins">
             <input type="button" class="btn" value="CHECKOUT" />
           </div>
         </b-col>
-        <!-- END SECOND COLUMN -->
       </b-row>
       <AddToCart />
-      <!-- END SECOND ROW -->
     </b-container>
     <Footer />
   </b-container>
@@ -462,6 +450,8 @@ section {
 
 .img-coldbrew {
   width: 50px;
+  height: 50px;
+  object-fit: cover;
   align-self: center;
 }
 

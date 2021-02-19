@@ -97,7 +97,8 @@ export default {
 </script>
 <style scoped>
 div {
-  width: 350px;
+  /* width: 350px; */
+  width: 100%;
   padding-top: 0;
 }
 label {

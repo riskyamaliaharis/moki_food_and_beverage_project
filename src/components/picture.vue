@@ -64,7 +64,8 @@ div.picture {
   text-align: center;
   border-radius: 10px;
   box-shadow: black;
-  width: 80%;
+  width: 300px;
+  margin: 0 auto;
   height: 400px;
   background-color: rgba(255, 186, 51, 1);
   padding-top: 80px;

@@ -2,12 +2,12 @@
   <div>
     <Header />
     <b-container class="addproduct">
-      <b-row align-h="center">
-        <b-col cols="5">
+      <b-row align-h="between">
+        <b-col xl="5" lg="5" md="4" sm="10" cols="12">
           <Picture />
           <Left />
         </b-col>
-        <b-col cols="5">
+        <b-col xl="5" lg="5" md="6" sm="10" cols="12">
           <Right />
         </b-col>
       </b-row>

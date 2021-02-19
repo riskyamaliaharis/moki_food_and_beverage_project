@@ -6,17 +6,19 @@
     />
     <Header />
     <b-container class="bv-example-row">
-      <b-row>
-        <b-col xl="5" offset-xl="1" lg="5" offset-lg="1">
-          <div class="left">
-            <p class="checkout-item">Checkout your item now!</p>
-            <OrderSummary />
-          </div>
-        </b-col>
-        <b-col xl="5" lg="5">
-          <div class="right"><AddressAndPayment /></div>
-        </b-col>
-      </b-row>
+      <div>
+        <b-row align-h="start">
+          <b-col xl="5" lg="5">
+            <div class="left">
+              <p class="checkout-item">Checkout your item now!</p>
+              <OrderSummary />
+            </div>
+          </b-col>
+          <b-col xl="6" lg="5">
+            <div class="right"><AddressAndPayment /></div>
+          </b-col>
+        </b-row>
+      </div>
     </b-container>
     <Footer />
   </div>

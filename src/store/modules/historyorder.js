@@ -25,6 +25,18 @@ export default {
             reject(error.response)
           })
       })
+    },
+    delHistory(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`http://${process.env.VUE_APP_ROOT_URL}/order/${payload}`)
+          .then(response => {
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
     }
   },
   getters: {

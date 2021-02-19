@@ -10,7 +10,11 @@
         <b-navbar toggleable="lg" class="header-set">
           <b-navbar-brand class="satisfy">Moki</b-navbar-brand>
 
-          <b-navbar-toggle class="dd" target="nav-collapse"></b-navbar-toggle>
+          <b-navbar-toggle
+            class="dd"
+            target="nav-collapse"
+            v-if="isLogin"
+          ></b-navbar-toggle>
 
           <b-collapse id="nav-collapse" is-nav v-if="isLogin">
             <b-navbar-nav class="menu-nav">
@@ -57,8 +61,9 @@
               <b-nav-item-dropdown right class="my-2">
                 <template #button-content>
                   <img
+                    style="width:40px;height:40px"
                     class="profile_img"
-                    src="../assets/img/image 39.png"
+                    :src="`http://${url}/user/${profile.user_photo}`"
                     alt="Kitten"
                   />
                 </template>
@@ -79,14 +84,16 @@ export default {
   name: 'Header',
   data() {
     return {
-      inputSearch: ''
+      inputSearch: '',
+      url: process.env.VUE_APP_ROOT_URL
     }
   },
   computed: {
     ...mapGetters({
       search: 'getSearchProduct',
       user: 'setUser',
-      isLogin: 'isLogin'
+      isLogin: 'isLogin',
+      profile: 'myProfile'
     })
   },
   methods: {
@@ -97,7 +104,6 @@ export default {
     },
     ...mapMutations(['newSearch']),
     searchData() {
-      console.log(this.inputSearch)
       this.newSearch(this.inputSearch)
       this.getProductsSearching()
     }

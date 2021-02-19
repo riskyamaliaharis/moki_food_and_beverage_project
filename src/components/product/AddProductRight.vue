@@ -277,8 +277,11 @@ input {
   border-bottom: 2px solid rgba(106, 64, 41, 1);
   border-radius: 0;
 }
-div {
+/* div {
   width: 450px;
+} */
+div {
+  width: 100%;
 }
 
 div .name {

@@ -8,11 +8,7 @@
           v-for="(el, i) in cards"
           :key="i"
         >
-          <i
-            v-b-modal="modalId(i)"
-            class="fa fa-close 3x"
-            style="position: absolute;  margin-left: 300px; cursor: pointer"
-          ></i>
+          <i v-b-modal="modalId(i)" class="fa fa-close 3x delete"></i>
           <b-modal :id="'modal' + i" hide-footer hide-header>
             <h1 class="text-center">Delete Coupon</h1>
             <h6 class="my-4 text-center">
@@ -116,6 +112,11 @@ export default {
 .centered {
   text-align: center;
 }
+.delete {
+  position: absolute;
+  margin-left: 300px;
+  cursor: pointer;
+}
 .coupon-info p {
   font-size: 13px;
   margin-bottom: 10px;
@@ -142,7 +143,6 @@ div.show-card-promo {
 }
 
 .card {
-  /* height: 125px; */
   margin-bottom: 20px;
   padding: 10px 15px;
   border-radius: 10px;
@@ -160,5 +160,23 @@ div.show-card-promo {
   height: 90px;
   object-fit: cover;
   border-radius: 30px;
+}
+
+@media only screen and (max-width: 394px) {
+  .delete {
+    margin-left: 270px;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .delete {
+    margin-left: 260px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .delete {
+    margin-left: 250px;
+  }
 }
 </style>

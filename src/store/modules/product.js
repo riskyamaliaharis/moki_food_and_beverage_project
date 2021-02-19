@@ -139,14 +139,11 @@ export default {
         axios
           .delete(`http://${process.env.VUE_APP_ROOT_URL}/product/${payload}`)
           .then(response => {
-            console.log(context.limit)
-            alert(response.data.msg)
             context.dispatch('getProducts')
             resolve(response)
           })
           .catch(error => {
-            alert('Failed to delete this product ' + error.response.data.msg)
-            reject(error)
+            reject(error.response)
           })
       })
     },

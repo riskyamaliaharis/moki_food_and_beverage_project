@@ -35,9 +35,33 @@
                 <b-button
                   type="button"
                   class="btn a rounded-circle act"
-                  @click="deleteProduct(item.product_id)"
+                  v-b-modal="modalId(index)"
                   v-if="user_role === 1"
                 >
+                  <b-modal :id="'modal' + index" hide-footer hide-header>
+                    <h1 class="text-center">Delete Coupon</h1>
+                    <h6 class="my-4 text-center">
+                      Are you sure you want to delete this item?
+                    </h6>
+                    <b-row align-h="end">
+                      <b-col cols="3"
+                        ><b-button
+                          variant="primary"
+                          block
+                          @click="$bvModal.hide('modal' + index)"
+                          >No</b-button
+                        ></b-col
+                      >
+                      <b-col cols="3"
+                        ><b-button
+                          @click="deleteProduct(item.product_id)"
+                          variant="danger"
+                          block
+                          >Yes</b-button
+                        ></b-col
+                      >
+                    </b-row>
+                  </b-modal>
                   <i class="fa fa-trash "></i>
                 </b-button>
                 <b-button
@@ -69,8 +93,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-
+import { alert } from '../../mixins/alert'
 export default {
+  mixins: [alert],
   computed: {
     ...mapGetters({
       products: 'getDataProduct',
@@ -110,27 +135,32 @@ export default {
     ...mapMutations(['changePage']),
 
     setProduct(data) {
-      console.log(data)
       this.form = data
       this.product_id = data.product_id
     },
     patchProduct(product_id) {
-      console.log(this.product_id)
-      console.log(this.form)
       this.$router.push({ name: 'editProduct', params: { id: product_id } })
     },
     deleteProduct(product_id) {
       this.deleteProducts(product_id)
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
       this.getProducts()
     },
     handlePageChange(numberPage) {
-      console.log(numberPage)
       this.changePage(numberPage)
       this.getProducts()
     },
     detailProduct(product_id) {
       console.log(product_id)
       this.$router.push({ name: 'detailProduct', params: { id: product_id } })
+    },
+    modalId(index) {
+      return 'modal' + index
     }
   }
 }

@@ -106,7 +106,6 @@ export default {
         }
         mydataorder.push(mine)
       }
-      console.log(mydataorder)
       await this.postHistoryVuex(mydataorder)
     }
   }

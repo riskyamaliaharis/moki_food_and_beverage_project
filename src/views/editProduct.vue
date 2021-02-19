@@ -293,7 +293,6 @@ export default {
   },
   created() {
     this.product_id = this.$route.params.id
-    console.log('id ' + this.product_id)
     this.getProductsByIdVuex(this.product_id)
     this.sizeNDelivButtonManipulation()
     this.getPromoByIdVuex(this.product_id)
@@ -376,7 +375,6 @@ export default {
     onFileChange(e) {
       this.form.up_image_src = e.target.files[0]
       var files = e.target.files || e.dataTransfer.files
-      console.log(files)
       if (!files.length) return
       this.createImage(files[0])
     },
@@ -391,14 +389,12 @@ export default {
       this.image = false
     },
     goToPromo(productid) {
-      console.log('ngirim id ' + productid)
       this.$router.push({ name: 'AddPromo', params: { id: productid } })
     },
     goToEditPromo(productid) {
       this.$router.push({ name: 'EditPromo', params: { id: productid } })
     },
     chooseSizeAndDelivMethod() {
-      console.log(this.size)
       if (this.size[3] == true && this.size[4] == true && this.size[5] == true)
         this.form.up_size_id = 14
       else if (
@@ -425,8 +421,7 @@ export default {
       else if (this.size[2] == true) this.form.up_size_id = 3
       else if (this.size[1] == true) this.form.up_size_id = 2
       else if (this.size[0] == true) this.form.up_size_id = 1
-      else console.log('choice is not available')
-      console.log('size ' + this.form.up_size_id)
+
       if (
         this.checked[0] == true &&
         this.checked[1] == true &&
@@ -442,15 +437,12 @@ export default {
       else if (this.checked[2] == true) this.form.up_delivery_method_id = 3
       else if (this.checked[1] == true) this.form.up_delivery_method_id = 2
       else if (this.checked[0] == true) this.form.up_delivery_method_id = 1
-      else console.log('choice is not available')
-      console.log(this.form.up_delivery_method_id)
     },
     patchProduct(product_id) {
-      console.log('satu')
       this.chooseSizeAndDelivMethod()
-      console.log('dua')
+
       this.sendDatatoUpdated(this.form)
-      console.log('tiga')
+
       this.patchProductVuex(product_id)
         .then(result => {
           this.successAlert(result.data.msg)
@@ -458,7 +450,6 @@ export default {
         .catch(error => {
           this.errorAlert(error.data.msg)
         })
-      console.log('success')
     }
   }
 }
