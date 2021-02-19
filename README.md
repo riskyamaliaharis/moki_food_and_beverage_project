@@ -7,7 +7,7 @@
     <a href="https://github.com/riskyamaliaharis/moki_food_and_beverage_project/pulls">Request Feature</a>
   </p>
 
-![Image Banner](src/assets/img/moki.PNG)
+![Image Banner](src/assets/img/moki.jpg)
 
 ## About The Project
 
