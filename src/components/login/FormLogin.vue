@@ -130,15 +130,12 @@ export default {
   methods: {
     ...mapActions(['login', 'sendEmailForgot']),
     onSubmit() {
-      console.log(this.form)
       this.login(this.form)
         .then(result => {
-          console.log(result)
           this.successAlert(result.data.msg)
           this.$router.push('/product')
         })
         .catch(error => {
-          console.log(error)
           this.errorAlert(error.data.msg)
         })
     },
@@ -152,12 +149,10 @@ export default {
       const email = this.emailForgot
       this.sendEmailForgot({ email })
         .then(result => {
-          console.log(result)
           this.successAlert(result.data.msg)
           this.emailForgot = ''
         })
         .catch(error => {
-          console.log(error)
           this.errorAlert(error.data.msg)
         })
     }

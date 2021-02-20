@@ -184,28 +184,21 @@ export default {
     ...mapActions(['postProductsVuex']),
     selectCategory1() {
       this.form.category = 1
-      console.log(this.form.category)
     },
     selectCategory2() {
       this.form.category = 2
-      console.log(this.form.category)
     },
     selectCategory3() {
       this.form.category = 3
-      console.log(this.form.category)
     },
     selectCategory4() {
       this.form.category = 4
-      console.log(this.form.category)
     },
     rightData() {
-      console.log('satu')
       this.chooseSizeAndDelivMethod()
-      console.log('dua')
-      console.log(this.form)
-      console.log('tiga')
+
       this.changeRightData(this.form)
-      console.log('empat')
+
       this.postProductsVuex()
         .then(result => {
           this.successAlert(result.data.msg)
@@ -213,10 +206,8 @@ export default {
         .catch(error => {
           this.errorAlert(error.data.msg)
         })
-      console.log('succeess')
     },
     chooseSizeAndDelivMethod() {
-      console.log(this.size)
       if (this.size[3] == true && this.size[4] == true && this.size[5] == true)
         this.form.sizeId = 14
       else if (
@@ -243,8 +234,6 @@ export default {
       else if (this.size[2] == true) this.form.sizeId = 3
       else if (this.size[1] == true) this.form.sizeId = 2
       else if (this.size[0] == true) this.form.sizeId = 1
-      else console.log('choice is not available')
-      console.log('size ' + this.form.sizeId)
 
       if (
         this.checked[0] == true &&
@@ -261,8 +250,6 @@ export default {
       else if (this.checked[2] == true) this.form.delivMethod = 3
       else if (this.checked[1] == true) this.form.delivMethod = 2
       else if (this.checked[0] == true) this.form.delivMethod = 1
-      else console.log('choice is not available')
-      console.log(this.form.delivMethod)
     }
   }
 }
@@ -277,9 +264,7 @@ input {
   border-bottom: 2px solid rgba(106, 64, 41, 1);
   border-radius: 0;
 }
-/* div {
-  width: 450px;
-} */
+
 div {
   width: 100%;
 }

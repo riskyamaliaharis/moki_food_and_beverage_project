@@ -270,7 +270,7 @@ export default {
     },
     addToMyCart() {
       const merged = { ...this.product, mycarts: this.myCarts }
-      console.log(merged)
+
       this.addToCart(merged)
       this.$bvToast.toast(`Check It By Click "GO TO MY CART"`, {
         title: 'Your Order has been added to your cart',
@@ -311,7 +311,6 @@ export default {
           this.myCarts[index] = setData
         }
       }
-      console.log(this.myCarts)
     },
     applyCoupon() {
       this.getPromoSale = this.coupons.coupon_discount

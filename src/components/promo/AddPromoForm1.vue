@@ -48,10 +48,7 @@ export default {
   methods: {
     ...mapMutations(['changeForm1']),
     sendThisForm1() {
-      console.log('masuk')
-      console.log(this.form)
       this.changeForm1(this.form)
-      console.log('success send form 1')
     }
   }
 }

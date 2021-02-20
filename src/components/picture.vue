@@ -41,7 +41,6 @@ export default {
       this.imgSrc = e.target.files[0]
       this.changeImage(this.imgSrc)
       var files = e.target.files || e.dataTransfer.files
-      console.log(files)
       if (!files.length) return
       this.createImage(files[0])
     },

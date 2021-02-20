@@ -156,7 +156,6 @@ export default {
       this.getProducts()
     },
     detailProduct(product_id) {
-      console.log(product_id)
       this.$router.push({ name: 'detailProduct', params: { id: product_id } })
     },
     thisModal(index) {

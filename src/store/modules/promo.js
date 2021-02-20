@@ -20,7 +20,6 @@ export default {
     setProductThisIdPromo(state, payload) {
       state.productPromo = payload
       state.form.product_id = payload.product_id
-      console.log('id di store ' + state.form.product_id)
     },
     inputForm2ToStore(state, payload) {
       state.form.coupon_discount = payload.promoCouponDiscount
@@ -35,7 +34,6 @@ export default {
     },
     setPromoAfterGetPromo(state, payload) {
       state.cards = payload
-      console.log(state.cards)
     },
     setPromoByIdAfterGetPromo(state, payload) {
       state.coupons = payload
@@ -47,8 +45,6 @@ export default {
   actions: {
     getProductsByIdVuexPromo(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log('Get Data Id process ... ')
-        console.log('payload ' + payload)
         axios
           .get(
             `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
@@ -65,7 +61,6 @@ export default {
     },
     postPromoVuex(context) {
       return new Promise((resolve, reject) => {
-        console.log('masuk post promo')
         axios
           .post(
             `http://${process.env.VUE_APP_ROOT_URL}/promo`,
@@ -85,7 +80,6 @@ export default {
         axios
           .get(`http://${process.env.VUE_APP_ROOT_URL}/promo`)
           .then(response => {
-            console.log(response.data.data)
             context.commit('setPromoAfterGetPromo', response.data.data)
             resolve(response)
           })

@@ -31,9 +31,8 @@ export default {
     ...mapMutations(['changeSort']),
     ...mapActions(['getProducts']),
     async sortBy(sort) {
-      console.log('before sort ' + sort)
       await this.changeSort(sort)
-      console.log('after sort ' + sort)
+
       await this.getProducts()
     }
   }

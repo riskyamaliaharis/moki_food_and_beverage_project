@@ -9,9 +9,6 @@ export default {
     setUser(state, payload) {
       state.user = payload
       state.token = payload.token
-      console.log('Proses Mutation setUser')
-      console.log(state.user)
-      console.log(state.token)
     },
     delUser(state) {
       state.user = {}
@@ -64,7 +61,6 @@ export default {
     },
     sendEmailForgot(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log('payload' + payload)
         axios
           .post(`http://${process.env.VUE_APP_ROOT_URL}/user/forgot`, payload)
           .then(result => {

@@ -42,7 +42,6 @@ export default {
       state.totalRows = payload.pagination.totalData
     },
     setTotalPay(state, payload) {
-      console.log('masuk' + state.total_pay)
       state.total_pay = payload
     },
     addItemToCart(state, payload) {
@@ -53,7 +52,6 @@ export default {
         product => product.product_id === payload.product_id
       )
       if (addedItem) {
-        console.log(state.cart)
         state.cart[index] = payload
       } else {
         state.cart.push({ ...payload, qty: 1 })
@@ -64,13 +62,11 @@ export default {
           subpay = subpay + state.cart[i].mycarts[j].total
         }
       }
-      console.log('subpay' + subpay)
+
       state.total_price = subpay
     },
     setOrderCart(state, payload) {
-      console.log(payload)
       state.myOrderData = payload
-      console.log(state.myOrderData)
     }
   },
   actions: {
@@ -111,7 +107,6 @@ export default {
             resolve(response)
           })
           .catch(error => {
-            console.log(error.response)
             reject(error)
           })
       })
@@ -157,7 +152,6 @@ export default {
         axios
           .post(`http://${process.env.VUE_APP_ROOT_URL}/order`, setData)
           .then(response => {
-            console.log(response.data.data)
             context.commit('setOrderCart', response.data.data)
             resolve(response)
           })
@@ -168,7 +162,6 @@ export default {
     },
     postHistoryVuex(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log(context.state.myOrderData)
         const setData = []
         for (let k = 0; k < payload.length; k++) {
           setData.push({
@@ -176,7 +169,7 @@ export default {
             order_id: context.state.myOrderData.order_id
           })
         }
-        console.log(setData)
+
         axios
           .post(`http://${process.env.VUE_APP_ROOT_URL}/order/history`, setData)
           .then(response => {

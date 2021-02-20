@@ -124,7 +124,6 @@ export default {
     onFileChange(e) {
       this.pict = e.target.files[0]
       var files = e.target.files || e.dataTransfer.files
-      console.log(files)
       if (!files.length) return
       this.createImage(files[0])
     },

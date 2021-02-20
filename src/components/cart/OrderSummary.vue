@@ -95,7 +95,6 @@ export default {
     } else {
       this.totals = 0
     }
-    console.log(this.totals)
     this.setTotalPay(this.totals)
   },
   computed: {

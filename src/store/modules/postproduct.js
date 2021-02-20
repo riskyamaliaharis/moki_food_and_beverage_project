@@ -55,7 +55,6 @@ export default {
   actions: {
     postProductsVuex(context) {
       return new Promise((resolve, reject) => {
-        console.log('masuk')
         const {
           product_name,
           category_id,
@@ -69,7 +68,7 @@ export default {
           delivery_end_hour,
           discount_id
         } = context.state.form
-        console.log('product_name ' + product_name)
+
         const data = new FormData()
         data.append('product_name', product_name)
         data.append('category_id', category_id)
@@ -97,14 +96,11 @@ export default {
     },
     getProductsByIdVuex(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log('Get Data Id process ... ')
-        console.log('payload ' + payload)
         axios
           .get(
             `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
           )
           .then(response => {
-            console.log(response.data.data[0].product_name)
             context.commit('setProductThisId', response.data.data[0])
             resolve(response)
           })
@@ -116,8 +112,6 @@ export default {
     },
     patchProductVuex(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log('patch proces ... ' + payload)
-        console.log(context.state.product.product_id)
         let {
           product_name,
           category_id,
@@ -131,8 +125,7 @@ export default {
           delivery_end_hour,
           discount_id
         } = context.state.form
-        console.log('context.state.form')
-        console.log(context.state.form)
+
         let dataUpdate = new FormData()
         dataUpdate.append('product_name', product_name)
         dataUpdate.append('category_id', category_id)
@@ -154,11 +147,9 @@ export default {
             dataUpdate
           )
           .then(response => {
-            console.log(response)
             resolve(response)
           })
           .catch(error => {
-            console.log(error.response.data.msg)
             reject(error.response)
           })
       })

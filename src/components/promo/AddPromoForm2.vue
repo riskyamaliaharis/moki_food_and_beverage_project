@@ -120,7 +120,6 @@ export default {
       else if (num === 4) this.form.promoCouponDiscount = 0.4
       else if (num === 5) this.form.promoCouponDiscount = 0.5
       else this.form.promoCouponDiscount = 0.7
-      console.log('promo ' + this.form.promoCouponDiscount)
     },
     generateThisSize(num) {
       if (num === 1) this.form.promoSize = 1
@@ -129,19 +128,15 @@ export default {
       else if (num === 4) this.form.promoSize = 1
       else if (num === 5) this.form.promoSize = 1.4
       else if (num === 6) this.form.promoSize = 1.72
-      console.log('Size ' + this.form.promoSize)
     },
     generateThisDelivMethod(num) {
       if (num === 1) this.form.promoDelivMethod = 1
       else if (num === 2) this.form.promoDelivMethod = 2
       else if (num === 3) this.form.promoDelivMethod = 3
-      console.log('Deliv ' + this.form.promoDelivMethod)
     },
     addPromoToStore() {
-      console.log('one')
-      console.log(this.form)
       this.inputForm2ToStore(this.form)
-      console.log('two')
+
       this.postPromoVuex()
         .then(result => {
           this.successAlert(result.data.msg)
@@ -149,7 +144,6 @@ export default {
         .catch(error => {
           this.errorAlert(error.data.msg)
         })
-      console.log('vuex')
     }
   }
 }

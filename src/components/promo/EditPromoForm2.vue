@@ -115,13 +115,11 @@ export default {
       else if (num === 4) this.data.promo_size = 1
       else if (num === 5) this.data.promo_size = 1.4
       else if (num === 6) this.data.promo_size = 1.72
-      console.log('Size ' + this.data.promo_size)
     },
     generateThisDelivMethod(num) {
       if (num === 1) this.data.promo_deliv_method = 1
       else if (num === 2) this.data.promo_deliv_method = 2
       else if (num === 3) this.data.promo_deliv_method = 3
-      console.log('Deliv ' + this.data.promo_deliv_method)
     },
     editPromo() {
       this.updatePromo({ id: this.data.promo_id, data: this.data })
@@ -131,7 +129,6 @@ export default {
         .catch(error => {
           this.errorAlert(error.data.msg)
         })
-      console.log('vuex')
     }
   }
 }
