@@ -22,16 +22,19 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapGetters({ user: 'setUser' })
+  },
   methods: {
     ...mapMutations(['changeSort']),
     ...mapActions(['getProducts']),
-    sortBy(sort) {
+    async sortBy(sort) {
       console.log('before sort ' + sort)
-      this.changeSort(sort)
+      await this.changeSort(sort)
       console.log('after sort ' + sort)
-      this.getProducts()
+      await this.getProducts()
     }
   }
 }

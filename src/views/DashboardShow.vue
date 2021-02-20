@@ -18,13 +18,16 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import MainInfoShow from '@/components/dashboard/MainInfoComponent.vue'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     Header,
     Footer,
     MainInfoShow
   },
-  mounted() {}
+  computed: {
+    ...mapGetters({ user: 'setUser' })
+  }
 }
 </script>
 

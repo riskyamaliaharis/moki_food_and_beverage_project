@@ -8,7 +8,11 @@
     <br /><br /><br /><br /><br />
     <Navbar />
     <div>
-      <b-button to="/createproduct" block class="toggle-add"
+      <b-button
+        to="/createproduct"
+        v-if="user.user_role === 1"
+        block
+        class="toggle-add"
         >Add New Product</b-button
       >
     </div>
@@ -28,13 +32,11 @@ import Navbar from '@/components/Navbar.vue'
 import Coupon from '@/components/Coupon.vue'
 import Card from '@/components/product/Card.vue'
 import Sorting from '@/components/Sorting.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Product',
-  created() {
-    this.getProfileVuex(this.user.user_id)
-  },
+
   components: {
     Header,
     Footer,
@@ -45,9 +47,6 @@ export default {
   },
   computed: {
     ...mapGetters({ user: 'setUser' })
-  },
-  methods: {
-    ...mapActions(['getProfileVuex'])
   }
 }
 </script>

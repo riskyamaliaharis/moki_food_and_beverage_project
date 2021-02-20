@@ -9,6 +9,7 @@ import CreateProduct from '../views/product/AddProduct.vue'
 import Cart from '../views/Cart.vue'
 import Profile from '../views/user/Profile.vue'
 import History from '../views/History.vue'
+import AdminHistory from '../views/HistoryAdmin.vue'
 import Login from '../views/auth/Login.vue'
 import SignUp from '../views/auth/SignUp.vue'
 import AddPromo from '../views/Promo/AddPromo.vue'
@@ -25,13 +26,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-    // meta: { requiresAuth: true }
   },
   {
     path: '/admin/dashadmin',
     name: 'Dashboard',
-    component: Dashboard
-    // meta: { requiresAuth: true }
+    component: Dashboard,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/about',
@@ -41,7 +41,8 @@ const routes = [
   {
     path: '/product',
     name: 'Product',
-    component: Product
+    component: Product,
+    meta: { requiresAuth: true }
   },
   {
     path: '/detailproduct/:id',
@@ -52,63 +53,80 @@ const routes = [
   {
     path: '/editproduct/:id',
     name: 'editProduct',
-    component: editProduct
+    component: editProduct,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/createproduct',
     name: 'CreateProduct',
-    component: CreateProduct
+    component: CreateProduct,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
-    // meta: { requiresVisitor: true }
+    component: Login,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    meta: { requiresCustomer: true }
   },
   {
     path: '/history',
     name: 'History',
-    component: History
+    component: History,
+    meta: { requiresCustomer: true }
+  },
+  {
+    path: '/admin/history',
+    name: 'AdminHistory',
+    component: AdminHistory,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp
+    component: SignUp,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/promo/addpromo',
     name: 'AddPromo',
-    component: AddPromo
+    component: AddPromo,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/promo/editpromo',
     name: 'EditPromo',
-    component: EditPromo
+    component: EditPromo,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/user/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: { requiresAuth: true }
   },
   {
     path: '/forgot/:keys',
     name: 'Forgot',
-    component: ForgotPassword
+    component: ForgotPassword,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/verify/:keys',
     name: 'Verification',
-    component: Verify
+    component: Verify,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/cart/myreceipt',
     name: 'PaymentReceipt',
-    component: PaymentReceipt
+    component: PaymentReceipt,
+    meta: { requiresCostumer: true }
   }
 ]
 
@@ -134,6 +152,22 @@ router.beforeEach((to, from, next) => {
       })
     } else {
       next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+    if (store.getters.isAdmin) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
+    }
+  } else if (to.matched.some(record => record.meta.requiresCustomer)) {
+    if (store.getters.isCustomer) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
     }
   } else next()
 })

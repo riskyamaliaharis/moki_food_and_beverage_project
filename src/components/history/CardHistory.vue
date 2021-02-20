@@ -36,7 +36,7 @@
               hide-footer
               hide-header
             >
-              <h1 class="text-center">Delete Coupon</h1>
+              <h1 class="text-center">Delete History</h1>
               <h6 class="my-4 text-center">
                 Are you sure you want to delete this item?
               </h6>
@@ -65,7 +65,7 @@
               hide-footer
               hide-header
             >
-              <h1 class="text-center">Delete Coupon</h1>
+              <h1 class="text-center">Delete History</h1>
               <h6 class="my-4 text-center">
                 You cannot delete this item until status is changed being 'DONE'
               </h6>

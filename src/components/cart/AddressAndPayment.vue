@@ -3,11 +3,14 @@
     <div class="d-flex flex-column ">
       <div class=" d-flex p-2 justify-content-between">
         <h4 class="p-2 title-box1 poppins">Address Details</h4>
-        <a class="p-2 align-bottom" href="">edit</a>
+        <router-link class="p-2 align-bottom" to="/user/profile"
+          >edit</router-link
+        >
       </div>
       <div class="p-2 box-address-details">
-        Delivery to Iskandar Street Km 5 refinery road oppsite re public road,
-        effurun, Jakarta +62 81348287878
+        Delivery to {{ profile.address }}
+        <br />
+        <b>{{ profile.mobile }}</b>
       </div>
       <div class="d-flex flex-column ">
         <h4 class="p-3">Payment Method</h4>
@@ -78,7 +81,8 @@ export default {
   computed: {
     ...mapGetters({
       user: 'setUser',
-      cart: 'getCart'
+      cart: 'getCart',
+      profile: 'myProfile'
     })
   },
   methods: {

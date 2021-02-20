@@ -5,11 +5,15 @@
       <div class="px-3 py-2 show-card-promo">
         <div
           :class="i % 2 === 0 ? 'card brown' : 'card orange'"
-          v-for="(el, i) in cards"
+          v-for="(el, i) in couponsall"
           :key="i"
         >
-          <i v-b-modal="modalId(i)" class="fa fa-close 3x delete"></i>
-          <b-modal :id="'modal' + i" hide-footer hide-header>
+          <i
+            v-b-modal="modalId(i)"
+            class="fa fa-close 3x delete"
+            v-if="user.user_role === 1"
+          ></i>
+          <b-modal :id="'modal' + i" hide-footer>
             <h1 class="text-center">Delete Coupon</h1>
             <h6 class="my-4 text-center">
               Are you sure you want to delete this item?
@@ -79,7 +83,7 @@ export default {
     this.getPromosVuex()
   },
   computed: {
-    ...mapGetters({ cards: 'getAllCoupons' })
+    ...mapGetters({ couponsall: 'getAllCoupons', user: 'setUser' })
   },
   methods: {
     ...mapActions(['getPromosVuex', 'delPromo']),
@@ -96,8 +100,8 @@ export default {
       moment.locale('en')
       return moment(String(value)).format('ll')
     },
-    deletePromo(id) {
-      this.delPromo(id)
+    deletePromo(promoId) {
+      this.delPromo(promoId)
         .then(result => {
           this.successAlert(result.data.msg)
         })
@@ -114,7 +118,7 @@ export default {
 }
 .delete {
   position: absolute;
-  margin-left: 300px;
+  margin-left: 320px;
   cursor: pointer;
 }
 .coupon-info p {

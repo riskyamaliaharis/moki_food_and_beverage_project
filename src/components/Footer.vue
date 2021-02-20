@@ -44,7 +44,7 @@
             order-xs="0"
           >
             <div class="product">
-              <p class="rubik">Product</p>
+              <p class="rubik title">Product</p>
               <ul class="rubik ">
                 <li><a href="#">Download</a></li>
                 <li><a href="#">Pricing</a></li>
@@ -65,7 +65,7 @@
             order-xs="2"
           >
             <div class="engage">
-              <p class="rubik">Engage</p>
+              <p class="rubik title">Engage</p>
               <ul class="rubik  ">
                 <li><a href="#">Coffee Shop?</a></li>
                 <li><a href="#">FAQ</a></li>
@@ -97,7 +97,10 @@
   margin: 5px 5px;
   width: 100px;
 }
-
+.product .title,
+.engage .title {
+  margin-left: 94px;
+}
 .about .description p {
   width: 40%;
   word-wrap: break-word;
@@ -129,7 +132,11 @@ b-container {
   margin-top: 100px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 992px) {
+  .product .title,
+  .engage .title {
+    margin-left: 76px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -164,6 +171,11 @@ b-container {
 
   .social-media img {
     width: 20px;
+  }
+  .product .title,
+  .engage .title {
+    margin: 0;
+    text-align: center;
   }
 }
 

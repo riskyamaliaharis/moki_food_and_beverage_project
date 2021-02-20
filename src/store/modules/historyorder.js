@@ -43,9 +43,22 @@ export default {
     getAllHistoriesVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get('http://${process.env.VUE_APP_ROOT_URL}/order/data/history/all')
+          .get(`http://${process.env.VUE_APP_ROOT_URL}/order/data/history/all`)
           .then(response => {
             context.commit('setAllHistories', response.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    patchStatus(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`http://${process.env.VUE_APP_ROOT_URL}/order/${payload}`)
+          .then(response => {
+            context.dispatch('getAllHistoriesVuex')
             resolve(response)
           })
           .catch(error => {

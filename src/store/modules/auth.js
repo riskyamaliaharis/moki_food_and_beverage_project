@@ -132,6 +132,12 @@ export default {
     },
     isLogin(state) {
       return state.token !== null
+    },
+    isAdmin(state) {
+      return state.user.user_role === 1
+    },
+    isCustomer(state) {
+      return state.user.user_role === 0
     }
   }
 }

@@ -8,7 +8,7 @@
           md="4"
           sm="5"
           xs="12"
-          v-for="(item, index) in getHistories"
+          v-for="(item, index) in getAllHistories"
           :key="index"
         >
           <div class="mini-card">
@@ -36,7 +36,7 @@
               hide-footer
               hide-header
             >
-              <h1 class="text-center">Delete Coupon</h1>
+              <h1 class="text-center">Delete History</h1>
               <h6 class="my-4 text-center">
                 Are you sure you want to delete this item?
               </h6>
@@ -65,7 +65,7 @@
               hide-footer
               hide-header
             >
-              <h1 class="text-center">Delete Coupon</h1>
+              <h1 class="text-center">Delete History</h1>
               <h6 class="my-4 text-center">
                 You cannot delete this item until status is changed being 'DONE'
               </h6>
@@ -80,6 +80,10 @@
                 >
               </b-row>
             </b-modal>
+            <br />
+            <p>
+              <b>{{ item.user_name }}</b> - {{ item.mobile }}
+            </p>
             <h5>{{ item.order_invoice }}</h5>
 
             <p>
@@ -105,6 +109,16 @@
 
             <h6><b>TOTAL</b> : {{ item.subtotal }}</h6>
             <p>*total includes tax & shipping</p>
+            <div>
+              <b-button
+                v-if="item.status === 0"
+                style="background:orange"
+                @click="markDone(item.order_id)"
+                block
+              >
+                DONE</b-button
+              >
+            </div>
           </div>
         </b-col>
       </b-row>
@@ -123,12 +137,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getAllHistories: 'setAllHistories',
-      user: 'setUser'
+      getAllHistories: 'setAllHistories'
     })
   },
   methods: {
-    ...mapActions(['getAllHistoriesVuex', 'delHistory']),
+    ...mapActions(['getAllHistoriesVuex', 'delHistory', 'patchStatus']),
     formatTime(value) {
       moment.locale('en')
       return moment(String(value)).format('dddd')
@@ -154,6 +167,15 @@ export default {
     },
     modalId(index) {
       return 'modal' + index
+    },
+    markDone(orderId) {
+      this.patchStatus(orderId)
+        .then(result => {
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
     }
   }
 }

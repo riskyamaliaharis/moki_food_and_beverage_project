@@ -28,14 +28,24 @@
                   >Product</router-link
                 ></b-nav-item
               >
-              <b-nav-item
+              <b-nav-item v-if="user.user_role === 0"
                 ><router-link class="menunav" to="/cart"
                   >Your Cart</router-link
                 ></b-nav-item
               >
-              <b-nav-item
+              <b-nav-item v-if="user.user_role === 0"
                 ><router-link class="menunav" to="/history"
                   >History</router-link
+                ></b-nav-item
+              >
+              <b-nav-item v-if="user.user_role === 1"
+                ><router-link class="menunav" to="/admin/history"
+                  >Order</router-link
+                ></b-nav-item
+              >
+              <b-nav-item v-if="user.user_role === 1"
+                ><router-link class="menunav" to="/admin/dashadmin"
+                  >Dashboard</router-link
                 ></b-nav-item
               >
             </b-navbar-nav>
@@ -82,6 +92,9 @@
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'Header',
+  created() {
+    this.getProfileVuex(this.user.user_id)
+  },
   data() {
     return {
       inputSearch: '',
@@ -97,7 +110,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['logout', 'getProductsSearching']),
+    ...mapActions(['logout', 'getProfileVuex', 'getProductsSearching']),
     handleLogout() {
       this.logout()
       this.$router.push('/')
@@ -151,7 +164,10 @@ header .satisfy {
 .b-search {
   background-color: rgba(106, 64, 41, 1);
 }
-
+.btn img {
+  padding-top: 10px;
+  object-fit: cover;
+}
 img.profile_img {
   border-radius: 50%;
 }

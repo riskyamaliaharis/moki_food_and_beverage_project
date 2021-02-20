@@ -9,7 +9,7 @@
               <img
                 :src="
                   profile.user_photo
-                    ? `http://localhost:3000/user/${profile.user_photo}`
+                    ? `http://${url}/user/${profile.user_photo}`
                     : '../../assets/img/unnamed.png'
                 "
               />
