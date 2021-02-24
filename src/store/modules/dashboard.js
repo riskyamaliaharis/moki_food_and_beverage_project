@@ -28,9 +28,7 @@ export default {
     chartWeekVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/order/chart/revenueperday`
-          )
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/chart/revenueperday`)
           .then(response => {
             context.commit('setChartWeek', response.data.data)
             resolve(response)
@@ -44,7 +42,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/order/chart/revenuepermonth`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}order/chart/revenuepermonth`
           )
           .then(response => {
             context.commit('setChartMo', response.data.data)
@@ -58,7 +56,7 @@ export default {
     infoTodayVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/order/data/todaysincome`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/data/todaysincome`)
           .then(response => {
             context.commit('setInfoToday', response.data.data)
             resolve(response)
@@ -71,7 +69,7 @@ export default {
     infoYearVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/order/data/yearsincome`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/data/yearsincome`)
           .then(response => {
             context.commit('setInfoYear', response.data.data)
             resolve(response)
@@ -84,7 +82,7 @@ export default {
     infoWeekVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/order/data/totalorder`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/data/totalorder`)
           .then(response => {
             context.commit('setInfoWeek', response.data.data)
             resolve(response)

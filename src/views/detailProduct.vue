@@ -11,7 +11,7 @@
           <section>
             <img
               class="img-set rounded-circle"
-              :src="`http://${url}/${product.image_src}`"
+              :src="`${url}${product.image_src}`"
               alt="coldbrew"
             />
             <h2 class="poppins">
@@ -164,7 +164,7 @@
             <div class="p-2">
               <img
                 class="img-coldbrew rounded-circle "
-                :src="`http://${url}/${product.image_src}`"
+                :src="`${url}${product.image_src}`"
                 alt="coldbrew"
               />
             </div>

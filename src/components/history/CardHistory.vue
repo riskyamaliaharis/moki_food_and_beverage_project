@@ -91,7 +91,7 @@
             <b-media v-for="(el, i) in item.detail" :key="i">
               <template #aside>
                 <b-img
-                  :src="'http://localhost:3000/' + el.image_src"
+                  :src="`${url}${el.image_src}`"
                   width="40"
                   alt="placeholder"
                 ></b-img>
@@ -120,6 +120,11 @@ export default {
   mixins: [alert],
   created() {
     this.getHistoriesVuex(this.user.user_id)
+  },
+  data() {
+    return {
+      url: process.env.VUE_APP_ROOT_URL
+    }
   },
   computed: {
     ...mapGetters({

@@ -3,7 +3,7 @@
     <div class="box1">
       <img
         class="rounded-circle"
-        :src="`http://localhost:3000/${data.image_src}`"
+        :src="`${url}${data.image_src}`"
         alt="spaghetti"
       />
       <h3 class="poppins">{{ data.product_name }}</h3>
@@ -23,6 +23,11 @@
 import moment from 'moment'
 import { mapGetters } from 'vuex'
 export default {
+  data() {
+    return {
+      url: process.env.VUE_APP_ROOT_URL
+    }
+  },
   computed: {
     ...mapGetters({
       data: 'getproductPromo'

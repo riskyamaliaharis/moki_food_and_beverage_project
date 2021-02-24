@@ -24,7 +24,7 @@
             <b-media>
               <template #aside>
                 <b-img
-                  :src="'http://localhost:3000/' + item.image_src"
+                  :src="`${url}${item.image_src}`"
                   width="50"
                   alt="placeholder"
                 ></b-img>
@@ -72,7 +72,9 @@ export default {
     ...mapGetters({ cart: 'getCart', total_price: 'totalPrice' })
   },
   data() {
-    return {}
+    return {
+      url: process.env.VUE_APP_ROOT_URL
+    }
   }
 }
 </script>

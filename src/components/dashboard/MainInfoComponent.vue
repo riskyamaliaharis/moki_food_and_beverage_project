@@ -30,29 +30,19 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   created() {
-    this.chartWeekVuex()
-    this.chartMoVuex()
     this.infoTodayVuex()
     this.infoYearVuex()
     this.infoWeekVuex()
   },
   computed: {
     ...mapGetters({
-      chartMo: 'setDataChartMo',
-      chartWeek: 'setDataChartWeek',
       infoToday: 'setDataInfoToday',
       infoYear: 'setDataInfoYear',
       infoWeek: 'setDataInfoWeek'
     })
   },
   methods: {
-    ...mapActions([
-      'chartWeekVuex',
-      'chartMoVuex',
-      'infoTodayVuex',
-      'infoYearVuex',
-      'infoWeekVuex'
-    ])
+    ...mapActions(['infoTodayVuex', 'infoYearVuex', 'infoWeekVuex'])
   }
 }
 </script>

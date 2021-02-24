@@ -18,7 +18,7 @@
               <div class="menu mx-auto">
                 <img
                   class="rounded-circle"
-                  :src="'http://localhost:3000/' + item.image_src"
+                  :src="`${url}${item.image_src}`"
                   alt="thumbnail"
                   style="width:100px"
                 />
@@ -127,7 +127,8 @@ export default {
       alert: false,
       isMsg: '',
       product_id: '',
-      user_role: 1
+      user_role: 1,
+      url: process.env.VUE_APP_ROOT_URL
     }
   },
   methods: {

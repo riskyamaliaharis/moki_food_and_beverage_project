@@ -11,6 +11,8 @@ export default {
   created() {
     this.interceptorRequest()
     this.interceptorResponse()
+    console.log(process.env.VUE_APP_ROOT_URL)
+    console.log(process.env.VUE_APP_ROOT_URL_MOKI)
   },
   methods: {
     ...mapActions(['interceptorRequest']),

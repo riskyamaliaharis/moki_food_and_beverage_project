@@ -16,9 +16,7 @@ export default {
     getHistoriesVuex(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/order/history/${payload}`
-          )
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/history/${payload}`)
           .then(response => {
             context.commit('setHistories', response.data)
             resolve(response)
@@ -31,7 +29,7 @@ export default {
     delHistory(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`http://${process.env.VUE_APP_ROOT_URL}/order/${payload}`)
+          .patch(`${process.env.VUE_APP_ROOT_URL_MOKI}order/delete/${payload}`)
           .then(response => {
             resolve(response)
           })
@@ -43,7 +41,7 @@ export default {
     getAllHistoriesVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/order/data/history/all`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}order/data/history/all`)
           .then(response => {
             context.commit('setAllHistories', response.data)
             resolve(response)
@@ -56,7 +54,7 @@ export default {
     patchStatus(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://${process.env.VUE_APP_ROOT_URL}/order/${payload}`)
+          .patch(`${process.env.VUE_APP_ROOT_URL_MOKI}order/${payload}`)
           .then(response => {
             context.dispatch('getAllHistoriesVuex')
             resolve(response)

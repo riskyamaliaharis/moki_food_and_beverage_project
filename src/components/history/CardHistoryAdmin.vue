@@ -95,7 +95,7 @@
             <b-media v-for="(el, i) in item.detail" :key="i">
               <template #aside>
                 <b-img
-                  :src="'http://localhost:3000/' + el.image_src"
+                  :src="`${url}${el.image_src}`"
                   width="40"
                   alt="placeholder"
                 ></b-img>
@@ -132,6 +132,11 @@ import { alert } from '../../mixins/alert'
 import moment from 'moment'
 export default {
   mixins: [alert],
+  data() {
+    return {
+      url: process.env.VUE_APP_ROOT_URL
+    }
+  },
   created() {
     this.getAllHistoriesVuex()
   },

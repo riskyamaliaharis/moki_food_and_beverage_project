@@ -74,7 +74,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product?page=${context.state.page}&limit=${context.state.limit}&sort=${context.state.sort}`
           )
           .then(response => {
             context.commit('setProduct', response.data)
@@ -89,7 +89,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/product/category?page=${context.state.page}&limit=${context.state.limit}&category_name=${context.state.category_name}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product/category?page=${context.state.page}&limit=${context.state.limit}&category_name=${context.state.category_name}`
           )
           .then(response => {
             if (
@@ -115,7 +115,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/product/searching?page=${context.state.page}&limit=${context.state.limit}&search=${context.state.search}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product/searching?page=${context.state.page}&limit=${context.state.limit}&search=${context.state.search}`
           )
           .then(response => {
             context.commit('setProductAfterInputSearch', response.data)
@@ -132,7 +132,7 @@ export default {
     deleteProducts(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`http://${process.env.VUE_APP_ROOT_URL}/product/${payload}`)
+          .delete(`${process.env.VUE_APP_ROOT_URL_MOKI}product/${payload}`)
           .then(response => {
             context.dispatch('getProducts')
             resolve(response)
@@ -150,7 +150,7 @@ export default {
           user_id: payload.id
         }
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/order`, setData)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}order`, setData)
           .then(response => {
             context.commit('setOrderCart', response.data.data)
             resolve(response)
@@ -171,7 +171,7 @@ export default {
         }
 
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/order/history`, setData)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}order/history`, setData)
           .then(response => {
             resolve(response)
           })

@@ -11,7 +11,7 @@
           <div class="picture">
             <div>
               <div v-if="!image">
-                <img :src="'http://localhost:3000/' + product.image_src" />
+                <img :src="`${url}${product.image_src}`" />
                 <input
                   type="file"
                   @change="onFileChange($event)"

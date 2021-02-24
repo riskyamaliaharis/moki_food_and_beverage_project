@@ -41,7 +41,7 @@
             <b-col cols="4">
               <img
                 v-if="el.image_src"
-                :src="'http://localhost:3000/' + el.image_src"
+                :src="`${url}${el.image_src}`"
                 alt="product"
                 class="image"
               />
@@ -77,7 +77,9 @@ import moment from 'moment'
 export default {
   mixins: [alert],
   data() {
-    return {}
+    return {
+      url: process.env.VUE_APP_ROOT_URL
+    }
   },
   created() {
     this.getPromosVuex()

@@ -73,7 +73,7 @@
                   <img
                     style="width:40px;height:40px"
                     class="profile_img"
-                    :src="`http://${url}/user/${profile.user_photo}`"
+                    :src="`${url}user/${profile.user_photo}`"
                     alt="Kitten"
                   />
                 </template>

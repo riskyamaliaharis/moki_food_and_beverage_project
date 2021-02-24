@@ -26,7 +26,7 @@
         <b-row align-h="start" align-v="center">
           <b-col cols="3"
             ><b-img
-              :src="'http://localhost:3000/' + el.image_src"
+              :src="`${url}${el.image_src}`"
               width="60"
               style="border-radius:10px"
               alt="placeholder"
@@ -86,7 +86,8 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
-      totals: 0
+      totals: 0,
+      url: process.env.VUE_APP_ROOT_URL
     }
   },
   created() {

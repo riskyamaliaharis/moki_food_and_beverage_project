@@ -12,7 +12,7 @@ export default {
     getProfileVuex(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/user/profile/${payload}`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}user/profile/${payload}`)
           .then(result => {
             context.commit('setProfiles', result.data.data[0])
             resolve(result)
@@ -27,7 +27,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://${process.env.VUE_APP_ROOT_URL}/user/update/${payload.id}`,
+            `${process.env.VUE_APP_ROOT_URL_MOKI}user/update/${payload.id}`,
             payload.data
           )
           .then(result => {

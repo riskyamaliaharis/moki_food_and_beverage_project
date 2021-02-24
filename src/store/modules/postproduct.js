@@ -85,7 +85,7 @@ export default {
           console.log(pair[0] + ', ' + pair[1])
         }
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/product`, data)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}product`, data)
           .then(response => {
             resolve(response)
           })
@@ -98,14 +98,13 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product/selectproduct/${payload}`
           )
           .then(response => {
             context.commit('setProductThisId', response.data.data[0])
             resolve(response)
           })
           .catch(error => {
-            alert(error.response.data.msg)
             reject(error)
           })
       })
@@ -143,7 +142,7 @@ export default {
         }
         axios
           .patch(
-            `http://${process.env.VUE_APP_ROOT_URL}/product/${payload}`,
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product/${payload}`,
             dataUpdate
           )
           .then(response => {

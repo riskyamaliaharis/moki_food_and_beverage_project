@@ -19,7 +19,7 @@ export default {
     login(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/user/login`, payload)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}user/login`, payload)
           .then(result => {
             context.commit('setUser', result.data.data)
             localStorage.setItem('token', result.data.data.token)
@@ -33,7 +33,7 @@ export default {
     register(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/user/register`, payload)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}user/register`, payload)
           .then(result => {
             resolve(result)
           })
@@ -62,7 +62,7 @@ export default {
     sendEmailForgot(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`http://${process.env.VUE_APP_ROOT_URL}/user/forgot`, payload)
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}user/forgot`, payload)
           .then(result => {
             resolve(result)
           })
@@ -75,7 +75,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://${process.env.VUE_APP_ROOT_URL}/user/changepasswordforgot`,
+            `${process.env.VUE_APP_ROOT_URL_MOKI}user/changepasswordforgot`,
             payload
           )
           .then(result => {
@@ -90,7 +90,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://${process.env.VUE_APP_ROOT_URL}/user/updatestatus/${payload}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}user/updatestatus/${payload}`
           )
           .then(result => {
             resolve(result)
@@ -115,7 +115,6 @@ export default {
               error.response.data.msg === 'jwt malformed')
           ) {
             context.dispatch('logout')
-            alert(error.response.data.msg)
           }
           return Promise.reject(error)
         }

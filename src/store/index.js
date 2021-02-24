@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Auth from './modules/auth'
-import Register from './modules/register'
+// import Register from './modules/register'
 import Product from './modules/product'
 import Promo from './modules/promo'
 import PostProduct from './modules/postproduct'
@@ -18,7 +18,6 @@ export default new Vuex.Store({
     Product,
     PostProduct,
     Promo,
-    Register,
     History,
     Dash,
     Profile

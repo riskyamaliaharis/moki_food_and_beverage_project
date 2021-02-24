@@ -47,14 +47,13 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/product/selectproduct/${payload}`
+            `${process.env.VUE_APP_ROOT_URL_MOKI}product/selectproduct/${payload}`
           )
           .then(response => {
             context.commit('setProductThisIdPromo', response.data.data[0])
             resolve(response)
           })
           .catch(error => {
-            alert(error.response.data.msg)
             reject(error)
           })
       })
@@ -62,10 +61,7 @@ export default {
     postPromoVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .post(
-            `http://${process.env.VUE_APP_ROOT_URL}/promo`,
-            context.state.form
-          )
+          .post(`${process.env.VUE_APP_ROOT_URL_MOKI}promo`, context.state.form)
           .then(response => {
             resolve(response)
           })
@@ -78,7 +74,7 @@ export default {
     getPromosVuex(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/promo`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}promo`)
           .then(response => {
             context.commit('setPromoAfterGetPromo', response.data.data)
             resolve(response)
@@ -91,7 +87,7 @@ export default {
     getPromoByIdVuex(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://${process.env.VUE_APP_ROOT_URL}/promo/${payload}`)
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}promo/${payload}`)
           .then(response => {
             context.commit('setPromoByIdAfterGetPromo', response.data.data[0])
             resolve(response)
@@ -104,9 +100,7 @@ export default {
     getPromoJoinProductVuex(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(
-            `http://${process.env.VUE_APP_ROOT_URL}/promo/product/${payload}`
-          )
+          .get(`${process.env.VUE_APP_ROOT_URL_MOKI}promo/product/${payload}`)
           .then(response => {
             context.commit('setPromoByIdProduct', response.data.data[0])
             resolve(response)
@@ -120,7 +114,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://${process.env.VUE_APP_ROOT_URL}/promo/${payload.id}`,
+            `${process.env.VUE_APP_ROOT_URL_MOKI}promo/${payload.id}`,
             payload.data
           )
           .then(response => {
@@ -134,7 +128,7 @@ export default {
     delPromo(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .delete(`http://${process.env.VUE_APP_ROOT_URL}/promo/${payload}`)
+          .delete(`${process.env.VUE_APP_ROOT_URL_MOKI}promo/${payload}`)
           .then(response => {
             context.dispatch('getPromosVuex')
             resolve(response)
