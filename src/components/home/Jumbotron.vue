@@ -13,26 +13,29 @@
           We provide high quality beans, good taste, and healthy meals made by
           love just for you. Start your day with us for a bigger smile!
         </p>
-        <b-button class="sign up" to="/signup" href="#">Sign Up</b-button>
-        <b-button class="sign in" to="/login" variant="warning" href="#"
-          >Login</b-button
-        >
+        <b-button class="sign up" to="/signup">Sign Up</b-button>
+        <b-button class="sign in" to="/login" variant="warning">Login</b-button>
         <div class="data-long-card">
           <b-row align-h="center">
             <b-col>
-              <div class="">
-                <i class="fa fa-user staff fa-2x"></i><span>90+ staff</span>
+              <div>
+                <i class="fa fa-user staff fa-2x"></i><br /><span
+                  >90+ staff</span
+                >
               </div>
             </b-col>
             <b-col>
-              <div class="">
-                <i class="fa fa-map-marker staff fa-2x"></i
-                ><span>90+ stores</span>
+              <div>
+                <i class="fa fa-map-marker staff fa-2x"></i><br /><span
+                  >90+ stores</span
+                >
               </div>
             </b-col>
             <b-col>
-              <div class="">
-                <i class="fa fa-heart staff fa-2x"></i><span>90+ users</span>
+              <div>
+                <i class="fa fa-heart staff fa-2x"></i><br /><span
+                  >90+ users</span
+                >
               </div>
             </b-col>
           </b-row>
@@ -48,6 +51,7 @@
   background-size: cover;
   height: 500px;
   padding-top: 180px;
+  position: relative;
 }
 h1.title,
 .jumbotron p {
@@ -57,26 +61,24 @@ h1.title,
 .data-long-card {
   background-color: white;
   position: absolute;
-  bottom: 110px;
-  width: 74%;
+  width: 75%;
+  top: 100px;
   text-align: center;
   padding: 20px;
   box-shadow: 2px 2px 8px 1px rgb(155, 154, 154);
   border-radius: 10px;
-  z-index: 8;
+  z-index: 6;
 }
 .staff {
   background-color: rgba(255, 186, 51, 1);
   width: 50px;
   height: 50px;
-  padding: 8px;
   text-align: center;
   color: white;
   border-radius: 50%;
   margin-right: 10px;
 }
-.fa-heart,
-.fa-map-marker {
+.fa {
   padding-top: 11px;
 }
 .sign {
@@ -89,5 +91,23 @@ h1.title,
 }
 .sign.up {
   background-color: #6a4029;
+}
+@media only screen and (min-width: 576px) {
+  .data-long-card {
+    top: 480px;
+  }
+}
+@media only screen and (max-width: 577px) {
+  .data-long-card {
+    top: 450px;
+  }
+  h1.title {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .data-long-card {
+    top: 500px;
+  }
 }
 </style>

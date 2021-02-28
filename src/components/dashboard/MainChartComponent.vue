@@ -32,6 +32,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Dashboard',
   async created() {
+    console.log('masuk')
     await this.chartWeekVuex()
     await this.chartMoVuex()
     console.log(this.chartWeek)
