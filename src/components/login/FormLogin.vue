@@ -13,9 +13,9 @@
       </b-col>
       <b-col cols="5" class="sign-up">
         <div style="text-align: right;">
-          <button class="w3-button  w3-round-xlarge sign-up" to="/signup">
+          <b-button class="w3-button  w3-round-xlarge sign-up" to="/signup">
             Sign-Up
-          </button>
+          </b-button>
         </div>
       </b-col>
     </b-row>
@@ -161,7 +161,7 @@ export default {
 </script>
 
 <style scoped>
-button.w3-button,
+.w3-button,
 .w3-btn {
   text-align: center;
   background-color: #ffba33;

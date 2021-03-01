@@ -31,12 +31,10 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Dashboard',
-  async created() {
-    console.log('masuk')
-    await this.chartWeekVuex()
-    await this.chartMoVuex()
-    console.log(this.chartWeek)
-    await this.perMonth()
+  created() {
+    this.chartWeekVuex()
+    this.chartMoVuex()
+    this.perMonth()
   },
   data() {
     return {

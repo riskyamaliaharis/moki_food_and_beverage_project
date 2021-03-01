@@ -231,7 +231,7 @@ export default {
 
 .left-profile {
   margin-top: 35px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
   background-color: white;
   border-radius: 10px;

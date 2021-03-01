@@ -8,13 +8,13 @@
     <b-container class="bv-example-row">
       <div>
         <b-row align-h="start">
-          <b-col xl="5" lg="5">
-            <div class="left">
+          <b-col xl="5" lg="5" md="6" sm="12" cols="12">
+            <div>
               <p class="checkout-item">Checkout your item now!</p>
               <OrderSummary />
             </div>
           </b-col>
-          <b-col xl="6" lg="5">
+          <b-col xl="6" lg="5" md="6" sm="12" cols="12">
             <div class="right"><AddressAndPayment /></div>
           </b-col>
         </b-row>

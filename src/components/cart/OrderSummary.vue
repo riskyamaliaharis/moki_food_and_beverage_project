@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-wrap box-payment">
+  <div class=" box-payment">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap"

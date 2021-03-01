@@ -164,4 +164,9 @@ label {
   height: 32px;
   color: rgba(255, 186, 51, 1);
 }
+@media only screen and (max-width: 691px) {
+  .right-profile {
+    margin-top: 20px;
+  }
+}
 </style>

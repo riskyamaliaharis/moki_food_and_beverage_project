@@ -197,7 +197,7 @@
 
         <b-col lg="6" md="12">
           <div class="card-coldbrew5 poppins">
-            <input type="button" class="btn" value="CHECKOUT" />
+            <input type="button" class="btn" to="/" value="CHECKOUT" />
           </div>
         </b-col>
       </b-row>

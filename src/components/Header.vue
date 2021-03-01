@@ -93,7 +93,9 @@ import { mapActions, mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'Header',
   created() {
-    this.getProfileVuex(this.user.user_id)
+    if (this.isLogin) {
+      this.getProfileVuex(this.user.user_id)
+    }
   },
   data() {
     return {
