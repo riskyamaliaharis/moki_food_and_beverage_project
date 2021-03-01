@@ -1,6 +1,6 @@
 <template>
   <div class="history-wrapper">
-    <VueSlickCarousel v-bind="settings">
+    <VueSlickCarousel v-bind="settings" v-if="getHistories.length > 0">
       <div v-for="(item, index) in getHistories" :key="index">
         <div class="mini-card">
           <b-row>
@@ -180,12 +180,11 @@ export default {
       await this.delHistory(id)
         .then(result => {
           this.successAlert(result.data.msg)
+          this.getHistoriesVuex(this.user.user_id)
         })
         .catch(error => {
           this.errorAlert(error.data.msg)
         })
-
-      await this.getHistoriesVuex(this.user.user_id)
     },
     modalId(index) {
       return 'modal' + index

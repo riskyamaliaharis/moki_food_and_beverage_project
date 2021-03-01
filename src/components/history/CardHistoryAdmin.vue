@@ -1,6 +1,6 @@
 <template>
   <div class="history-wrapper">
-    <div>
+    <div v-if="getAllHistories.length > 0">
       <b-row>
         <b-col
           xl="3"

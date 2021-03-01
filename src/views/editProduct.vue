@@ -7,8 +7,8 @@
         <b-breadcrumb-item active>Edit Product</b-breadcrumb-item>
       </b-breadcrumb>
       <b-row>
-        <b-col>
-          <div class="picture">
+        <b-col class="left-update">
+          <div class="picture pict-img">
             <div>
               <div v-if="!image">
                 <img :src="`${url}${product.image_src}`" />
@@ -234,7 +234,7 @@
                     ></b-form-input>
                     <br /><br />
                   </div>
-                  <b-row class="">
+                  <b-row class="update-btn">
                     <button
                       class="save"
                       type="button"
@@ -265,6 +265,7 @@ export default {
   mixins: [alert],
   data() {
     return {
+      url: process.env.VUE_APP_ROOT_URL,
       name: 'editProduct',
       components: {
         Header,
@@ -456,6 +457,9 @@ export default {
 </script>
 
 <style>
+.left-update {
+  margin-left: 10px;
+}
 div.picture {
   text-align: center;
   border-radius: 10px;
@@ -539,5 +543,16 @@ h4 {
 }
 div.category {
   width: 200px;
+}
+@media only screen and (max-width: 500px) {
+  .picture img {
+    width: 220px;
+  }
+  .pict-img {
+    margin: 0 auto;
+  }
+  .update-btn {
+    width: 200px;
+  }
 }
 </style>

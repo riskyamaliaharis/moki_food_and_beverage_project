@@ -2,12 +2,12 @@
   <div>
     <Header />
     <b-container class="editpromo">
-      <b-row align-h="center">
-        <b-col cols="5">
+      <b-row align-h="between">
+        <b-col xl="4" lg="5" md="6" sm="12" cols="12">
           <Coupon />
           <EditPromoForm1 />
         </b-col>
-        <b-col cols="5">
+        <b-col xl="6" lg="7" md="6" sm="12" cols="12">
           <EditPromoForm2 />
         </b-col>
       </b-row>
