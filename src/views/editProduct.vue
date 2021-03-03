@@ -6,6 +6,7 @@
         <b-breadcrumb-item to="/product">Product</b-breadcrumb-item>
         <b-breadcrumb-item active>Edit Product</b-breadcrumb-item>
       </b-breadcrumb>
+      {{ product }}
       <b-row>
         <b-col class="left-update">
           <div class="picture pict-img">
